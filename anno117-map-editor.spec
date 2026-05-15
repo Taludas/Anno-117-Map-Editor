@@ -8,6 +8,7 @@ a = Analysis(
     datas=[
         ('data', 'data'),
         ('[Map] $ModName (TAMPER)', '[Map] $ModName (TAMPER)'),
+        ('[Map] $ModName Enlarged (TAMPER)', '[Map] $ModName Enlarged (TAMPER)')
     ],
     hiddenimports=[
         'PIL._imagingtk',

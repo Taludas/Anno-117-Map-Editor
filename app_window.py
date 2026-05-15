@@ -1004,7 +1004,23 @@ class MapEditorApp(tk.Frame):
             extracted_root=config.EXTRACTED_DIR,
             rda_exe=rda_exe,
             on_import=self._on_template_selected,
+            on_extracted=self._on_rda_extracted,
         )
+
+    def _on_rda_extracted(self):
+        """Reload all registries after a fresh RDA extraction and refresh canvases.
+        Called on the main thread immediately after extraction completes."""
+        from island_registry import IslandRegistry
+        from fertility_registry import FertilityRegistry
+        from fertility_set_registry import FertilitySetRegistry
+
+        def _reload():
+            IslandRegistry.instance().load(force=True)
+            FertilityRegistry.instance().load(force=True)
+            FertilitySetRegistry.instance().load(force=True)
+            self.root.after(0, self.refresh_all_canvases)
+
+        threading.Thread(target=_reload, daemon=True).start()
 
     def cmd_import_a7tinfo(self):
         """Import a .a7tinfo file from any location - decompresses via FileDBReader then loads."""

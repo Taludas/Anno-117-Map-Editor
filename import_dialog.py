@@ -79,7 +79,7 @@ class ImportDialog(tk.Toplevel):
     User picks one entry; both regions load automatically.
     """
 
-    def __init__(self, parent, game_path: str, extracted_root: str, rda_exe: Optional[str], on_import: Callable[[str, bool], None]):
+    def __init__(self, parent, game_path: str, extracted_root: str, rda_exe: Optional[str], on_import: Callable[[str, bool], None], on_extracted: Optional[Callable] = None):
         super().__init__(parent)
         self.title("Import Map Template")
         self.configure(bg=config.BG_SECTION)
@@ -94,7 +94,8 @@ class ImportDialog(tk.Toplevel):
         self._game_path = game_path
         self._extracted_root = extracted_root
         self._rda_exe = rda_exe
-        self._on_import = on_import # callback(path: str, want_enlarged: bool)
+        self._on_import = on_import  # callback(path: str, want_enlarged: bool)
+        self._on_extracted = on_extracted  # optional callback fired after successful RDA extraction
         self._entries: List[TemplateEntry] = []
 
         self._build()
@@ -188,7 +189,7 @@ class ImportDialog(tk.Toplevel):
                 banner,
                 text=(
                     "Map template files need to be extracted from the game's .rda archives once.\n"
-                    "Make sure the game path and RdaConsole path are set in the bottom bar,\n"
+                    "Make sure the game path and RdaConsole path are set in the Edit menu,\n"
                     "then click '⟳ Extract from RDA' below."
                 ),
                 bg="#1a3050", fg=config.FG_MAIN, font=config.FONT_XSMALL, justify="left").pack(anchor="w")
@@ -261,6 +262,8 @@ class ImportDialog(tk.Toplevel):
         self._extract_btn.config(state="normal")
         self._load_entries(files)
         self._status_var.set(f"Extraction complete - {len(self._entries)} templates found.")
+        if self._on_extracted:
+            self._on_extracted()
 
     def _on_extract_error(self, msg: str):
         self._progress_bar.stop()

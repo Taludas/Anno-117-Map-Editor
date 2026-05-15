@@ -275,7 +275,6 @@ class MapTemplate:
         """
         ax1, ay1 = pos
         ax2, ay2 = ax1 + size_px, ay1 + size_px
-        ipa = self.computed_initial_pa   # used for continental underlap check
 
         for isl in self.islands:
             if exclude_eid is not None and isl._eid == exclude_eid:
@@ -288,10 +287,22 @@ class MapTemplate:
             # Symmetric gap test: are the two AABBs within *gap* px of each other?
             if not (ax2 + gap > bx1 and bx2 + gap > ax1 and ay2 + gap > by1 and by2 + gap > ay1):
                 continue
-            # Continental islands permit overlap from any island whose bounds are fully inside the InitialPlayableArea (the sea region over the continent where regular islands can legitimately be placed).
-            if isl.size == "Continental":
-                if ax1 >= ipa[0] and ay1 >= ipa[1] and ax2 <= ipa[2] and ay2 <= ipa[3]:
-                    continue
+            # Continental underlap: a non-continental island may partially overlap the continental AABB, but only up to 10 % of the smaller island's area.
+            # Only applies when gap == 0 (actual AABB overlap, not XL clearance range).
+            if gap == 0:
+                if isl.size == "Continental" and size_str != "Continental":
+                    # Placing a smaller island that overlaps the continental
+                    ix1 = max(ax1, bx1); iy1 = max(ay1, by1)
+                    ix2 = min(ax2, bx2); iy2 = min(ay2, by2)
+                    if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * size_px * size_px:
+                        continue
+                elif size_str == "Continental" and isl.size != "Continental":
+                    # Placing the continental over an existing smaller island
+                    isl_px = config.ISLAND_SIZE_PX.get(isl.size, size_px)
+                    ix1 = max(ax1, bx1); iy1 = max(ay1, by1)
+                    ix2 = min(ax2, bx2); iy2 = min(ay2, by2)
+                    if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * isl_px * isl_px:
+                        continue
             return True
         return False
 

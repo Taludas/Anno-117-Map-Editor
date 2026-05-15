@@ -58,26 +58,34 @@ def _is_relevant_rda(path: str) -> bool:
 
 def _run_rda(cmd: list) -> None:
     """
-    Run RdaConsole without spawning a visible console window.
-    The .NET ConsolePal.Clear() crash (exit code 3762504530) still occurs when
-    there is no console attached, but extraction succeeds before that point and
-    the exit code is treated as success.
+    Run RdaConsole with its console window hidden.
+    The exit code 3762504530 (.NET ConsolePal crash after extraction) is accepted as success.
     """
-    _flags = subprocess.CREATE_NO_WINDOW if config.IS_WINDOWS else 0
-    print(f"[rda] Running: {' '.join(cmd)}")
+    quoted = " ".join(f'"{a}"' for a in cmd)
+    print(f"[rda] Running: {quoted}")
+
+    _kwargs: dict = {}
+    if config.IS_WINDOWS:
+        _si = subprocess.STARTUPINFO()
+        _si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+        _si.wShowWindow = 0  # SW_HIDE — console allocated but never shown
+        _kwargs["startupinfo"] = _si
 
     result = subprocess.run(
-        cmd,
-        capture_output=True,
+        quoted,
+        shell=True,
+        stdin=None,
+        stdout=None,
+        stderr=None,
         timeout=300,
-        creationflags=_flags,
+        **_kwargs,
     )
     print(f"[rda] Exit code: {result.returncode}")
 
     if result.returncode not in (0, _NET_CONSOLE_EXIT_CODE):
         raise RuntimeError(
             f"RdaConsole failed with exit code {result.returncode}.\n"
-            f"Command: {' '.join(cmd)}"
+            f"Command: {quoted}"
         )
 
 

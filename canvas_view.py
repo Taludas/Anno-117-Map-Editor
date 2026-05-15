@@ -1496,7 +1496,6 @@ class MapCanvas(tk.Canvas):
                 nx, ny = proposed[isl._eid]
                 sz = isl.size_pixels
                 # Overlap check vs. external islands
-                ipa = self.template.computed_initial_pa
                 for ext in external:
                     gap = (config.XL_COLLISION_GAP
                            if (isl.size == "ExtraLarge" and ext.size == "Continental") or
@@ -1506,9 +1505,18 @@ class MapCanvas(tk.Canvas):
                     if not (nx + sz + gap > bx1 and bx2 + gap > nx
                             and ny + sz + gap > by1 and by2 + gap > ny):
                         continue
-                    if ext.size == "Continental":
-                        if nx >= ipa[0] and ny >= ipa[1] and nx + sz <= ipa[2] and ny + sz <= ipa[3]:
-                            continue
+                    if gap == 0:
+                        if ext.size == "Continental" and isl.size != "Continental":
+                            ix1 = max(nx, bx1); iy1 = max(ny, by1)
+                            ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
+                            if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * sz * sz:
+                                continue
+                        elif isl.size == "Continental" and ext.size != "Continental":
+                            ext_px = config.ISLAND_SIZE_PX.get(ext.size, sz)
+                            ix1 = max(nx, bx1); iy1 = max(ny, by1)
+                            ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
+                            if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * ext_px * ext_px:
+                                continue
                     blocked = True
                     break
                 if blocked:
@@ -1837,7 +1845,6 @@ class MapCanvas(tk.Canvas):
                     break
                 continue
             sz = isl.size_pixels
-            ipa = self.template.computed_initial_pa
             for ext in external:
                 gap = (config.XL_COLLISION_GAP
                        if (isl.size == "ExtraLarge" and ext.size == "Continental") or (isl.size == "Continental" and ext.size == "ExtraLarge")
@@ -1846,9 +1853,18 @@ class MapCanvas(tk.Canvas):
                 if not (nx + sz + gap > bx1 and bx2 + gap > nx
                         and ny + sz + gap > by1 and by2 + gap > ny):
                     continue
-                if ext.size == "Continental":
-                    if nx >= ipa[0] and ny >= ipa[1] and nx + sz <= ipa[2] and ny + sz <= ipa[3]:
-                        continue
+                if gap == 0:
+                    if ext.size == "Continental" and isl.size != "Continental":
+                        ix1 = max(nx, bx1); iy1 = max(ny, by1)
+                        ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
+                        if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * sz * sz:
+                            continue
+                    elif isl.size == "Continental" and ext.size != "Continental":
+                        ext_px = config.ISLAND_SIZE_PX.get(ext.size, sz)
+                        ix1 = max(nx, bx1); iy1 = max(ny, by1)
+                        ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
+                        if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * ext_px * ext_px:
+                            continue
                 blocked = True
                 break
             if blocked:
