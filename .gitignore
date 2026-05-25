@@ -1,0 +1,32 @@
+
+# make files
+Makefile
+requirements.txt
+
+.vs/
+
+# Executables
+*.exe
+*.out
+*.app
+
+# zip files
+*.zip
+
+# VS Code
+*.vscode
+
+# working directories
+working/
+.modcache/
+__pycache__/
+
+# PyCharm
+.idea/
+
+# Visual SlickEdit projct files
+*.vtg
+*.vpj
+*.vpw
+*.vpwhist
+
