@@ -15,11 +15,11 @@ import config
 
 _RDA_EXE = "RdaConsole.exe" if config.IS_WINDOWS else "RdaConsole"
 
-RDA_CANDIDATES = [
-    os.path.join(config.TOOLS_INSTALL_DIR, _RDA_EXE),
-    os.path.join(config.DATA_DIR, "..", "tools", _RDA_EXE),
-    os.path.join(".", "tools", _RDA_EXE),
-]
+# RDA_CANDIDATES = [
+#     os.path.join(config.TOOLS_INSTALL_DIR, _RDA_EXE),
+#     os.path.join(config.DATA_DIR, "..", "tools", _RDA_EXE),
+#     os.path.join(".", "tools", _RDA_EXE),
+# ]
 
 # Only extract from these archives
 RELEVANT_RDA_PATTERNS = [
@@ -41,9 +41,15 @@ CONFIG_FILTER   = r"data/base/config/export/.*\.xml"
 
 
 def find_rda_console() -> Optional[str]:
-    for c in RDA_CANDIDATES:
-        if os.path.isfile(c):
-            return c
+
+    # Check candidates
+    for candidate in config.RDACONSOLE_CANDIDATES:
+        if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
+            return candidate
+
+    # for c in RDA_CANDIDATES:
+    #     if os.path.isfile(c):
+    #         return c
     return shutil.which("RdaConsole.exe" if config.IS_WINDOWS else "RdaConsole")
 
 
