@@ -18,6 +18,7 @@ working/
 .modcache/
 __pycache__/
 dist/
+mod_tests/
 
 # PyCharm
 .idea/

@@ -623,7 +623,7 @@ class MapEditorApp(tk.Frame):
         edit_menu.add_command(label="Undo",          command=self.cmd_undo,        accelerator="Ctrl+Z")
         edit_menu.add_command(label="Redo",          command=self.cmd_redo,        accelerator="Ctrl+Y")
         edit_menu.add_separator()
-        self._region_name_screenshot_var = tk.BooleanVar(value=False)
+        self._region_name_screenshot_var = tk.BooleanVar(value=True)
         edit_menu.add_checkbutton(
             label="Region Name in Screenshots",
             selectcolor="#ffffff",
