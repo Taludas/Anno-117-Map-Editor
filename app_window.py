@@ -623,6 +623,13 @@ class MapEditorApp(tk.Frame):
         edit_menu.add_command(label="Undo",          command=self.cmd_undo,        accelerator="Ctrl+Z")
         edit_menu.add_command(label="Redo",          command=self.cmd_redo,        accelerator="Ctrl+Y")
         edit_menu.add_separator()
+        self._region_name_screenshot_var = tk.BooleanVar(value=False)
+        edit_menu.add_checkbutton(
+            label="Region Name in Screenshots",
+            selectcolor="#ffffff",
+            variable=self._region_name_screenshot_var,
+        )
+        edit_menu.add_separator()
         edit_menu.add_command(label="Select All",    command=self._select_all,     accelerator="Ctrl+A")
         edit_menu.add_command(label="Deselect All",  command=self._deselect_all,   accelerator="Escape")
         edit_menu.add_command(label="Delete Selected", command=self._delete_selected)
@@ -1613,7 +1620,10 @@ class MapEditorApp(tk.Frame):
 
         self.set_status("Exporting PNG…")
         try:
-            canvas.export_png(filepath)
+            canvas.export_png(
+                filepath,
+                show_region_name=self._region_name_screenshot_var.get(),
+            )
             self.set_status(f"PNG exported: {os.path.basename(filepath)}")
         except Exception as exc:
             messagebox.showerror("Export Failed", str(exc), parent=self.root)

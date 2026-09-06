@@ -876,7 +876,8 @@ class MapCanvas(tk.Canvas):
 
     # ── PNG export ───────────────────────────────────────────────────────────
 
-    def export_png(self, filepath: str, img_size: int = 1024) -> None:
+    def export_png(self, filepath: str, img_size: int = 1024,
+                   show_region_name: bool = False) -> None:
         """
         Render the current map to a PNG of the full map template diamond:
         playable area + border zone with all islands included.
@@ -950,6 +951,26 @@ class MapCanvas(tk.Canvas):
                 label_font = _ImageFont.load_default(size=font_sz)
             except TypeError:
                 label_font = _ImageFont.load_default()
+
+        region_font = None
+        if show_region_name:
+            region_font_sz = max(1, int(64 * img_size / 1024))
+            region_font_path = os.path.join(
+                config.FONTS_DIR,
+                "PlayfairDisplaySC-Regular.ttf",
+            )
+            try:
+                region_font = _ImageFont.truetype(
+                    region_font_path,
+                    region_font_sz,
+                )
+            except Exception:
+                pass
+            if region_font is None:
+                try:
+                    region_font = _ImageFont.load_default(size=region_font_sz)
+                except TypeError:
+                    region_font = _ImageFont.load_default()
 
         # ── Helper: dashed polyline (PIL has no native dash support) ─────────
         def _dashed_line(draw_ctx, pts, fill, width=1, dash_on=8, dash_off=5):
@@ -1119,6 +1140,9 @@ class MapCanvas(tk.Canvas):
 
         # ── Clip: outside map diamond → bg_main.jpg (ocean corners) ──────────
         result = Image.composite(base, bg_main, map_mask)
+        if show_region_name:
+            _ImageDraw.Draw(result).text((20, 20), self.region,
+                                         fill="#000000", font=region_font)
         result.convert("RGB").save(filepath, "PNG")
 
     # ── Ship spawns ──────────────────────────────────────────────────────────
