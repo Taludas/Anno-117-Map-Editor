@@ -163,8 +163,9 @@ class _BaseDialog(tk.Toplevel):
 class IslandPropertiesDialog(_BaseDialog):
     """Edit properties of an existing island element."""
 
-    def __init__(self, parent, island: IslandElement):
+    def __init__(self, parent, island: IslandElement, all_regions: bool = True):
         self._isl = island
+        self._all_regions = all_regions
         super().__init__(parent, "Island Properties", width=480, height=None)
 
     def _build(self):
@@ -246,7 +247,10 @@ class IslandPropertiesDialog(_BaseDialog):
             tk.Label(self._fixed_frame, text="Select Island", bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_XSMALL).pack(anchor="w")
 
             region = getattr(self._isl, '_region', 'Latium')
-            islands = reg.for_region(region)
+            islands = reg.for_region(
+                region,
+                include_other_regions=self._all_regions,
+            )
             # Group by type
             options = [f"{i.name}  [{i.size} / {i.island_type}]" for i in islands]
             self._island_options = islands
@@ -599,7 +603,7 @@ class NewMapDialog(_BaseDialog):
     # ── build ─────────────────────────────────────────────────────────────────
 
     def _build(self):
-        tk.Label(self, text="New Map Template", bg=config.BG_SECTION, fg=config.FG_GOLD, font=config.FONT_HEADER).pack(anchor="w", padx=16, pady=(14, 4))
+        tk.Label(self, text="New Map Template (mod by Jopo-JP)", bg=config.BG_SECTION, fg=config.FG_GOLD, font=config.FONT_HEADER).pack(anchor="w", padx=16, pady=(14, 4))
         _sep(self).pack(fill="x", padx=10, pady=4)
 
         body = tk.Frame(self, bg=config.BG_SECTION)
@@ -1070,8 +1074,9 @@ class ResizeMapDialog(_BaseDialog):
 class FixedIslandPickerDialog(_BaseDialog):
     """Pick a specific island asset for fixed placement."""
 
-    def __init__(self, parent, region: str = "Latium"):
+    def __init__(self, parent, region: str = "Latium", all_regions: bool = True):
         self._region = region
+        self._all_regions = all_regions
         super().__init__(parent, "Select Fixed Island", width=700, height=480)
 
     def _build(self):
@@ -1094,10 +1099,13 @@ class FixedIslandPickerDialog(_BaseDialog):
         self._filter_var.trace_add("write", lambda *_: self._populate())
         tk.Entry(fbar1, textvariable=self._filter_var, width=22, bg=config.BG_HOVER, fg=config.FG_MAIN, insertbackground=config.FG_MAIN, relief=tk.FLAT, font=config.FONT_SMALL).pack(side="left", padx=6)
 
-        tk.Label(fbar1, text="Culture:", bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_SMALL).pack(side="left", padx=(8, 2))
-        self._culture_filter_var = tk.StringVar(value="All")
-        for c in ("All", "Celtic", "Roman"):
-            tk.Radiobutton(fbar1, text=c, variable=self._culture_filter_var, value=c, command=self._populate, bg=config.BG_SECTION, fg=config.FG_MAIN, selectcolor=config.BG_HOVER, font=config.FONT_XSMALL, activebackground=config.BG_SECTION).pack(side="left", padx=2)
+        if self._all_regions:
+            tk.Label(fbar1, text="Culture:", bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_SMALL).pack(side="left", padx=(8, 2))
+            self._culture_filter_var = tk.StringVar(value="All")
+            for c in ("All", "Celtic", "Roman"):
+                tk.Radiobutton(fbar1, text=c, variable=self._culture_filter_var, value=c, command=self._populate, bg=config.BG_SECTION, fg=config.FG_MAIN, selectcolor=config.BG_HOVER, font=config.FONT_XSMALL, activebackground=config.BG_SECTION).pack(side="left", padx=2)
+        else:
+            self._culture_filter_var = None
 
         # Filter bar - row 2: type radio buttons
         fbar2 = tk.Frame(self, bg=config.BG_SECTION)
@@ -1126,7 +1134,10 @@ class FixedIslandPickerDialog(_BaseDialog):
         sb.pack(side="right", fill="y")
         self._tree.bind("<Double-1>", lambda e: self._confirm())
 
-        self._islands = reg.for_region(self._region)
+        self._islands = reg.for_region(
+            self._region,
+            include_other_regions=self._all_regions,
+        )
         self._populate()
 
         btn_f = tk.Frame(self, bg=config.BG_SECTION)
@@ -1139,7 +1150,7 @@ class FixedIslandPickerDialog(_BaseDialog):
         self._tree.delete(*self._tree.get_children())
         flt  = self._filter_var.get().lower()
         tfilter = self._type_filter_var.get()
-        cfilter = self._culture_filter_var.get() if self._culture_filter_var else "All"
+        cfilter = self._culture_filter_var.get() if self._culture_filter_var is not None else "All"
         for isl in self._islands:
             culture = "Roman" if isl.region == "Latium" else "Celtic"
             if cfilter != "All" and culture != cfilter:
@@ -1176,13 +1187,35 @@ class FixedIslandPickerDialog(_BaseDialog):
 
 # ─── About Dialog ────────────────────────────────────────────────────────────
 
+import webbrowser
+
 class AboutDialog(_BaseDialog):
+
     def __init__(self, parent):
-        super().__init__(parent, "About", width=380, height=250)
+        super().__init__(parent, "About", width=500, height=380)
+
+    # 2. Helper for Hyperlinks
+    def _open_url(self, url):
+        webbrowser.open_new_tab(url)
 
     def _build(self):
         tk.Label(self, text="Anno 117 Map Template Editor", bg=config.BG_SECTION, fg=config.FG_GOLD, font=config.FONT_HEADER).pack(pady=(24, 6))
         tk.Label(self, text="A community tool for creating & editing\nAnno 117 map templates (.a7tinfo).", bg=config.BG_SECTION, fg=config.FG_MAIN, font=config.FONT_SMALL, justify="center").pack(pady=6)
+        
+        # --- Jopo-JP ---
+        tk.Label(self, text="Increased Map Sizes by Jopo-JP", bg=config.BG_SECTION, fg=config.FG_MAIN, font=config.FONT_SMALL).pack(pady=(6, 0))
+        # Der klickbare Link:
+        link1 = tk.Label(self, text="https://github.com/Jopo-JP", bg=config.BG_SECTION, fg="#1e90ff", font=(config.FONT_SMALL[0], config.FONT_SMALL[1], "underline"), cursor="hand2")
+        link1.pack(pady=(0, 6))
+        link1.bind("<Button-1>", lambda e: self._open_url("https://github.com/Jopo-JP"))
+
+        # --- gz2k2 ---
+        tk.Label(self, text="All Islands in all Regions and Region Name in Screenshots by gz2k2", bg=config.BG_SECTION, fg=config.FG_MAIN, font=config.FONT_SMALL, justify="center").pack(pady=(6, 0))
+        # Der klickbare Link:
+        link2 = tk.Label(self, text="https://github.com/gz2k2", bg=config.BG_SECTION, fg="#1e90ff", font=(config.FONT_SMALL[0], config.FONT_SMALL[1], "underline"), cursor="hand2")
+        link2.pack(pady=(0, 6))
+        link2.bind("<Button-1>", lambda e: self._open_url("https://github.com/gz2k2"))
+
         tk.Label(self, text="Requires FileDBReader by anno-mods\nRequires RDAConsole by anno-mods", bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_XSMALL).pack(pady=2)
         _sep(self).pack(fill="x", padx=20, pady=12)
         _btn(self, "  Close  ", self.destroy).pack()

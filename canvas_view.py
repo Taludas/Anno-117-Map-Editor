@@ -241,11 +241,13 @@ class MapCanvas(tk.Canvas):
     45°-rotated diamond and handles interactive island editing.
     """
 
-    def __init__(self, parent: tk.Widget, region: str, **kwargs):
+    def __init__(self, parent: tk.Widget, region: str,
+                 all_regions_islands=True, **kwargs):
         bg = kwargs.pop("bg", config.CANVAS_BG)
         super().__init__(parent, bg=bg, highlightthickness=0, **kwargs)
 
         self.region = region
+        self.all_regions_islands = all_regions_islands
         self.template: Optional[MapTemplate] = None
 
         # View state
@@ -2348,7 +2350,12 @@ class MapCanvas(tk.Canvas):
         from dialogs import FixedIslandPickerDialog
         self.push_undo()
         region = getattr(isl, '_region', self.region)
-        dlg = FixedIslandPickerDialog(self.winfo_toplevel(), region=region)
+        enabled = self.all_regions_islands() if callable(self.all_regions_islands) else self.all_regions_islands
+        dlg = FixedIslandPickerDialog(
+            self.winfo_toplevel(),
+            region=region,
+            all_regions=enabled,
+        )
         if dlg.result:
             fixed = dlg.result
             isl.element_type   = 0
@@ -2371,7 +2378,12 @@ class MapCanvas(tk.Canvas):
     def _edit_island(self, isl: IslandElement) -> None:
         from dialogs import IslandPropertiesDialog
         self.push_undo()
-        dlg = IslandPropertiesDialog(self.winfo_toplevel(), isl)
+        dlg = IslandPropertiesDialog(
+            self.winfo_toplevel(),
+            isl,
+            all_regions=(self.all_regions_islands() if callable(self.all_regions_islands)
+                         else self.all_regions_islands),
+        )
         if dlg.result:
             self.invalidate_image(isl._eid)
             if self.on_modify:

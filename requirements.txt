@@ -1,2 +1,3 @@
 pillow>=9.0
+webbrowser
 pyinstaller

@@ -164,6 +164,7 @@ class RegionTab(tk.Frame):
         self.canvas_widget = MapCanvas(
             canvas_frame,
             region=self.region,
+            all_regions_islands=lambda: self.app._all_regions_islands_var.get(),
         )
         self.canvas_widget.on_select = self._on_island_select
         self.canvas_widget.on_modify = self._on_modify
@@ -370,7 +371,11 @@ class RegionTab(tk.Frame):
             messagebox.showinfo("No Map", "Please open or create a map first.", parent=self.app.root)
             return
         from dialogs import FixedIslandPickerDialog
-        dlg = FixedIslandPickerDialog(self.winfo_toplevel(), region=self.region)
+        dlg = FixedIslandPickerDialog(
+            self.winfo_toplevel(),
+            region=self.region,
+            all_regions=self.app._all_regions_islands_var.get(),
+        )
         if dlg.result and self.canvas_widget and self.canvas_widget.template:
             self.canvas_widget.start_placing(dlg.result)
             self.app.set_status(f"Place custom island: {dlg.result.display_name}  - click to place, . / middle-click to rotate, Esc to cancel.")
@@ -436,7 +441,11 @@ class RegionTab(tk.Frame):
         isl = self.canvas_widget.get_selected()
         if isl:
             self.canvas_widget.push_undo()
-            dlg = IslandPropertiesDialog(self.winfo_toplevel(), isl)
+            dlg = IslandPropertiesDialog(
+                self.winfo_toplevel(),
+                isl,
+                all_regions=self.app._all_regions_islands_var.get(),
+            )
             if dlg.result:
                 self.canvas_widget.invalidate_image(isl._eid)
                 self.canvas_widget.redraw()
@@ -633,28 +642,33 @@ class MapEditorApp(tk.Frame):
         edit_menu.add_separator()
         edit_menu.add_command(label="Resize Map…", command=self._resize_map)
 
-
-        # Options menu
-        options_menu = tk.Menu(mb, tearoff=0, bg=config.BG_SECTION, fg=config.FG_MAIN, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD)
-        mb.add_cascade(label="Options", menu=options_menu)
-        self._region_name_screenshot_var = tk.BooleanVar(value=True)
-        options_menu.add_checkbutton(
-            label="Region Name in Screenshots",
-            selectcolor="#ffffff",
-            variable=self._region_name_screenshot_var,
-        )
-        options_menu.add_separator()
-        options_menu.add_command(label="Set Game Path…",         command=self._browse_game_path)
-        options_menu.add_command(label="Set FileDBReader Path…", command=self._browse_fdb)
-        options_menu.add_command(label="Set RdaConsole Path…",   command=self._browse_rda)
-
-
         # View menu
         view_menu = tk.Menu(mb, tearoff=0, bg=config.BG_SECTION, fg=config.FG_MAIN, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD)
         mb.add_cascade(label="View", menu=view_menu)
         view_menu.add_command(label="Zoom In",      accelerator="Ctrl++", command=lambda: self._zoom(1))
         view_menu.add_command(label="Zoom Out",     accelerator="Ctrl+-", command=lambda: self._zoom(-1))
         view_menu.add_command(label="Fit to Window",                      command=self._fit_view)
+
+        # Options menu
+        options_menu = tk.Menu(mb, tearoff=0, bg=config.BG_SECTION, fg=config.FG_MAIN, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD)
+        mb.add_cascade(label="Options", menu=options_menu)
+        self._region_name_screenshot_var = tk.BooleanVar(value=True)
+        options_menu.add_checkbutton(
+            label="Region Name in Screenshots (gz2k2)",
+            selectcolor="#ffffff",
+            variable=self._region_name_screenshot_var,
+        )
+        options_menu.add_separator()
+        self._all_regions_islands_var = tk.BooleanVar(value=False)
+        options_menu.add_checkbutton(
+            label="Enable all Islands in all Regions (gz2k2)",
+            selectcolor="#ffffff",
+            variable=self._all_regions_islands_var,
+        )
+        options_menu.add_separator()
+        options_menu.add_command(label="Set Game Path…",         command=self._browse_game_path)
+        options_menu.add_command(label="Set FileDBReader Path…", command=self._browse_fdb)
+        options_menu.add_command(label="Set RdaConsole Path…",   command=self._browse_rda)
 
         # Help
         help_menu = tk.Menu(mb, tearoff=0, bg=config.BG_SECTION, fg=config.FG_MAIN, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD)
@@ -1649,6 +1663,18 @@ class MapEditorApp(tk.Frame):
             return
         if not self._warn_before_export(tmpls):
             return
+        if self._has_foreign_region_islands(tmpls):
+            if not messagebox.askyesno(
+                "Foreign-Region Islands",
+                "One or more islands belong to a different region than the map "
+                "they were placed in.\n\n"
+                "Foreign-region islands may not work correctly. Mining slots, "
+                "swamp areas, and graphics are not properly adapted to the "
+                "target region.\n\n"
+                "Proceed with export anyway?",
+                parent=self.root,
+            ):
+                return
 
         # DLC01 enlargement warning - non-enlarged maps won't grow with Continental islands
         if not any(t.is_enlarged for t in tmpls):
@@ -1941,6 +1967,33 @@ class MapEditorApp(tk.Frame):
             + "\n\nProceed anyway?"
         )
         return messagebox.askyesno("Export Warnings", msg, parent=self.root)
+
+    def _has_foreign_region_islands(self, tmpls) -> bool:
+        """Return True when a fixed island belongs to the other region."""
+        from island_registry import IslandRegistry
+
+        registry = IslandRegistry.instance()
+        registry.load()
+
+        for tmpl in tmpls:
+            for island in tmpl.islands:
+                if not island.is_fixed:
+                    continue
+
+                asset = registry.find_by_name(island.map_file_path or "")
+                if asset is not None:
+                    if asset.region != tmpl.region:
+                        return True
+                    continue
+
+                path = (island.map_file_path or "").replace("\\", "/").lower()
+                if (
+                    (tmpl.region == "Latium" and "/celtic/" in path)
+                    or (tmpl.region == "Albion" and "/roman/" in path)
+                ):
+                    return True
+
+        return False
 
     # ── App lifecycle ─────────────────────────────────────────────────────────
 

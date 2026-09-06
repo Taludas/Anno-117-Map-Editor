@@ -319,9 +319,12 @@ class IslandRegistry:
     def all_islands(self) -> List[IslandAsset]:
         return list(self._islands)
 
-    def for_region(self, region: str) -> List[IslandAsset]:
+    def for_region(self, region: str,
+                   include_other_regions: bool = True) -> List[IslandAsset]:
         if region in ("Both", "all", "All"):
             return list(self._islands)
+        if not include_other_regions:
+            return [i for i in self._islands if i.region == region]
         # Both regions show all islands, with native-region islands listed first
         native = [i for i in self._islands if i.region == region]
         other  = [i for i in self._islands if i.region != region]
