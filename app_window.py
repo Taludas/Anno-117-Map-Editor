@@ -623,13 +623,7 @@ class MapEditorApp(tk.Frame):
         edit_menu.add_command(label="Undo",          command=self.cmd_undo,        accelerator="Ctrl+Z")
         edit_menu.add_command(label="Redo",          command=self.cmd_redo,        accelerator="Ctrl+Y")
         edit_menu.add_separator()
-        self._region_name_screenshot_var = tk.BooleanVar(value=True)
-        edit_menu.add_checkbutton(
-            label="Region Name in Screenshots",
-            selectcolor="#ffffff",
-            variable=self._region_name_screenshot_var,
-        )
-        edit_menu.add_separator()
+
         edit_menu.add_command(label="Select All",    command=self._select_all,     accelerator="Ctrl+A")
         edit_menu.add_command(label="Deselect All",  command=self._deselect_all,   accelerator="Escape")
         edit_menu.add_command(label="Delete Selected", command=self._delete_selected)
@@ -638,10 +632,22 @@ class MapEditorApp(tk.Frame):
         edit_menu.add_command(label="Rotate Selection 90° CCW", command=lambda: self._rotate_selection(-1), accelerator="Shift+Ctrl+R")
         edit_menu.add_separator()
         edit_menu.add_command(label="Resize Map…", command=self._resize_map)
-        edit_menu.add_separator()
-        edit_menu.add_command(label="Set Game Path…",         command=self._browse_game_path)
-        edit_menu.add_command(label="Set FileDBReader Path…", command=self._browse_fdb)
-        edit_menu.add_command(label="Set RdaConsole Path…",   command=self._browse_rda)
+
+
+        # Options menu
+        options_menu = tk.Menu(mb, tearoff=0, bg=config.BG_SECTION, fg=config.FG_MAIN, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD)
+        mb.add_cascade(label="Options", menu=options_menu)
+        self._region_name_screenshot_var = tk.BooleanVar(value=True)
+        options_menu.add_checkbutton(
+            label="Region Name in Screenshots",
+            selectcolor="#ffffff",
+            variable=self._region_name_screenshot_var,
+        )
+        options_menu.add_separator()
+        options_menu.add_command(label="Set Game Path…",         command=self._browse_game_path)
+        options_menu.add_command(label="Set FileDBReader Path…", command=self._browse_fdb)
+        options_menu.add_command(label="Set RdaConsole Path…",   command=self._browse_rda)
+
 
         # View menu
         view_menu = tk.Menu(mb, tearoff=0, bg=config.BG_SECTION, fg=config.FG_MAIN, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD)
