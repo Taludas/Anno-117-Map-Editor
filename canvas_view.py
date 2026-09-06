@@ -783,13 +783,19 @@ class MapCanvas(tk.Canvas):
             x1, y1 = int(min(xs)), int(min(ys))
             x2, y2 = int(max(xs)), int(max(ys))
             diam_w, diam_h = x2 - x1, y2 - y1
+            # Cap background map resolution to max 2048px to prevent massive memory allocations at deep zoom
+            MAX_BG_PX = 2048
+            if max(diam_w, diam_h) > MAX_BG_PX:
+                sf = MAX_BG_PX / float(max(diam_w, diam_h))
+                diam_w = max(1, int(diam_w * sf))
+                diam_h = max(1, int(diam_h * sf))
             key = ("bg_map", diam_w, diam_h)
             if key not in self._bg_cache:
                 # Load, rotate 45°, resize to diamond bounding box
                 img = Image.open(config.MAP_BG_MAP).convert("RGBA")
                 img = img.rotate(45, expand=True, resample=Image.BICUBIC,
                                  fillcolor=(0, 0, 0, 0))
-                img = img.resize((diam_w, diam_h), Image.LANCZOS)
+                img = img.resize((diam_w, diam_h), Image.BILINEAR)
                 self._bg_cache[key] = ImageTk.PhotoImage(img)
             cx2 = (x1 + x2) / 2
             cy2 = (y1 + y2) / 2
@@ -1183,7 +1189,8 @@ class MapCanvas(tk.Canvas):
         if not PIL_AVAILABLE:
             return
         s = isl.render_size_pixels
-        img_px = max(4, int(s * self._scale))
+        # Cap max image size to 1024px to prevent gigantic allocations and slowdowns at high zoom levels
+        img_px = min(256, max(4, int(s * self._scale)))
         cache_key = (isl._eid, img_px, isl.island_type, isl.size, self.show_images, isl.rotation90)
 
         if cache_key not in self._img_cache:
@@ -1227,6 +1234,16 @@ class MapCanvas(tk.Canvas):
         ne = self.gts(px + s, py + s)
         nw = self.gts(px,     py + s)
         pts = [*sw, *se, *ne, *nw]
+
+        # Viewport culling: Skip rendering islands that are completely off-screen
+        if not ghost:
+            cw = self.winfo_width() or 800
+            ch = self.winfo_height() or 600
+            xs = [sw[0], se[0], ne[0], nw[0]]
+            ys = [sw[1], se[1], ne[1], nw[1]]
+            margin = 150
+            if max(xs) < -margin or min(xs) > cw + margin or max(ys) < -margin or min(ys) > ch + margin:
+                return
 
         tag = f"iid_{isl._eid}"
         tags = (tag, "island")
@@ -2445,7 +2462,13 @@ class MapCanvas(tk.Canvas):
         """Zoom in (direction > 0) or out (direction < 0)."""
         factor = 1.15 if direction > 0 else (1 / 1.15)
         self._scale = max(0.05, min(5.0, self._scale * factor))
-        self.redraw()
+        if self.on_zoom_change:
+            self.on_zoom_change(self._scale)
+        self._zoom_active = True
+        if self._zoom_settle_id is not None:
+            self.after_cancel(self._zoom_settle_id)
+        self._zoom_settle_id = self.after(1000, self._zoom_settle)
+        self._request_redraw()
 
     def fit_view(self) -> None:
         """Scale and centre the map to fill the visible canvas."""
@@ -2482,12 +2505,12 @@ class MapCanvas(tk.Canvas):
             self._zoom_active = True
             if self._zoom_settle_id is not None:
                 self.after_cancel(self._zoom_settle_id)
-            self._zoom_settle_id = self.after(225, self._zoom_settle)
+            self._zoom_settle_id = self.after(1000, self._zoom_settle)
 
         self._request_redraw()
 
     def _zoom_settle(self) -> None:
-        """Called 225ms after the last zoom scroll event; restores full image rendering."""
+        """Called 1000ms after the last zoom scroll event; restores full image rendering."""
         self._zoom_active = False
         self.F = None
         self._img_cache.clear()
