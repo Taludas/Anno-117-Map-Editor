@@ -1210,7 +1210,7 @@ class AboutDialog(_BaseDialog):
         link1.bind("<Button-1>", lambda e: self._open_url("https://github.com/Jopo-JP"))
 
         # --- gz2k2 ---
-        tk.Label(self, text="All Islands in all Regions and Region Name in Screenshots by gz2k2", bg=config.BG_SECTION, fg=config.FG_MAIN, font=config.FONT_SMALL, justify="center").pack(pady=(6, 0))
+        tk.Label(self, text="All Islands in all Regions and Region Name in PNG-Files by gz2k2", bg=config.BG_SECTION, fg=config.FG_MAIN, font=config.FONT_SMALL, justify="center").pack(pady=(6, 0))
         # clickable Link:
         link2 = tk.Label(self, text="https://github.com/gz2k2", bg=config.BG_SECTION, fg="#1e90ff", font=(config.FONT_SMALL[0], config.FONT_SMALL[1], "underline"), cursor="hand2")
         link2.pack(pady=(0, 6))
