@@ -1457,7 +1457,31 @@ class MapEditorApp(tk.Frame):
     def _resolve_and_save_xml(self, tmpl, xml_path: str) -> None:
         """Deep-copy *tmpl* and write it to *xml_path*. Original template is untouched."""
         from copy import deepcopy
+        from fertility_set_registry import FertilitySetRegistry
+        from island_registry import IslandRegistry
+
         copy = deepcopy(tmpl)
+
+        # A fixed island from the other culture cannot use the game's random
+        # fertility assignment. Export it as a Starter and resolve fertilities
+        # from the map template's region instead.
+        fertility_registry = FertilitySetRegistry.instance()
+        fertility_registry.load()
+        island_registry = IslandRegistry.instance()
+        island_registry.load()
+        for isl in copy.islands:
+            if not (isl.is_fixed and isl.randomize_fertilities
+                    and not isl.fertility_guids):
+                continue
+            island_asset = island_registry.find_by_name(isl.map_file_path or "")
+            if island_asset is None or island_asset.region == copy.region:
+                continue
+            isl.island_type = "Starter"
+            isl.fertility_guids = fertility_registry.resolve_fertilities(
+                "Starter", copy.difficulty, copy.region)
+            if isl.fertility_guids:
+                isl.randomize_fertilities = False
+
         save_xml(copy, xml_path)
 
     def _compress_xml(self, xml_path: str, out_path: str) -> bool:
