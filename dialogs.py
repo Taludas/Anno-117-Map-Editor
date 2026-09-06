@@ -10,6 +10,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from typing import Optional, List
 
+import webbrowser
+
 import config
 import terrain_builder
 from models import IslandElement
@@ -1187,14 +1189,12 @@ class FixedIslandPickerDialog(_BaseDialog):
 
 # ─── About Dialog ────────────────────────────────────────────────────────────
 
-import webbrowser
-
 class AboutDialog(_BaseDialog):
 
     def __init__(self, parent):
         super().__init__(parent, "About", width=500, height=380)
 
-    # 2. Helper for Hyperlinks
+    # Helper for Hyperlinks
     def _open_url(self, url):
         webbrowser.open_new_tab(url)
 
@@ -1204,14 +1204,14 @@ class AboutDialog(_BaseDialog):
         
         # --- Jopo-JP ---
         tk.Label(self, text="Increased Map Sizes by Jopo-JP", bg=config.BG_SECTION, fg=config.FG_MAIN, font=config.FONT_SMALL).pack(pady=(6, 0))
-        # Der klickbare Link:
+        # clickable Link:
         link1 = tk.Label(self, text="https://github.com/Jopo-JP", bg=config.BG_SECTION, fg="#1e90ff", font=(config.FONT_SMALL[0], config.FONT_SMALL[1], "underline"), cursor="hand2")
         link1.pack(pady=(0, 6))
         link1.bind("<Button-1>", lambda e: self._open_url("https://github.com/Jopo-JP"))
 
         # --- gz2k2 ---
         tk.Label(self, text="All Islands in all Regions and Region Name in Screenshots by gz2k2", bg=config.BG_SECTION, fg=config.FG_MAIN, font=config.FONT_SMALL, justify="center").pack(pady=(6, 0))
-        # Der klickbare Link:
+        # clickable Link:
         link2 = tk.Label(self, text="https://github.com/gz2k2", bg=config.BG_SECTION, fg="#1e90ff", font=(config.FONT_SMALL[0], config.FONT_SMALL[1], "underline"), cursor="hand2")
         link2.pack(pady=(0, 6))
         link2.bind("<Button-1>", lambda e: self._open_url("https://github.com/gz2k2"))
