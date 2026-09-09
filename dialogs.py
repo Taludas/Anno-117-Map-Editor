@@ -605,7 +605,7 @@ class NewMapDialog(_BaseDialog):
     # ── build ─────────────────────────────────────────────────────────────────
 
     def _build(self):
-        tk.Label(self, text="New Map Template (mod by Jopo-JP)", bg=config.BG_SECTION, fg=config.FG_GOLD, font=config.FONT_HEADER).pack(anchor="w", padx=16, pady=(14, 4))
+        tk.Label(self, text="New Map Template", bg=config.BG_SECTION, fg=config.FG_GOLD, font=config.FONT_HEADER).pack(anchor="w", padx=16, pady=(14, 4))
         _sep(self).pack(fill="x", padx=10, pady=4)
 
         body = tk.Frame(self, bg=config.BG_SECTION)

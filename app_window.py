@@ -654,14 +654,14 @@ class MapEditorApp(tk.Frame):
         mb.add_cascade(label="Options", menu=options_menu)
         self._region_name_screenshot_var = tk.BooleanVar(value=True)
         options_menu.add_checkbutton(
-            label="Region Name in PNG-Files (gz2k2)",
+            label="Region Name in PNG-Files",
             selectcolor="#ffffff",
             variable=self._region_name_screenshot_var,
         )
         options_menu.add_separator()
         self._all_regions_islands_var = tk.BooleanVar(value=True)
         options_menu.add_checkbutton(
-            label="Enable all Islands in all Regions (gz2k2)",
+            label="Enable all Islands in all Regions",
             selectcolor="#ffffff",
             variable=self._all_regions_islands_var,
         )

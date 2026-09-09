@@ -31,6 +31,7 @@
     - [6.9 Enlarged (DLC01) Templates](#69-enlarged-dlc01-templates)
     - [6.10 Island Properties Dialog](#610-island-properties-dialog)
     - [6.11 Validation and Limits](#611-validation-and-limits)
+    - [6.12 Placement Aids (Mirror Mode, Ignore Collisions, Lock Formation)](#612-placement-aids-mirror-mode-ignore-collisions-lock-formation)
   - [7. Saving and Exporting](#7-saving-and-exporting)
     - [7.1 XML Save / Load](#71-xml-save--load)
     - [7.2 Export to .a7tinfo](#72-export-to-a7tinfo)
@@ -122,12 +123,16 @@ On first launch the editor checks for the required tools and displays a setup di
 Set via `Edit → Set Game Path…` or auto-detect. The editor searches known Ubisoft Connect, Steam, and Epic install directories automatically. Used for the "Import from Game" workflow.
 
 **FileDBReader Path**
-Set via `Edit → Set FileDBReader Path…` if not auto-detected. Required for importing `.a7tinfo` files and for compressing exports. Points to the `FileDBReader` executable.
+Set via `Options → Set FileDBReader Path…` if not auto-detected. Required for importing `.a7tinfo` files and for compressing exports. Points to the `FileDBReader` executable.
 
 **RdaConsole Path**
-Set via `Edit → Set RdaConsole Path…`. Required only if you intend to use `File → Import from Game`, which extracts map templates directly from the game's RDA archives. Not needed for editing XML files or exporting.
+Set via `Options → Set RdaConsole Path…`. Required only if you intend to use `File → Import from Game`, which extracts map templates directly from the game's RDA archives. Not needed for editing XML files or exporting.
+
+If neither tool can be found automatically, a **Tool Setup** dialog opens on startup offering to auto-install them from GitHub, locate them manually, or skip for now.
 
 All paths are saved across sessions in the platform-appropriate user config directory (`%APPDATA%\Anno117MapEditor` on Windows, `~/.config/Anno117MapEditor` on Linux).
+
+**Options menu:** Besides the tool/game paths above, `Options` also holds two export toggles - "Region Name in PNG-Files" (see [7.3](#73-export-png)) and "Enable all Islands in all Regions", which lets the Fixed Island Picker ([6.5](#65-custom-fixed-islands)) offer Roman and Celtic islands regardless of which region tab is active. Both default to on.
 
 ---
 
@@ -156,6 +161,7 @@ All paths are saved across sessions in the platform-appropriate user config dire
 | Region | Latium (Roman) or Albion (Celtic) |
 | Difficulty | Default difficulty for auto-derive of other difficulties on mod export |
 | Enlarged template | Enable DLC01 (Prophecies of Ash) expansion support |
+| Map size | Total map size in game pixels, adjustable in 64 px steps from the minimum up to 8192. Defaults to 2048 (2688 while "Enlarged" is checked for Latium) |
 | Border distance | Distance in game pixels from map edge to playable area boundary |
 | X / Y axis offset | Asymmetric offset of the playable area centre |
 
@@ -172,6 +178,10 @@ Slider ranges automatically enforce a minimum 20 px border on all sides. Values 
 **Live preview:** A real-time isometric thumbnail shows both the Latium and Albion playable areas side-by-side as sliders are adjusted.
 
 When confirmed, TAMPER creates the selected region's template and also initialises a default empty template for the complementary region, so both tabs are immediately editable.
+
+**Map size beyond the vanilla default:** Sizes up to 4096 are verified to work with no issues in-game. Above that you'll be asked to confirm before proceeding: at 6144 the game renders correctly except very close to the map border, and at 8192 buildings stop being drawn (though they still function) - this is a limitation of the game's own rendering/streaming range, not of the exported map data. The map remains fully playable at any size; this only affects what you see.
+
+**Resizing an existing map:** `Edit → Resize Map…` grows the total size of the currently active tab's map after the fact. Only enlarging is supported - shrinking risks pushing existing islands outside the map bounds. New space is always added on the north/east edges; the existing Playable Area and every already-placed island are left untouched.
 
 ---
 
@@ -286,6 +296,8 @@ Spawn points:
 
 **Multi-select:** Hold Shift while clicking to add islands to the selection. Arrow key movement applies to all selected islands simultaneously, treating the group as a rigid body for collision purposes.
 
+**Rotate selection:** `Ctrl+R` / `Shift+Ctrl+R` (or `Edit → Rotate Selection 90° CW/CCW`) rotates every currently selected island 90° around the group's combined centre, as a rigid body. This is distinct from the single-ghost rotation described in [6.4](#64-placing-islands), which only applies while an island is still being placed.
+
 **Grid snap:** All island positions are snapped to multiples of 8 px (game requirement). Positions are also snapped when islands are pushed to the Playable Area boundary.
 
 **Undo / Redo:** Full undo history is maintained (`Ctrl+Z` / `Ctrl+Y`). Each placement, move, delete, and property change is a separate undo step.
@@ -359,6 +371,18 @@ Validation is performed when confirming: invalid size/type combinations (e.g. 3r
 
 ---
 
+### 6.12 Placement Aids (Mirror Mode, Ignore Collisions, Lock Formation)
+
+The side panel's **View** section has three toggles that make laying out symmetric or dense maps easier:
+
+**Mirror:** A radio group (`off` / `2×` / `4×`) that automatically places rotated copies of every newly placed island around the map centre - `2×` adds one copy at the opposite corner, `4×` adds copies at all four. Intended for keeping multiplayer starts fair without placing each corner by hand. If a mirrored copy has no room at its target position, it is silently skipped and a summary is shown after placement; enabling "Ignore collisions" guarantees the full set gets placed.
+
+**Ignore collisions:** When checked, islands can be placed, dragged, or nudged without being blocked by overlap with other islands, spawn points, or the Playable Area boundary. Useful for quickly roughing out a layout before cleaning up spacing manually.
+
+**Lock formation at edges:** Normally, moving a selection so part of it would exit the Playable Area clamps the whole group back inside. With this checked, the group is allowed to move freely without that clamping - handy when arranging a multi-island formation that intentionally straddles the border.
+
+---
+
 ## 7. Saving and Exporting
 
 ### 7.1 XML Save / Load
@@ -379,9 +403,11 @@ FileDBReader must be configured (see Section 4).
 
 `File → Export PNG…` (or PrtScn shortcut) - renders the active tab's canvas as a PNG image, cropped to the playable area. Useful for documentation and preview images.
 
+The region name (e.g. "Latium") is stamped onto the top-left corner of the image by default; disable this via `Options → Region Name in PNG-Files`.
+
 ### 7.4 Export as Playable Mod (.zip)
 
-`File → Export as Mod (.zip)…` (or Ctrl+S) - the most complete export path. Packages both the Latium and Albion templates into a ready-to-install Anno 117 mod.
+`File → Export as Mod (.zip)…` (or Ctrl+S) - the most complete export path. Packages both the Latium and Albion templates into a ready-to-install Anno 117 mod. The build runs on a background worker thread behind a progress window, so the UI stays responsive - large map sizes take noticeably longer to build than the vanilla 2048/2688 defaults.
 
 **What is generated:**
 

@@ -31,6 +31,7 @@
     - [6.9 Erweiterte (DLC01) Vorlagen](#69-erweiterte-dlc01-vorlagen)
     - [6.10 Inseleigenschaften-Dialog](#610-inseleigenschaften-dialog)
     - [6.11 Validierung und Limits](#611-validierung-und-limits)
+    - [6.12 Platzierungshilfen (Spiegelmodus, Kollisionen ignorieren, Formation sperren)](#612-platzierungshilfen-spiegelmodus-kollisionen-ignorieren-formation-sperren)
   - [7. Speichern und Exportieren](#7-speichern-und-exportieren)
     - [7.1 XML speichern / laden](#71-xml-speichern--laden)
     - [7.2 Als .a7tinfo exportieren](#72-als-a7tinfo-exportieren)
@@ -122,12 +123,16 @@ Beim ersten Start prüft der Editor, ob die benötigten Tools vorhanden sind, un
 Einstellbar über `Bearbeiten → Spielpfad festlegen…` oder die Automatisch-Erkennen-Funktion. Der Editor sucht selbstständig in bekannten Ubisoft Connect-, Steam- und Epic-Installationsverzeichnissen. Wird für den „Import aus dem Spiel"-Workflow benötigt.
 
 **FileDBReader-Pfad**
-Einstellbar über `Bearbeiten → FileDBReader-Pfad festlegen…`, falls er nicht automatisch erkannt wird. Erforderlich zum Importieren von `.a7tinfo`-Dateien und zum Komprimieren von Exporten. Zeigt auf die `FileDBReader`-Programmdatei.
+Einstellbar über `Optionen → FileDBReader-Pfad festlegen…`, falls er nicht automatisch erkannt wird. Erforderlich zum Importieren von `.a7tinfo`-Dateien und zum Komprimieren von Exporten. Zeigt auf die `FileDBReader`-Programmdatei.
 
 **RdaConsole-Pfad**
-Einstellbar über `Bearbeiten → RdaConsole-Pfad festlegen…`. Nur erforderlich, wenn du `Datei → Import aus Spiel` verwenden möchtest, um Kartenvorlagen direkt aus den RDA-Archiven des Spiels zu extrahieren. Nicht nötig zum Bearbeiten von XML-Dateien oder zum Exportieren.
+Einstellbar über `Optionen → RdaConsole-Pfad festlegen…`. Nur erforderlich, wenn du `Datei → Import aus Spiel` verwenden möchtest, um Kartenvorlagen direkt aus den RDA-Archiven des Spiels zu extrahieren. Nicht nötig zum Bearbeiten von XML-Dateien oder zum Exportieren.
+
+Falls keines der beiden Tools automatisch gefunden wird, öffnet sich beim Start ein **Tool-Einrichtungsdialog**, der anbietet, sie von GitHub automatisch zu installieren, manuell auszuwählen, oder die Einrichtung vorerst zu überspringen.
 
 Alle Pfade werden sitzungsübergreifend im plattformgerechten Konfigurationsverzeichnis gespeichert (`%APPDATA%\Anno117MapEditor` unter Windows, `~/.config/Anno117MapEditor` unter Linux).
+
+**Optionen-Menü:** Neben den oben genannten Tool-/Spielpfaden enthält `Optionen` auch zwei Export-Schalter - „Region Name in PNG-Files" (siehe [7.3](#73-png-exportieren)) und „Enable all Islands in all Regions", der dem Feste-Insel-Auswähler ([6.5](#65-benutzerdefinierte-feste-inseln)) erlaubt, römische und keltische Inseln unabhängig vom aktiven Regions-Tab anzubieten. Beide sind standardmäßig aktiviert.
 
 ---
 
@@ -156,6 +161,7 @@ Alle Pfade werden sitzungsübergreifend im plattformgerechten Konfigurationsverz
 | Region | Latium (Römisch) oder Albion (Keltisch) |
 | Schwierigkeit | Standardschwierigkeit für automatische Ableitung der anderen Schwierigkeitsgrade beim Mod-Export |
 | Erweiterte Vorlage | DLC01-Unterstützung (Prophecies of Ash) aktivieren |
+| Kartengröße | Gesamtgröße der Karte in Spielpixeln, in 64-Px-Schritten einstellbar bis maximal 8192. Standard ist 2048 (2688 bei aktivierter „Erweiterte Vorlage" für Latium) |
 | Randabstand | Abstand in Spielpixeln vom Kartenrand zur Spielbereichsgrenze |
 | X- / Y-Versatz | Asymmetrischer Versatz des Spielbereichsmittelpunkts |
 
@@ -172,6 +178,10 @@ Die Schieberegler erzwingen automatisch einen Mindestrand von 20 Px auf allen Se
 **Live-Vorschau:** Eine Echtzeit-Isometrie-Miniaturansicht zeigt beim Verschieben der Regler die spielbaren Bereiche von Latium und Albion nebeneinander.
 
 Nach Bestätigung erstellt TAMPER die Vorlage für die gewählte Region und initialisiert gleichzeitig eine leere Standardvorlage für die Gegenregion, sodass beide Tabs sofort bearbeitet werden können.
+
+**Kartengröße über den Standard hinaus:** Größen bis 4096 sind im Spiel nachweislich problemlos. Darüber wirst du vor dem Fortfahren um Bestätigung gebeten: Bei 6144 rendert das Spiel korrekt, außer sehr nah am Kartenrand, und bei 8192 werden Gebäude nicht mehr angezeigt (funktionieren aber weiterhin) - das ist eine Einschränkung der Render-/Streaming-Reichweite des Spiels selbst, nicht der exportierten Kartendaten. Die Karte bleibt bei jeder Größe voll spielbar; betroffen ist nur, was zu sehen ist.
+
+**Eine vorhandene Karte vergrößern:** `Bearbeiten → Karte vergrößern…` vergrößert die Gesamtgröße der Karte im aktiven Tab nachträglich. Nur Vergrößern wird unterstützt - Verkleinern würde riskieren, vorhandene Inseln aus den Kartengrenzen zu schieben. Neuer Platz wird immer an der Nord-/Ostkante hinzugefügt; der bestehende spielbare Bereich und jede bereits platzierte Insel bleiben unverändert.
 
 ---
 
@@ -286,6 +296,8 @@ Startpunkte:
 
 **Mehrfachauswahl:** Halte Shift gedrückt und klicke, um Inseln zur Auswahl hinzuzufügen. Pfeiltasten-Bewegung gilt für alle ausgewählten Inseln gleichzeitig, wobei die Gruppe für Kollisionszwecke als starrer Körper behandelt wird.
 
+**Auswahl rotieren:** `Strg+R` / `Umschalt+Strg+R` (oder `Bearbeiten → Auswahl 90° drehen (CW/CCW)`) dreht alle aktuell ausgewählten Inseln als starren Körper um 90° um den gemeinsamen Mittelpunkt der Gruppe. Dies ist unabhängig von der Geist-Rotation aus Abschnitt [6.4](#64-inseln-platzieren), die nur während der aktiven Platzierung einer Insel gilt.
+
 **Gitter-Snap:** Alle Inselpositionen werden auf Vielfache von 8 Px gerundet (Spielanforderung). Positionen werden auch beim Drücken von Inseln an die Spielbereichsgrenze eingerastet.
 
 **Rückgängig / Wiederherstellen:** Eine vollständige Rückgängig-Chronik wird geführt (`Strg+Z` / `Strg+Y`). Jede Platzierung, Bewegung, Löschung und Eigenschaftsänderung ist ein separater Schritt.
@@ -359,6 +371,18 @@ Bei der Bestätigung wird validiert: Ungültige Größen-/Typ-Kombinationen (z. 
 
 ---
 
+### 6.12 Platzierungshilfen (Spiegelmodus, Kollisionen ignorieren, Formation sperren)
+
+Der Bereich **Ansicht** in der Seitenleiste enthält drei Schalter, die symmetrische oder dichte Kartenlayouts erleichtern:
+
+**Spiegeln:** Eine Radiobutton-Gruppe (`aus` / `2×` / `4×`), die automatisch rotierte Kopien jeder neu platzierten Insel um das Kartenzentrum herum erzeugt - `2×` fügt eine Kopie an der gegenüberliegenden Ecke hinzu, `4×` Kopien an allen vier Ecken. Gedacht, um Multiplayer-Startpositionen fair zu halten, ohne jede Ecke von Hand zu platzieren. Findet eine gespiegelte Kopie an ihrer Zielposition keinen Platz, wird sie übersprungen und nach der Platzierung eine Zusammenfassung angezeigt; mit aktiviertem „Kollisionen ignorieren" wird garantiert der vollständige Satz platziert.
+
+**Kollisionen ignorieren:** Wenn aktiviert, können Inseln platziert, gezogen oder verschoben werden, ohne durch Überlappung mit anderen Inseln, Startpunkten oder der Spielbereichsgrenze blockiert zu werden. Nützlich, um ein Layout schnell grob zu entwerfen, bevor der Abstand manuell bereinigt wird.
+
+**Formation an Rändern sperren:** Normalerweise wird eine Auswahl, die teilweise aus dem spielbaren Bereich hinausbewegt würde, als Ganzes zurück in die Grenzen geklemmt. Ist dieser Schalter aktiviert, kann sich die Gruppe frei bewegen, ohne dieses Klemmen - praktisch, wenn eine Mehrinsel-Formation absichtlich über die Grenze hinausragen soll.
+
+---
+
 ## 7. Speichern und Exportieren
 
 ### 7.1 XML speichern / laden
@@ -379,9 +403,11 @@ FileDBReader muss konfiguriert sein (siehe Abschnitt 4).
 
 `Datei → PNG exportieren…` (oder der PrtScn-Shortcut) - rendert die Kartenansicht des aktiven Tabs als PNG-Bild, beschnitten auf den spielbaren Bereich. Nützlich für Dokumentation und Vorschaubilder.
 
+Der Regionsname (z. B. „Latium") wird standardmäßig oben links in das Bild eingeblendet; deaktivierbar über `Optionen → Region Name in PNG-Files`.
+
 ### 7.4 Als spielbare Mod exportieren (.zip)
 
-`Datei → Als Mod exportieren (.zip)…` (oder Strg+S) - der umfassendste Exportweg. Verpackt sowohl die Latium- als auch die Albion-Vorlage in eine sofort installierbare Anno 117-Mod.
+`Datei → Als Mod exportieren (.zip)…` (oder Strg+S) - der umfassendste Exportweg. Verpackt sowohl die Latium- als auch die Albion-Vorlage in eine sofort installierbare Anno 117-Mod. Der Build läuft in einem Hintergrund-Thread hinter einem Fortschrittsfenster, sodass die Benutzeroberfläche währenddessen reaktionsfähig bleibt - große Kartengrößen benötigen dabei merklich länger als die vanilla Standardwerte (2048/2688).
 
 **Was erzeugt wird:**
 
