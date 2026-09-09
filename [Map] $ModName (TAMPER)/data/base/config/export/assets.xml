@@ -1362,4 +1362,21 @@
 			<MapType>Start_GUID</MapType>
 		</Item>
 	</ModOp>
+
+	<!-- needed for Roman Islands and Cinis in Albion and some Fertility Bugs in Latium -->
+	<!-- 1. (AllowedIslandSize) -->
+	<!-- Tag exists: replace -->
+	<ModOp Type="replace" Path="//Asset[Template='FertilitySet']/Values/ResourceSetCondition/AllowedIslandSize">
+	<AllowedIslandSize>Small;Medium;Large;XL;Continental</AllowedIslandSize>
+	</ModOp>
+	<!-- no Tag: add -->
+	<ModOp Type="add" Path="//Asset[Template='FertilitySet']/Values/ResourceSetCondition[not(AllowedIslandSize)]">
+	<AllowedIslandSize>Small;Medium;Large;XL;Continental</AllowedIslandSize>
+	</ModOp>
+
+	<!-- 2. (AllowedIslandType) - Celtic and not Starter -->
+	<ModOp Type="replace" Path="//Asset[Template='FertilitySet']/Values/ResourceSetCondition[AllowedRegion='Celtic' and AllowedIslandType!='Starter']/AllowedIslandType">
+	<AllowedIslandType>Normal;VolcanicIsland</AllowedIslandType>
+	</ModOp>
+
 </ModOps>

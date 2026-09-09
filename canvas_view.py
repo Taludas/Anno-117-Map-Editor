@@ -241,11 +241,13 @@ class MapCanvas(tk.Canvas):
     45°-rotated diamond and handles interactive island editing.
     """
 
-    def __init__(self, parent: tk.Widget, region: str, **kwargs):
+    def __init__(self, parent: tk.Widget, region: str,
+                 all_regions_islands=True, **kwargs):
         bg = kwargs.pop("bg", config.CANVAS_BG)
         super().__init__(parent, bg=bg, highlightthickness=0, **kwargs)
 
         self.region = region
+        self.all_regions_islands = all_regions_islands
         self.template: Optional[MapTemplate] = None
 
         # View state
@@ -781,13 +783,19 @@ class MapCanvas(tk.Canvas):
             x1, y1 = int(min(xs)), int(min(ys))
             x2, y2 = int(max(xs)), int(max(ys))
             diam_w, diam_h = x2 - x1, y2 - y1
+            # Cap background map resolution to max 2048px to prevent massive memory allocations at deep zoom
+            MAX_BG_PX = 2048
+            if max(diam_w, diam_h) > MAX_BG_PX:
+                sf = MAX_BG_PX / float(max(diam_w, diam_h))
+                diam_w = max(1, int(diam_w * sf))
+                diam_h = max(1, int(diam_h * sf))
             key = ("bg_map", diam_w, diam_h)
             if key not in self._bg_cache:
                 # Load, rotate 45°, resize to diamond bounding box
                 img = Image.open(config.MAP_BG_MAP).convert("RGBA")
                 img = img.rotate(45, expand=True, resample=Image.BICUBIC,
                                  fillcolor=(0, 0, 0, 0))
-                img = img.resize((diam_w, diam_h), Image.LANCZOS)
+                img = img.resize((diam_w, diam_h), Image.BILINEAR)
                 self._bg_cache[key] = ImageTk.PhotoImage(img)
             cx2 = (x1 + x2) / 2
             cy2 = (y1 + y2) / 2
@@ -876,7 +884,8 @@ class MapCanvas(tk.Canvas):
 
     # ── PNG export ───────────────────────────────────────────────────────────
 
-    def export_png(self, filepath: str, img_size: int = 1024) -> None:
+    def export_png(self, filepath: str, img_size: int = 1024,
+                   show_region_name: bool = False) -> None:
         """
         Render the current map to a PNG of the full map template diamond:
         playable area + border zone with all islands included.
@@ -950,6 +959,26 @@ class MapCanvas(tk.Canvas):
                 label_font = _ImageFont.load_default(size=font_sz)
             except TypeError:
                 label_font = _ImageFont.load_default()
+
+        region_font = None
+        if show_region_name:
+            region_font_sz = max(1, int(64 * img_size / 1024))
+            region_font_path = os.path.join(
+                config.FONTS_DIR,
+                "PlayfairDisplaySC-Regular.ttf",
+            )
+            try:
+                region_font = _ImageFont.truetype(
+                    region_font_path,
+                    region_font_sz,
+                )
+            except Exception:
+                pass
+            if region_font is None:
+                try:
+                    region_font = _ImageFont.load_default(size=region_font_sz)
+                except TypeError:
+                    region_font = _ImageFont.load_default()
 
         # ── Helper: dashed polyline (PIL has no native dash support) ─────────
         def _dashed_line(draw_ctx, pts, fill, width=1, dash_on=8, dash_off=5):
@@ -1119,6 +1148,9 @@ class MapCanvas(tk.Canvas):
 
         # ── Clip: outside map diamond → bg_main.jpg (ocean corners) ──────────
         result = Image.composite(base, bg_main, map_mask)
+        if show_region_name:
+            _ImageDraw.Draw(result).text((20, 20), self.region,
+                                         fill="#000000", font=region_font)
         result.convert("RGB").save(filepath, "PNG")
 
     # ── Ship spawns ──────────────────────────────────────────────────────────
@@ -1157,7 +1189,8 @@ class MapCanvas(tk.Canvas):
         if not PIL_AVAILABLE:
             return
         s = isl.render_size_pixels
-        img_px = max(4, int(s * self._scale))
+        # Cap max image size to 1024px to prevent gigantic allocations and slowdowns at high zoom levels
+        img_px = min(256, max(4, int(s * self._scale)))
         cache_key = (isl._eid, img_px, isl.island_type, isl.size, self.show_images, isl.rotation90)
 
         if cache_key not in self._img_cache:
@@ -1201,6 +1234,16 @@ class MapCanvas(tk.Canvas):
         ne = self.gts(px + s, py + s)
         nw = self.gts(px,     py + s)
         pts = [*sw, *se, *ne, *nw]
+
+        # Viewport culling: Skip rendering islands that are completely off-screen
+        if not ghost:
+            cw = self.winfo_width() or 800
+            ch = self.winfo_height() or 600
+            xs = [sw[0], se[0], ne[0], nw[0]]
+            ys = [sw[1], se[1], ne[1], nw[1]]
+            margin = 150
+            if max(xs) < -margin or min(xs) > cw + margin or max(ys) < -margin or min(ys) > ch + margin:
+                return
 
         tag = f"iid_{isl._eid}"
         tags = (tag, "island")
@@ -2324,7 +2367,12 @@ class MapCanvas(tk.Canvas):
         from dialogs import FixedIslandPickerDialog
         self.push_undo()
         region = getattr(isl, '_region', self.region)
-        dlg = FixedIslandPickerDialog(self.winfo_toplevel(), region=region)
+        enabled = self.all_regions_islands() if callable(self.all_regions_islands) else self.all_regions_islands
+        dlg = FixedIslandPickerDialog(
+            self.winfo_toplevel(),
+            region=region,
+            all_regions=enabled,
+        )
         if dlg.result:
             fixed = dlg.result
             isl.element_type   = 0
@@ -2347,7 +2395,12 @@ class MapCanvas(tk.Canvas):
     def _edit_island(self, isl: IslandElement) -> None:
         from dialogs import IslandPropertiesDialog
         self.push_undo()
-        dlg = IslandPropertiesDialog(self.winfo_toplevel(), isl)
+        dlg = IslandPropertiesDialog(
+            self.winfo_toplevel(),
+            isl,
+            all_regions=(self.all_regions_islands() if callable(self.all_regions_islands)
+                         else self.all_regions_islands),
+        )
         if dlg.result:
             self.invalidate_image(isl._eid)
             if self.on_modify:
@@ -2409,7 +2462,13 @@ class MapCanvas(tk.Canvas):
         """Zoom in (direction > 0) or out (direction < 0)."""
         factor = 1.15 if direction > 0 else (1 / 1.15)
         self._scale = max(0.05, min(5.0, self._scale * factor))
-        self.redraw()
+        if self.on_zoom_change:
+            self.on_zoom_change(self._scale)
+        self._zoom_active = True
+        if self._zoom_settle_id is not None:
+            self.after_cancel(self._zoom_settle_id)
+        self._zoom_settle_id = self.after(1000, self._zoom_settle)
+        self._request_redraw()
 
     def fit_view(self) -> None:
         """Scale and centre the map to fill the visible canvas."""
@@ -2446,12 +2505,12 @@ class MapCanvas(tk.Canvas):
             self._zoom_active = True
             if self._zoom_settle_id is not None:
                 self.after_cancel(self._zoom_settle_id)
-            self._zoom_settle_id = self.after(225, self._zoom_settle)
+            self._zoom_settle_id = self.after(1000, self._zoom_settle)
 
         self._request_redraw()
 
     def _zoom_settle(self) -> None:
-        """Called 225ms after the last zoom scroll event; restores full image rendering."""
+        """Called 1000ms after the last zoom scroll event; restores full image rendering."""
         self._zoom_active = False
         self.F = None
         self._img_cache.clear()

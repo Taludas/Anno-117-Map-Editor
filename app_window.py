@@ -164,6 +164,7 @@ class RegionTab(tk.Frame):
         self.canvas_widget = MapCanvas(
             canvas_frame,
             region=self.region,
+            all_regions_islands=lambda: self.app._all_regions_islands_var.get(),
         )
         self.canvas_widget.on_select = self._on_island_select
         self.canvas_widget.on_modify = self._on_modify
@@ -370,7 +371,11 @@ class RegionTab(tk.Frame):
             messagebox.showinfo("No Map", "Please open or create a map first.", parent=self.app.root)
             return
         from dialogs import FixedIslandPickerDialog
-        dlg = FixedIslandPickerDialog(self.winfo_toplevel(), region=self.region)
+        dlg = FixedIslandPickerDialog(
+            self.winfo_toplevel(),
+            region=self.region,
+            all_regions=self.app._all_regions_islands_var.get(),
+        )
         if dlg.result and self.canvas_widget and self.canvas_widget.template:
             self.canvas_widget.start_placing(dlg.result)
             self.app.set_status(f"Place custom island: {dlg.result.display_name}  - click to place, . / middle-click to rotate, Esc to cancel.")
@@ -436,7 +441,11 @@ class RegionTab(tk.Frame):
         isl = self.canvas_widget.get_selected()
         if isl:
             self.canvas_widget.push_undo()
-            dlg = IslandPropertiesDialog(self.winfo_toplevel(), isl)
+            dlg = IslandPropertiesDialog(
+                self.winfo_toplevel(),
+                isl,
+                all_regions=self.app._all_regions_islands_var.get(),
+            )
             if dlg.result:
                 self.canvas_widget.invalidate_image(isl._eid)
                 self.canvas_widget.redraw()
@@ -623,6 +632,7 @@ class MapEditorApp(tk.Frame):
         edit_menu.add_command(label="Undo",          command=self.cmd_undo,        accelerator="Ctrl+Z")
         edit_menu.add_command(label="Redo",          command=self.cmd_redo,        accelerator="Ctrl+Y")
         edit_menu.add_separator()
+
         edit_menu.add_command(label="Select All",    command=self._select_all,     accelerator="Ctrl+A")
         edit_menu.add_command(label="Deselect All",  command=self._deselect_all,   accelerator="Escape")
         edit_menu.add_command(label="Delete Selected", command=self._delete_selected)
@@ -631,10 +641,6 @@ class MapEditorApp(tk.Frame):
         edit_menu.add_command(label="Rotate Selection 90° CCW", command=lambda: self._rotate_selection(-1), accelerator="Shift+Ctrl+R")
         edit_menu.add_separator()
         edit_menu.add_command(label="Resize Map…", command=self._resize_map)
-        edit_menu.add_separator()
-        edit_menu.add_command(label="Set Game Path…",         command=self._browse_game_path)
-        edit_menu.add_command(label="Set FileDBReader Path…", command=self._browse_fdb)
-        edit_menu.add_command(label="Set RdaConsole Path…",   command=self._browse_rda)
 
         # View menu
         view_menu = tk.Menu(mb, tearoff=0, bg=config.BG_SECTION, fg=config.FG_MAIN, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD)
@@ -642,6 +648,27 @@ class MapEditorApp(tk.Frame):
         view_menu.add_command(label="Zoom In",      accelerator="Ctrl++", command=lambda: self._zoom(1))
         view_menu.add_command(label="Zoom Out",     accelerator="Ctrl+-", command=lambda: self._zoom(-1))
         view_menu.add_command(label="Fit to Window",                      command=self._fit_view)
+
+        # Options menu
+        options_menu = tk.Menu(mb, tearoff=0, bg=config.BG_SECTION, fg=config.FG_MAIN, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD)
+        mb.add_cascade(label="Options", menu=options_menu)
+        self._region_name_screenshot_var = tk.BooleanVar(value=True)
+        options_menu.add_checkbutton(
+            label="Region Name in PNG-Files (gz2k2)",
+            selectcolor="#ffffff",
+            variable=self._region_name_screenshot_var,
+        )
+        options_menu.add_separator()
+        self._all_regions_islands_var = tk.BooleanVar(value=True)
+        options_menu.add_checkbutton(
+            label="Enable all Islands in all Regions (gz2k2)",
+            selectcolor="#ffffff",
+            variable=self._all_regions_islands_var,
+        )
+        options_menu.add_separator()
+        options_menu.add_command(label="Set Game Path…",         command=self._browse_game_path)
+        options_menu.add_command(label="Set FileDBReader Path…", command=self._browse_fdb)
+        options_menu.add_command(label="Set RdaConsole Path…",   command=self._browse_rda)
 
         # Help
         help_menu = tk.Menu(mb, tearoff=0, bg=config.BG_SECTION, fg=config.FG_MAIN, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD)
@@ -1457,7 +1484,31 @@ class MapEditorApp(tk.Frame):
     def _resolve_and_save_xml(self, tmpl, xml_path: str) -> None:
         """Deep-copy *tmpl* and write it to *xml_path*. Original template is untouched."""
         from copy import deepcopy
+        from fertility_set_registry import FertilitySetRegistry
+        from island_registry import IslandRegistry
+
         copy = deepcopy(tmpl)
+
+        # A fixed island from the other culture cannot use the game's random
+        # fertility assignment. Export it as a Starter and resolve fertilities
+        # from the map template's region instead.
+        fertility_registry = FertilitySetRegistry.instance()
+        fertility_registry.load()
+        island_registry = IslandRegistry.instance()
+        island_registry.load()
+        for isl in copy.islands:
+            if not (isl.is_fixed and isl.randomize_fertilities
+                    and not isl.fertility_guids):
+                continue
+            island_asset = island_registry.find_by_name(isl.map_file_path or "")
+            if island_asset is None or island_asset.region == copy.region:
+                continue
+            isl.island_type = "Starter"
+            isl.fertility_guids = fertility_registry.resolve_fertilities(
+                "Starter", copy.difficulty, copy.region)
+            if isl.fertility_guids:
+                isl.randomize_fertilities = False
+
         save_xml(copy, xml_path)
 
     def _compress_xml(self, xml_path: str, out_path: str) -> bool:
@@ -1589,7 +1640,10 @@ class MapEditorApp(tk.Frame):
 
         self.set_status("Exporting PNG…")
         try:
-            canvas.export_png(filepath)
+            canvas.export_png(
+                filepath,
+                show_region_name=self._region_name_screenshot_var.get(),
+            )
             self.set_status(f"PNG exported: {os.path.basename(filepath)}")
         except Exception as exc:
             messagebox.showerror("Export Failed", str(exc), parent=self.root)
@@ -1609,6 +1663,18 @@ class MapEditorApp(tk.Frame):
             return
         if not self._warn_before_export(tmpls):
             return
+        if self._has_foreign_region_islands(tmpls):
+            if not messagebox.askyesno(
+                "Foreign-Region Islands",
+                "One or more islands belong to a different region than the map "
+                "they were placed in.\n\n"
+                "Foreign-region islands may not work correctly. Mining slots, "
+                "swamp areas, and graphics are not properly adapted to the "
+                "target region.\n\n"
+                "Proceed with export anyway?",
+                parent=self.root,
+            ):
+                return
 
         # DLC01 enlargement warning - non-enlarged maps won't grow with Continental islands
         if not any(t.is_enlarged for t in tmpls):
@@ -1901,6 +1967,33 @@ class MapEditorApp(tk.Frame):
             + "\n\nProceed anyway?"
         )
         return messagebox.askyesno("Export Warnings", msg, parent=self.root)
+
+    def _has_foreign_region_islands(self, tmpls) -> bool:
+        """Return True when a fixed island belongs to the other region."""
+        from island_registry import IslandRegistry
+
+        registry = IslandRegistry.instance()
+        registry.load()
+
+        for tmpl in tmpls:
+            for island in tmpl.islands:
+                if not island.is_fixed:
+                    continue
+
+                asset = registry.find_by_name(island.map_file_path or "")
+                if asset is not None:
+                    if asset.region != tmpl.region:
+                        return True
+                    continue
+
+                path = (island.map_file_path or "").replace("\\", "/").lower()
+                if (
+                    (tmpl.region == "Latium" and "/celtic/" in path)
+                    or (tmpl.region == "Albion" and "/roman/" in path)
+                ):
+                    return True
+
+        return False
 
     # ── App lifecycle ─────────────────────────────────────────────────────────
 

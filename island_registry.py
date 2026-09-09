@@ -78,7 +78,7 @@ def _size_from_filepath(fp: str) -> str:
 
 # ─── Image path resolution ───────────────────────────────────────────────────
 
-def _resolve_image(a7m_name: str, region: str) -> Optional[str]:
+def _resolve_image(a7m_name: str, region: str = "") -> Optional[str]:
     """
     Map an island .a7m name to a UI image path.
 
@@ -90,34 +90,41 @@ def _resolve_image(a7m_name: str, region: str) -> Optional[str]:
       roman_island_pirate_01       → data/ui/islands/roman/pirate_01.jpg
     """
     ui_base = config.UI_ISLANDS_DIR
-    culture = "roman" if region == "Latium" else "celtic"
-
-    # Strip leading culture prefix
     n = a7m_name.lower()
-    # Remove "roman_" or "celtic_" prefix
-    for pfx in (f"{culture}_island_", f"{culture}_dlc01_island_",
-                f"{culture}_dlc_01_island_",
-                "roman_island_", "celtic_island_",
-                "roman_dlc01_island_", "celtic_dlc01_island_",
-                "roman_dlc_01_island_", "celtic_dlc_01_island_"):
-        if n.startswith(pfx):
-            stem = n[len(pfx):] # e.g. "small_01" / "dlc01_medium_02"
-            # Re-add dlc01 prefix if it was in the original (handles both dlc01 and dlc_01 variants)
-            if "dlc01" in pfx or "dlc_01" in pfx:
-                stem = "dlc01_" + stem
-            break
+
+    if "celtic" in n:
+        cultures = ["celtic", "roman"]
+    elif "roman" in n:
+        cultures = ["roman", "celtic"]
+    elif region == "Albion":
+        cultures = ["celtic", "roman"]
     else:
-        stem = n # fallback
+        cultures = ["roman", "celtic"]
 
-    # Strip 3rdparty_ segment so e.g. "3rdparty_trader_01" → "trader_01"
-    if stem.startswith("3rdparty_"):
-        stem = stem[len("3rdparty_"):]
+    for culture in cultures:
+        if culture == "roman" and n.startswith("celtic"):
+            continue
+        if culture == "celtic" and n.startswith("roman"):
+            continue
 
-    # Try jpg first, then png
-    for ext in (".jpg", ".png"):
-        path = os.path.join(ui_base, culture, stem + ext)
-        if os.path.isfile(path):
-            return path
+        stem = n
+        for pfx in (f"{culture}_island_", f"{culture}_dlc01_island_",
+                    f"{culture}_dlc_01_island_", f"{culture}_"):
+            if n.startswith(pfx):
+                stem = n[len(pfx):]  # e.g. "small_01" / "dlc01_medium_02"
+                if "dlc01" in pfx or "dlc_01" in pfx:
+                    stem = "dlc01_" + stem
+                break
+
+        # Strip 3rdparty_ segment so e.g. "3rdparty_trader_01" → "trader_01"
+        if stem.startswith("3rdparty_"):
+            stem = stem[len("3rdparty_"):]
+
+        # Try jpg first, then png
+        for ext in (".jpg", ".png"):
+            path = os.path.join(ui_base, culture, stem + ext)
+            if os.path.isfile(path):
+                return path
 
     return None
 
@@ -312,14 +319,21 @@ class IslandRegistry:
     def all_islands(self) -> List[IslandAsset]:
         return list(self._islands)
 
-    def for_region(self, region: str) -> List[IslandAsset]:
-        return [i for i in self._islands if i.region == region]
+    def for_region(self, region: str,
+                   include_other_regions: bool = True) -> List[IslandAsset]:
+        if region in ("Both", "all", "All"):
+            return list(self._islands)
+        if not include_other_regions:
+            return [i for i in self._islands if i.region == region]
+        # Both regions show all islands, with native-region islands listed first
+        native = [i for i in self._islands if i.region == region]
+        other  = [i for i in self._islands if i.region != region]
+        return native + other
 
     def for_region_size_type(self, region: str, size: str,
                               island_type: str) -> List[IslandAsset]:
-        return [i for i in self._islands
-                if i.region == region and i.size == size
-                and i.island_type == island_type]
+        return [i for i in self.for_region(region)
+                if i.size == size and i.island_type == island_type]
 
     def find_by_name(self, a7m_name: str) -> Optional[IslandAsset]:
         """Match a .a7m filename (without extension) to a registry entry."""
