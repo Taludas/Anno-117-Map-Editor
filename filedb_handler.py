@@ -78,6 +78,25 @@ def _run(cmd: list[str], timeout: int = 60,
     return result
 
 
+# FileDBReader catches its own exceptions, prints them, and still exits 0,
+# leaving a zero-byte output behind.  Work built from that looks like it
+# succeeded and is silently broken, so scan the output as well as the exit code.
+_TOOL_ERROR_MARKERS = ("exception occured", "exception was thrown",
+                       "outofmemory", "unhandled")
+
+
+def _check_tool_output(result: subprocess.CompletedProcess, what: str) -> None:
+    text = (result.stdout or "") + "\n" + (result.stderr or "")
+    lowered = text.lower()
+    for marker in _TOOL_ERROR_MARKERS:
+        if marker in lowered:
+            detail = next((ln.strip() for ln in text.splitlines()
+                           if marker in ln.lower()), marker)
+            raise FileDBError(
+                f"FileDBReader reported an error while {what} "
+                f"(it exits 0 even on failure):\n{detail}")
+
+
 # ─── Public API ───────────────────────────────────────────────────────────────
 
 def decompress(
@@ -122,7 +141,7 @@ def decompress(
         "-i", interp,
     ]
 
-    _run(cmd, cwd=tmp_dir)
+    _check_tool_output(_run(cmd, cwd=tmp_dir), "decompressing")
 
     if os.path.isfile(expected_xml):
         if output_path and output_path != expected_xml:
@@ -190,7 +209,7 @@ def compress(
         "-o", "a7tinfo",          # output file extension, not a path
     ]
 
-    _run(cmd, cwd=tmp_dir)
+    _check_tool_output(_run(cmd, cwd=tmp_dir), "compressing")
 
     if os.path.isfile(tmp_output):
         os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)

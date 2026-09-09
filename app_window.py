@@ -29,9 +29,68 @@ import rda_handler
 from models import IslandElement, MapTemplate
 from canvas_view import MapCanvas
 import filedb_handler as _fdb
+import filedb_io as _fdb_io
+import terrain_builder as _terrain
 from xml_io import load_xml, save_xml
-from dialogs import IslandPropertiesDialog, NewMapDialog, AboutDialog
+from dialogs import IslandPropertiesDialog, NewMapDialog, AboutDialog, ResizeMapDialog
 import mod_exporter as _mod_exp
+
+
+# ─── Export progress window ─────────────────────────────────────────────────
+
+class _ExportProgressWindow(tk.Toplevel):
+    """
+    Modal, indeterminate progress window shown while a mod export runs on a
+    worker thread.  Deliberately has no cancel button: the export writes into a
+    temp folder and interrupting FileDBReader mid-run would leave it behind.
+
+    Only ever driven from the main thread - the worker posts updates through
+    root.after().
+    """
+
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.title("Exporting Mod")
+        self.configure(bg=config.BG_SECTION)
+        self.resizable(False, False)
+        self.transient(parent)
+        self.grab_set()
+        self.protocol("WM_DELETE_WINDOW", lambda: None)   # no closing mid-export
+
+        tk.Label(self, text="Building mod…", bg=config.BG_SECTION,
+                 fg=config.FG_GOLD, font=config.FONT_HEADER).pack(
+                     anchor="w", padx=18, pady=(16, 2))
+
+        self._msg = tk.StringVar(value="Starting…")
+        tk.Label(self, textvariable=self._msg, bg=config.BG_SECTION,
+                 fg=config.FG_DIM, font=config.FONT_SMALL,
+                 anchor="w", width=46).pack(anchor="w", padx=18)
+
+        self._bar = ttk.Progressbar(self, mode="indeterminate", length=320)
+        self._bar.pack(padx=18, pady=(10, 6))
+        self._bar.start(12)
+
+        tk.Label(self, text="Terrain is generated once per map size and reused "
+                            "for all three difficulties.",
+                 bg=config.BG_SECTION, fg=config.FG_DIM,
+                 font=config.FONT_XSMALL, wraplength=320,
+                 justify="left").pack(anchor="w", padx=18, pady=(0, 14))
+
+        self.update_idletasks()
+        px = parent.winfo_rootx() + (parent.winfo_width() - self.winfo_reqwidth()) // 2
+        py = parent.winfo_rooty() + (parent.winfo_height() - self.winfo_reqheight()) // 2
+        self.geometry(f"+{max(0, px)}+{max(0, py)}")
+
+    def set_message(self, msg: str) -> None:
+        self._msg.set(msg)
+
+    def close(self) -> None:
+        try:
+            self._bar.stop()
+        except tk.TclError:
+            pass
+        self.grab_release()
+        self.destroy()
 
 
 # ─── Icon loader ────────────────────────────────────────────────────────────
@@ -266,6 +325,28 @@ class RegionTab(tk.Frame):
         chk.pack(anchor="w", padx=12)
         _bind_hover(chk, config.BG_SECTION, config.BG_HOVER)
 
+        self._ignore_collisions_var = tk.BooleanVar(value=False)
+        coll_chk = tk.Checkbutton(side, text="Ignore collisions", variable=self._ignore_collisions_var, command=self._on_ignore_collisions_toggle, bg=config.BG_SECTION, fg=config.FG_MAIN, selectcolor=config.BG_HOVER, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD, font=config.FONT_SMALL, cursor="hand2")
+        coll_chk.pack(anchor="w", padx=12)
+        _bind_hover(coll_chk, config.BG_SECTION, config.BG_HOVER)
+
+        self._lock_formation_var = tk.BooleanVar(value=False)
+        lock_chk = tk.Checkbutton(side, text="Lock formation at edges", variable=self._lock_formation_var, command=self._on_lock_formation_toggle, bg=config.BG_SECTION, fg=config.FG_MAIN, selectcolor=config.BG_HOVER, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD, font=config.FONT_SMALL, cursor="hand2")
+        lock_chk.pack(anchor="w", padx=12)
+        _bind_hover(lock_chk, config.BG_SECTION, config.BG_HOVER)
+
+        # Mirror mode: newly placed islands get copies rotated about the map
+        # centre, so a multiplayer map stays fair without placing each corner
+        # by hand. 2 = opposite corner, 4 = all four.
+        tk.Label(side, text="Mirror", bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_XSMALL).pack(anchor="w", padx=12, pady=(6, 0))
+        self._symmetry_var = tk.IntVar(value=0)
+        sym_row = tk.Frame(side, bg=config.BG_SECTION)
+        sym_row.pack(anchor="w", padx=12)
+        for label, value in (("off", 0), ("2×", 2), ("4×", 4)):
+            rb = tk.Radiobutton(sym_row, text=label, variable=self._symmetry_var, value=value, command=self._on_symmetry_change, bg=config.BG_SECTION, fg=config.FG_MAIN, selectcolor=config.BG_HOVER, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD, font=config.FONT_SMALL, cursor="hand2")
+            rb.pack(side="left")
+            _bind_hover(rb, config.BG_SECTION, config.BG_HOVER)
+
         self._reset_zoom_btn = tk.Button(side, text="Reset Zoom", command=self._reset_zoom, bg=config.BG_HOVER, fg=config.FG_DIM, activebackground=config.BG_MAIN, activeforeground=config.FG_GOLD, relief=tk.FLAT, font=config.FONT_SMALL, padx=8, pady=3, state="disabled")
         self._reset_zoom_btn.pack(anchor="w", padx=12, pady=(4, 6))
         _bind_hover_active(self._reset_zoom_btn, config.BG_SECTION, config.BG_HOVER)
@@ -381,6 +462,19 @@ class RegionTab(tk.Frame):
     def _on_image_toggle(self):
         if self.canvas_widget:
             self.canvas_widget.show_images = self._img_toggle_var.get()
+            self.canvas_widget.redraw()
+
+    def _on_ignore_collisions_toggle(self):
+        if self.canvas_widget:
+            self.canvas_widget.ignore_collisions = self._ignore_collisions_var.get()
+
+    def _on_lock_formation_toggle(self):
+        if self.canvas_widget:
+            self.canvas_widget.lock_formation = self._lock_formation_var.get()
+
+    def _on_symmetry_change(self):
+        if self.canvas_widget:
+            self.canvas_widget.symmetry_mode = self._symmetry_var.get()
             self.canvas_widget.redraw()
 
     def _update_limits(self):
@@ -533,6 +627,11 @@ class MapEditorApp(tk.Frame):
         edit_menu.add_command(label="Deselect All",  command=self._deselect_all,   accelerator="Escape")
         edit_menu.add_command(label="Delete Selected", command=self._delete_selected)
         edit_menu.add_separator()
+        edit_menu.add_command(label="Rotate Selection 90° CW",  command=lambda: self._rotate_selection(1),  accelerator="Ctrl+R")
+        edit_menu.add_command(label="Rotate Selection 90° CCW", command=lambda: self._rotate_selection(-1), accelerator="Shift+Ctrl+R")
+        edit_menu.add_separator()
+        edit_menu.add_command(label="Resize Map…", command=self._resize_map)
+        edit_menu.add_separator()
         edit_menu.add_command(label="Set Game Path…",         command=self._browse_game_path)
         edit_menu.add_command(label="Set FileDBReader Path…", command=self._browse_fdb)
         edit_menu.add_command(label="Set RdaConsole Path…",   command=self._browse_rda)
@@ -570,6 +669,8 @@ class MapEditorApp(tk.Frame):
         self.root.bind("<Control-a>",      lambda e: self._select_all())
         self.root.bind("<Control-z>",      lambda e: self.cmd_undo())
         self.root.bind("<Control-y>",      lambda e: self.cmd_redo())
+        self.root.bind("<Control-r>",      lambda e: self._rotate_selection(1))    # Ctrl+R        → rotate CW
+        self.root.bind("<Control-R>",      lambda e: self._rotate_selection(-1))   # Shift+Ctrl+R  → rotate CCW
 
     def _build_header(self):
         hdr = tk.Frame(self, bg=config.BG_SECTION, height=52)
@@ -741,6 +842,25 @@ class MapEditorApp(tk.Frame):
         tab = self._current_tab()
         if tab and tab.canvas_widget:
             tab.canvas_widget.deselect_all()
+
+    def _rotate_selection(self, direction: int):
+        tab = self._current_tab()
+        if tab and tab.canvas_widget:
+            tab.canvas_widget.rotate_selection(direction)
+
+    def _resize_map(self):
+        tab = self._current_tab()
+        canvas = tab.canvas_widget if tab else None
+        if canvas is None or canvas.template is None:
+            messagebox.showinfo("No Map", "Please open or create a map first.", parent=self.root)
+            return
+        current_size = max(canvas.template.size)
+        dlg = ResizeMapDialog(self.root, current_size=current_size, region=tab.region)
+        if dlg.result is None:
+            return
+        if canvas.resize_map(dlg.result):
+            self.mark_modified()
+            self.set_status(f"{tab.region} map resized to {dlg.result}×{dlg.result}.")
 
     def _browse_game_path(self):
         path = filedialog.askdirectory(title="Select Anno 117 Installation Folder", parent=self.root)
@@ -945,9 +1065,10 @@ class MapEditorApp(tk.Frame):
         # Also create a default blank template for the other region so both canvases are editable without needing to save/reload between tabs.
         other = "Albion" if region == "Latium" else "Latium"
         other_pa = dlg.result.get("companion_playable_area", (20, 20, 2020, 2020))
+        other_size = dlg.result.get("companion_size", (2048, 2048))
         other_tmpl = MapTemplate(
             region=other,
-            size=(2048, 2048),
+            size=other_size,
             playable_area=other_pa,
             initial_playable_area=other_pa,
             enlargement_offset=(0, 0),
@@ -1523,28 +1644,50 @@ class MapEditorApp(tk.Frame):
         slug, display_name, description, start_guid, zip_path, install_path, debug_xml, auto_derive = dlg._result
         personal_mode = getattr(dlg, "_personal_mode", False)
 
+        # Terrain generation makes an export take tens of seconds per map size,
+        # so it runs on a worker thread behind a progress window - doing it
+        # inline blocks the event loop and Windows paints the app as hung.
         self.set_status("Building mod zip…")
-        try:
-            _mod_exp.build_mod_zip(
-                templates=tmpls,
-                slug=slug,
-                display_name=display_name,
-                description=description,
-                start_guid=start_guid,
-                zip_path=zip_path,
-                app=self,
-                install_path=install_path,
-                debug_xml=debug_xml,
-                auto_derive=auto_derive,
-            )
-        except _fdb.FileDBError as exc:
-            messagebox.showerror("Export Failed", str(exc), parent=self.root)
-            self.set_status("Mod export failed.")
-            return
-        except Exception as exc:
-            messagebox.showerror("Export Failed",
-                                 f"An unexpected error occurred:\n{exc}",
-                                 parent=self.root)
+        prog = _ExportProgressWindow(self.root)
+        failure: list = []
+
+        def _post(msg: str) -> None:
+            self.root.after(0, prog.set_message, msg)
+
+        def _worker() -> None:
+            try:
+                _mod_exp.build_mod_zip(
+                    templates=tmpls,
+                    slug=slug,
+                    display_name=display_name,
+                    description=description,
+                    start_guid=start_guid,
+                    zip_path=zip_path,
+                    app=self,
+                    install_path=install_path,
+                    debug_xml=debug_xml,
+                    auto_derive=auto_derive,
+                    progress=_post,
+                )
+            except Exception as exc:
+                failure.append(exc)
+            finally:
+                self.root.after(0, prog.close)
+
+        threading.Thread(target=_worker, daemon=True).start()
+        self.root.wait_window(prog)
+
+        if failure:
+            exc = failure[0]
+            # These three carry messages meant for the user; anything else
+            # is a bug and gets the generic wording.
+            if isinstance(exc, (_fdb.FileDBError, _fdb_io.FileDBFormatError,
+                                _terrain.TerrainBuildError)):
+                messagebox.showerror("Export Failed", str(exc), parent=self.root)
+            else:
+                messagebox.showerror("Export Failed",
+                                     f"An unexpected error occurred:\n{exc}",
+                                     parent=self.root)
             self.set_status("Mod export failed.")
             return
 

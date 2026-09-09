@@ -124,6 +124,9 @@ def extract_map_templates(game_path: str, output_path: str, rda_exe: Optional[st
                    "-f", rda_file,
                    "-o", output_path,
                    "-y",
+                   "-n",  # suppress RDAExplorer's internal console output - without this it
+                          # can crash on Console.Clear() before writing any files when no real
+                          # console is attached (observed to yield 0 extracted files otherwise)
                    "--filter", filt]
             try:
                 _run_rda(cmd)

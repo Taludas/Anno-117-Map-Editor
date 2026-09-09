@@ -34,8 +34,17 @@ libs.clean:
 #
 # exe make targets ###########################
 # data/ icons the legacy build already pulled in.
+#
+# The two [Map] template folders have to be bundled too: mod_exporter reads the
+# region .a7t (terrain source), assets.xml, modinfo.json and texts_english.xml
+# out of them at export time, and config.resource_path() resolves to sys._MEIPASS
+# in a frozen build - so without these the exe starts fine and only fails once
+# you export. $$ escapes the $ so make does not expand $ModName.
+MAPDIR     = [Map] $$ModName (TAMPER)
+MAPDIR_ENL = [Map] $$ModName Enlarged (TAMPER)
+
 exe: libs
-	pyinstaller --onefile --windowed --add-data "data;data" --add-data "_version.py;." --icon="app_icon.ico" --version-file="file_version_info.txt" --name $(EXENAME) $(PACKAGE).py
+	pyinstaller --onefile --windowed --add-data "data;data" --add-data "_version.py;." --add-data "$(MAPDIR);$(MAPDIR)" --add-data "$(MAPDIR_ENL);$(MAPDIR_ENL)" --icon="app_icon.ico" --version-file="file_version_info.txt" --name $(EXENAME) $(PACKAGE).py
 
 exe.clean:
 	-cmd /c rd /s /q build

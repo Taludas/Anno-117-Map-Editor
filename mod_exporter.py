@@ -22,11 +22,12 @@ import zipfile
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from copy import deepcopy
-from typing import List, Optional, Tuple
+from typing import Callable, List, Optional, Tuple
 
 import config
 import filedb_handler as _fdb
 import settings as _settings
+import terrain_builder
 from fertility_set_registry import FertilitySetRegistry
 
 # ─── Personal GUID range ─────────────────────────────────────────────────────
@@ -56,17 +57,6 @@ def _a7t_src(template_dir: str, region: str, suffix: str) -> str:
     name = f"$ModName_{suffix}_easy"
     return os.path.join(template_dir, "data", "tamper", "provinces", prov, "templates", "pool", name, name + ".a7t")
 
-def _a7te_src(template_dir: str, region: str, suffix: str) -> str:
-    prov = _REGION_INFO[region]["province"]
-    name = f"$ModName_{suffix}_easy"
-    return os.path.join(template_dir, "data", "tamper", "provinces", prov, "templates", "pool", name, name + ".a7te")
-
-
-# Enlarged Latium-only binary variants (same content for all difficulties)
-_A7T_ENL_LAT  = os.path.join(
-    _TEMPLATE_DIR_ENL, "data", "tamper", "provinces", "roman", "templates", "pool", "$ModName_latium_easy_enlarged", "$ModName_latium_easy_enlarged.a7t")
-_A7TE_ENL_LAT = os.path.join(
-    _TEMPLATE_DIR_ENL, "data", "tamper", "provinces", "roman", "templates", "pool", "$ModName_latium_easy_enlarged", "$ModName_latium_easy_enlarged.a7te")
 
 _LOCALE_FILES = [
     "texts_brazilian.xml",
@@ -128,6 +118,52 @@ def _substitute(text: str, slug: str, display_name: str, description: str, start
         text = text.replace(f"Start_GUID+{i}", str(start_guid + i))
     text = text.replace("Start_GUID", str(start_guid))
     return text
+
+
+class _TerrainCache:
+    """
+    Supplies the .a7t / .a7te that go next to each .a7tinfo.
+
+    Both files encode the map size themselves, so they cannot simply be copied
+    from the bundled template once a map deviates from its 2048 / 2688 size -
+    doing that leaves the world (and with it the backdrop) at the template's
+    size while islands are placed beyond it.  They are generated per size here.
+
+    A .a7t is identical for all three difficulties, so results are cached per
+    (region, size, playable area) for the duration of one export.
+    """
+
+    def __init__(self, template_dir: str,
+                 progress: Optional[Callable[[str], None]] = None):
+        self._template_dir = template_dir
+        self._progress = progress
+        self._cache: dict = {}
+        # Pool folder stem -> terrain size, for scaling assets.xml HorizonIslands.
+        self.size_by_stem: dict = {}
+
+    def write(self, dst_dir: str, stem: str, region: str, suffix: str,
+              size: int, playable_area: Tuple[int, int, int, int]) -> None:
+        terrain_size = terrain_builder.terrain_size_for(size)
+        self.size_by_stem[stem] = terrain_size
+        key = (region, terrain_size, tuple(playable_area))
+
+        if key not in self._cache:
+            if self._progress:
+                self._progress(f"Building {region} terrain ({terrain_size}x{terrain_size})...")
+            self._cache[key] = (
+                terrain_builder.build_a7t(
+                    _a7t_src(self._template_dir, region, suffix),
+                    terrain_size, tuple(playable_area),
+                    progress=self._progress),
+                terrain_builder.build_a7te(terrain_size),
+            )
+        a7t, a7te = self._cache[key]
+
+        with open(os.path.join(dst_dir, stem + ".a7t"), "wb") as f:
+            f.write(a7t)
+        with open(os.path.join(dst_dir, stem + ".a7te"), "w",
+                  encoding="utf-8", newline="") as f:
+            f.write(a7te)
 
 
 def _make_initial_copy(tmpl):
@@ -281,12 +317,14 @@ def build_mod_zip(
     install_path: Optional[str] = None,  # if set, also copy mod to this folder
     debug_xml: bool = False,             # if True, save pre-compression XMLs next to the zip
     auto_derive: bool = False,           # if True, derive Medium/Hard from the source difficulty
+    progress: Optional[Callable[[str], None]] = None,   # status message sink
 ) -> None:
     """
     Build a complete mod zip file from the given templates.
 
     For every loaded region (Latium / Albion) three difficulty variants (easy, medium, hard) are generated, giving up to 6 .a7tinfo files total.
-    The pre-baked .a7t / .a7te files are copied from the bundled template.
+    The .a7t / .a7te next to each .a7tinfo are generated for that file's map size
+    (see terrain_builder), because both encode the size themselves.
     All metadata files (modinfo.json, assets.xml, locale text XMLs) are written with variable substitution applied.
 
     If *install_path* is provided the finished mod folder is also copied there (replacing any existing folder with the same name).
@@ -304,6 +342,7 @@ def build_mod_zip(
     # Albion never has an enlarged variant.
     is_enlarged_export = any(t.is_enlarged for t in templates)
     tmpl_dir = _TEMPLATE_DIR_ENL if is_enlarged_export else _TEMPLATE_DIR
+    terrain  = _TerrainCache(tmpl_dir, progress)
 
     # Debug XML folder: {zip_stem}_debug_xml/ next to the zip
     debug_dir: Optional[str] = None
@@ -330,15 +369,8 @@ def build_mod_zip(
                 pool_dir  = os.path.join(mod_root, "data", "tamper", "provinces", ri["province"], "templates", "pool", file_stem)
                 os.makedirs(pool_dir, exist_ok=True)
 
-                # Copy the pre-baked a7t / a7te (binary; content is difficulty-agnostic)
-                shutil.copy2(
-                    _a7t_src(tmpl_dir, tmpl.region, ri["suffix"]),
-                    os.path.join(pool_dir, file_stem + ".a7t"),
-                )
-                shutil.copy2(
-                    _a7te_src(tmpl_dir, tmpl.region, ri["suffix"]),
-                    os.path.join(pool_dir, file_stem + ".a7te"),
-                )
+                if progress:
+                    progress(f"{tmpl.region} - {diff_key}...")
 
                 # Build the working template for this difficulty variant.
                 # When auto_derive is on, derive the other two from the source; otherwise all three difficulties use identical island layouts.
@@ -351,6 +383,12 @@ def build_mod_zip(
 
                 # Generate the regular a7tinfo. For enlarged Latium this uses InitialPlayableArea (non-DLC content only).
                 base_copy = _make_initial_copy(working) if do_enlarged else working
+
+                # The terrain must match the a7tinfo this file actually carries:
+                # for an enlarged export that is the shrunken InitialPlayableArea
+                # copy, not the full template.
+                terrain.write(pool_dir, file_stem, tmpl.region, ri["suffix"],
+                              base_copy.size[0], base_copy.playable_area)
 
                 tmp_xml_fd, tmp_xml = tempfile.mkstemp(suffix=".xml")
                 os.close(tmp_xml_fd)
@@ -375,8 +413,8 @@ def build_mod_zip(
                     enl_dir  = os.path.join(mod_root, "data", "tamper", "provinces", ri["province"], "templates", "pool", enl_stem)
                     os.makedirs(enl_dir, exist_ok=True)
 
-                    shutil.copy2(_A7T_ENL_LAT, os.path.join(enl_dir, enl_stem + ".a7t"))
-                    shutil.copy2(_A7TE_ENL_LAT, os.path.join(enl_dir, enl_stem + ".a7te"))
+                    terrain.write(enl_dir, enl_stem, tmpl.region, ri["suffix"],
+                                  working.size[0], working.playable_area)
 
                     # The enlarged file uses the full working template (all islands,
                     # full PlayableArea) — already derived above.
@@ -398,6 +436,13 @@ def build_mod_zip(
             tmpl_dir, "data", "base", "config", "export", "assets.xml")
         with open(assets_xml_src, "r", encoding="utf-8") as fh:
             assets_text = _substitute(fh.read(), slug, display_name, description, start_guid)
+
+        # The backdrop lives here, at absolute world coordinates authored for a
+        # 2048 map - it has to follow the map size like the terrain does.
+        # Substitution runs first so the stems in TemplateFilename match.
+        assets_text = terrain_builder.scale_horizon_islands(
+            assets_text, terrain.size_by_stem)
+
         assets_dir = os.path.join(mod_root, "data", "base", "config", "export")
         os.makedirs(assets_dir, exist_ok=True)
         with open(os.path.join(assets_dir, "assets.xml"), "w", encoding="utf-8") as fh:

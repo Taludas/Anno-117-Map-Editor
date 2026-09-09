@@ -686,7 +686,7 @@
 				<TemplateRegion>Roman</TemplateRegion>
 				<MapTemplateType>Start_GUID</MapTemplateType>
 				<EnlargeDLC>67902</EnlargeDLC>
-				<EnlargedTemplateFilename>data/tamper/provinces/roman/templates/pool/$ModName_latium_enlarged/$ModName_latium_enlarged.a7t</EnlargedTemplateFilename>
+				<EnlargedTemplateFilename>data/tamper/provinces/roman/templates/pool/$ModName_latium_hard_enlarged/$ModName_latium_hard_enlarged.a7t</EnlargedTemplateFilename>
 				<EnlargedAdditionalDecoIslands>4</EnlargedAdditionalDecoIslands>
 				<HorizonIslands>
 					<Item>

@@ -11,6 +11,7 @@ from tkinter import ttk, messagebox
 from typing import Optional, List
 
 import config
+import terrain_builder
 from models import IslandElement
 
 try:
@@ -64,6 +65,46 @@ def _combo(parent, values, textvariable=None, width=25, **kw):
 
 def _sep(parent):
     return tk.Frame(parent, height=1, bg=config.FG_SEPARATOR)
+
+
+def _confirm_oversized_map(parent, size: int) -> bool:
+    """
+    Ask before committing to a map size the game does not render reliably.
+
+    Returns True to proceed.  Sizes at or below NewMapDialog._SIZE_WARN pass
+    without a prompt.  Building the terrain is cheap; what degrades past 4096 is
+    the game's own object rendering, so the wording is about that, not the export.
+    """
+    if size <= NewMapDialog._SIZE_WARN:
+        return True
+
+    # In-game findings, same save, buildings placed across the map:
+    #   4096 - no problems at all
+    #   6144 - fine except very close to the map border
+    #   8192 - buildings stop being drawn although they still work
+    # The failing zone grows inward with map size, which points at a fixed
+    # streaming range in the engine rather than anything in the map data.
+    if size >= 8192:
+        risk = ("At this size the game stops drawing buildings. They still "
+                "function - menus, production and trade all work - but they are "
+                "invisible.")
+    elif size >= 6144:
+        risk = ("At this size the game renders correctly except very close to "
+                "the map border, where buildings may stop being drawn.")
+    else:
+        risk = ("Sizes above 4096 have not been tested individually; 6144 shows "
+                "rendering problems near the map border, 8192 across the map.")
+
+    return messagebox.askyesno(
+        "Very Large Map",
+        f"Map size {size}x{size} is well beyond anything the game ships "
+        f"(2048, or 2688 enlarged), and only 4096 has been verified to work.\n\n"
+        f"{risk}\n\n"
+        "The map is still fully playable - this affects what you see, not what "
+        "works.\n\n"
+        "Create it anyway?",
+        parent=parent,
+    )
 
 
 def _btn(parent, text, command, fg=None, bg=None, **kw):
@@ -521,7 +562,7 @@ class IslandPropertiesDialog(_BaseDialog):
 class NewMapDialog(_BaseDialog):
     """Ask for region / difficulty / playable-area for a new blank map.
 
-    Map sizes are fixed (2048 for Latium/Albion, 2688 for enlarged Latium).
+    Map size is user-adjustable per region (default 2048, 2688 while "Enlarged" is checked for Latium).
     The PlayableArea border is user-adjustable in 4 px steps per region, minimum 20 px on any side, maximum 50 % of the map dimension per axis.
     InitialPlayableArea is always derived automatically (never user-editable).
     """
@@ -529,9 +570,28 @@ class NewMapDialog(_BaseDialog):
     # DLC expansion adds this many px to PA x2/y2 on enlarged Latium.
     _ENL_EXP = config.ENL_PA_EXPANSION  # 420
 
-    # Map sizes (fixed)
+    # Default / enlarged map size ("Enlarged" only nudges Latium to _SIZE_ENL).
     _SIZE_STD = 2048
     _SIZE_ENL = 2688
+    # Sizes must land on the .a7te chunk grid (64) - see terrain_builder.
+    # Cost grows with S squared, because the .a7t holds two height maps of
+    # (2*S+1)^2 samples.  Building it is cheap - 0.2 s at 2048, 0.6 s at 4096,
+    # 2.3 s at 8192 - so the limit is not the export.
+    #
+    # What limits the size is the game: tested in-game, 4096 renders perfectly,
+    # 6144 fails only very close to the map border, and at 8192 buildings stop
+    # being drawn altogether (they still function).  The failing zone grows
+    # inward as the map grows, so it looks like a fixed streaming range in the
+    # engine, not anything in the map data - nothing here can widen it.
+    #
+    # Larger sizes stay available because the maps are still playable, but
+    # anything past _SIZE_WARN has to be confirmed.  The FileDB format itself
+    # runs out just under 16384, where the height maps overflow its 32-bit
+    # offsets; filedb_io raises there.
+    _SIZE_MIN  = terrain_builder.MIN_SIZE
+    _SIZE_MAX  = 8192
+    _SIZE_WARN = 4096
+    _SIZE_STEP = terrain_builder.CHUNK_SIZE
 
     def __init__(self, parent):
         super().__init__(parent, "New Map Template", width=450, height=None)
@@ -576,6 +636,10 @@ class NewMapDialog(_BaseDialog):
 
         # Info var must exist before any slider trace fires _update_info.
         self._info_var = tk.StringVar()
+
+        # Per-region map size. Freely adjustable in both modes; toggling
+        # "Enlarged" only swaps Latium between the two defaults.
+        self._size_var: dict = {}
 
         # Per-region slider vars: dist = border distance, ox/oy = axis offsets.
         # PA formula: (dist+ox, dist+oy, size-dist+ox, size-dist+oy)
@@ -633,6 +697,9 @@ class NewMapDialog(_BaseDialog):
             return sl
 
         for region in ["Latium", "Albion"]:
+            size_var = tk.IntVar(value=self._SIZE_STD)
+            self._size_var[region] = size_var
+
             dist_var = tk.IntVar(value=24)
             ox_var   = tk.IntVar(value=-4)
             oy_var   = tk.IntVar(value=-4)
@@ -644,8 +711,11 @@ class NewMapDialog(_BaseDialog):
             rf.pack(fill="x", pady=(4, 0))
             tk.Label(rf, text=f"{region}:", bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_XSMALL).pack(anchor="w")
 
+            _make_slider_row(rf, "Map size", size_var,
+                             self._SIZE_MIN, self._SIZE_MAX, resolution=self._SIZE_STEP)
+
             # Initial offset range: [20-dist, dist-20] = [-4, 4] for default dist=24.
-            _make_slider_row(rf, "Border distance", dist_var, 0, 512, resolution=2)
+            _make_slider_row(rf, "Border distance", dist_var, 0, 2048, resolution=2)
             ox_sl = _make_slider_row(rf, "X axis offset", ox_var, -4, 4, resolution=2)
             oy_sl = _make_slider_row(rf, "Y axis offset", oy_var, -4, 4, resolution=2)
             self._pa_ox_sl[region] = ox_sl
@@ -695,7 +765,7 @@ class NewMapDialog(_BaseDialog):
 
     def _read_pa(self, region: str) -> tuple:
         """Return (x1,y1,x2,y2) derived from the three sliders for *region*."""
-        size = self._lat_size() if region == "Latium" else self._SIZE_STD
+        size = self._size_var[region].get()
         dist = self._pa_dist[region].get()
         ox   = self._pa_ox[region].get()
         oy   = self._pa_oy[region].get()
@@ -718,7 +788,7 @@ class NewMapDialog(_BaseDialog):
         return pa
 
     def _lat_size(self) -> int:
-        return self._SIZE_ENL if self._enlarged_var.get() else self._SIZE_STD
+        return self._size_var["Latium"].get()
 
     # ── callbacks ─────────────────────────────────────────────────────────────
 
@@ -733,12 +803,21 @@ class NewMapDialog(_BaseDialog):
     def _on_enlarged_toggle(self):
         # Switch Latium sliders to the enlarged or standard defaults.
         # Setting dist fires the trace which automatically expands the ox/oy limits before the ox/oy set() calls happen (trace runs synchronously).
+        # The size slider stays live either way. It used to be locked to 2688
+        # here because the enlarged .a7t/.a7te were pre-baked at that size;
+        # terrain_builder generates them per size now, so any size works.
+        # Only nudge the size to the enlarged default when the user has not
+        # picked one of their own, so an existing choice is never overwritten.
         if self._enlarged_var.get():
-            # dist=134, ox=oy=-114 → PA = (20,20,2440,2440), all coords /4
+            if self._size_var["Latium"].get() == self._SIZE_STD:
+                self._size_var["Latium"].set(self._SIZE_ENL)
+            # dist=134, ox=oy=-114 → PA = (20,20,2440,2440) at 2688, all coords /4
             self._pa_dist["Latium"].set(134)
             self._pa_ox["Latium"].set(-114)
             self._pa_oy["Latium"].set(-114)
         else:
+            if self._size_var["Latium"].get() == self._SIZE_ENL:
+                self._size_var["Latium"].set(self._SIZE_STD)
             self._pa_dist["Latium"].set(24)
             self._pa_ox["Latium"].set(-4)
             self._pa_oy["Latium"].set(-4)
@@ -755,8 +834,8 @@ class NewMapDialog(_BaseDialog):
         H = int(cv["height"])
         import math
 
-        lat_size = self._SIZE_ENL if enlarged else self._SIZE_STD
-        alb_size = self._SIZE_STD
+        lat_size = self._size_var["Latium"].get()
+        alb_size = self._size_var["Albion"].get()
 
         # We lay out the two regions side-by-side.
         # Each slot is (W//2) × H; the isometric diamond of a square map with side S fits in a box of width S*√2 × height S*√2.
@@ -815,6 +894,8 @@ class NewMapDialog(_BaseDialog):
 
         enlarged = self._enlarged_var.get()
         lat_ipa  = self._ipa_from_pa(lat, enlarged)
+        lat_size = self._size_var["Latium"].get()
+        alb_size = self._size_var["Albion"].get()
 
         def _f(pa):
             return f"{pa[0]} {pa[1]} {pa[2]} {pa[3]}"
@@ -823,19 +904,19 @@ class NewMapDialog(_BaseDialog):
 
         if enlarged:
             self._info_var.set(
-                f"Latium size:           {self._SIZE_ENL} × {self._SIZE_ENL}\n"
+                f"Latium size:           {lat_size} × {lat_size}\n"
                 f"Latium playable area:  {_f(lat)}\n"
                 f"Latium initial PA:     {_f(lat_ipa)}  (auto)\n"
-                f"Albion size:           {self._SIZE_STD} × {self._SIZE_STD}\n"
+                f"Albion size:           {alb_size} × {alb_size}\n"
                 f"Albion playable area:  {_f(alb)}\n"
                 f"Albion initial PA:     {_f(alb)}  (auto)"
             )
         else:
             self._info_var.set(
-                f"Latium size:           {self._SIZE_STD} × {self._SIZE_STD}\n"
+                f"Latium size:           {lat_size} × {lat_size}\n"
                 f"Latium playable area:  {_f(lat)}\n"
                 f"Latium initial PA:     {_f(lat)}  (auto)\n"
-                f"Albion size:           {self._SIZE_STD} × {self._SIZE_STD}\n"
+                f"Albion size:           {alb_size} × {alb_size}\n"
                 f"Albion playable area:  {_f(alb)}\n"
                 f"Albion initial PA:     {_f(alb)}  (auto)"
             )
@@ -853,8 +934,8 @@ class NewMapDialog(_BaseDialog):
         lat = self._read_pa("Latium")
         alb = self._read_pa("Albion")
 
-        lat_size = self._SIZE_ENL if enlarged else self._SIZE_STD
-        alb_size = self._SIZE_STD
+        lat_size = self._size_var["Latium"].get()
+        alb_size = self._size_var["Albion"].get()
 
         # Validate both regions
         # With sliders: pa = (dist+ox, dist+oy, size-dist+ox, size-dist+oy)
@@ -878,9 +959,16 @@ class NewMapDialog(_BaseDialog):
                 )
                 return
 
-        companion_pa = alb if region == "Latium" else lat
-        primary_pa   = lat if region == "Latium" else alb
-        primary_size = (lat_size, lat_size) if region == "Latium" else (alb_size, alb_size)
+        # Terrain build cost grows with the square of the map size, and the map
+        # is only built at export time - warn here rather than let someone find
+        # out after designing a whole map.
+        if not _confirm_oversized_map(self, max(lat_size, alb_size)):
+            return
+
+        companion_pa   = alb if region == "Latium" else lat
+        primary_pa     = lat if region == "Latium" else alb
+        primary_size   = (lat_size, lat_size) if region == "Latium" else (alb_size, alb_size)
+        companion_size = (alb_size, alb_size) if region == "Latium" else (lat_size, lat_size)
 
         self.result = {
             "region":                  region,
@@ -891,7 +979,90 @@ class NewMapDialog(_BaseDialog):
             "is_enlarged":             enlarged,
             "difficulty":              difficulty,
             "companion_playable_area": companion_pa,
+            "companion_size":          companion_size,
         }
+        self.destroy()
+
+# ─── Resize Map ─────────────────────────────────────────────────────────────
+
+class ResizeMapDialog(_BaseDialog):
+    """Grow the total map size of an already-created template.
+
+    Only enlarging is allowed - shrinking would risk pushing existing islands
+    outside the map/PA bounds. New space is always added on the north/east
+    edges (x2/y2); the existing Playable Area border widths (and therefore
+    every island already placed) are left completely untouched.
+    """
+
+    _SIZE_MAX  = NewMapDialog._SIZE_MAX
+    _SIZE_STEP = NewMapDialog._SIZE_STEP
+
+    def __init__(self, parent, current_size: int, region: str):
+        self._current_size = current_size
+        self._region = region
+        super().__init__(parent, "Resize Map", width=380, height=None)
+
+    def _build(self):
+        tk.Label(self, text=f"Resize {self._region} Map", bg=config.BG_SECTION, fg=config.FG_GOLD, font=config.FONT_HEADER).pack(anchor="w", padx=16, pady=(14, 4))
+        _sep(self).pack(fill="x", padx=10, pady=4)
+
+        body = tk.Frame(self, bg=config.BG_SECTION)
+        body.pack(fill="x", padx=16, pady=(4, 0))
+
+        tk.Label(body, text=f"Current size: {self._current_size} × {self._current_size} px", bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_SMALL).pack(anchor="w", pady=(0, 8))
+
+        row = tk.Frame(body, bg=config.BG_SECTION)
+        row.pack(fill="x")
+        tk.Label(row, text="New size", width=10, anchor="w", bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_SMALL).pack(side="left")
+
+        self._size_var = tk.IntVar(value=self._current_size)
+        entry_var = tk.StringVar(value=str(self._current_size))
+
+        sl = tk.Scale(row, variable=self._size_var, from_=self._current_size, to=self._SIZE_MAX,
+                       resolution=self._SIZE_STEP, orient=tk.HORIZONTAL, length=180, showvalue=False,
+                       bg=config.BG_SECTION, fg=config.FG_MAIN, troughcolor=config.BG_HOVER,
+                       activebackground=config.FG_GOLD, highlightthickness=0,
+                       command=lambda *_: entry_var.set(str(self._size_var.get())))
+        sl.pack(side="left")
+
+        def _entry_to_slider(*_):
+            try:
+                raw = int(entry_var.get())
+            except ValueError:
+                entry_var.set(str(self._size_var.get()))
+                return
+            # Snap to the same step the slider uses - a tk.Scale does not coerce
+            # a value written straight into its variable, so an unsnapped one
+            # would survive into the template and leave the .a7tinfo size off the
+            # .a7te chunk grid.
+            snapped = round(raw / self._SIZE_STEP) * self._SIZE_STEP
+            snapped = max(self._current_size, min(self._SIZE_MAX, snapped))
+            self._size_var.set(snapped)
+            entry_var.set(str(snapped))
+
+        ent = _entry(row, textvariable=entry_var, width=6)
+        ent.pack(side="left", padx=(4, 2))
+        ent.bind("<Return>",   _entry_to_slider)
+        ent.bind("<FocusOut>", _entry_to_slider)
+        tk.Label(row, text="px", bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_XSMALL).pack(side="left")
+
+        tk.Label(body, text="New space is added on the north/east edges.\nExisting islands and the Playable Area borders\naround them stay exactly where they are.",
+                 bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_XSMALL, justify="left").pack(anchor="w", pady=(10, 4))
+
+        _sep(self).pack(fill="x", padx=10, pady=8)
+        btn_f = tk.Frame(self, bg=config.BG_SECTION)
+        btn_f.pack(pady=(0, 12))
+        _btn(btn_f, "  Resize  ", self._confirm, fg=config.BG_MAIN, bg=config.FG_GOLD).pack(side="left", padx=8)
+        _btn(btn_f, "  Cancel  ", self.destroy).pack(side="left", padx=8)
+
+    def _confirm(self):
+        new_size = self._size_var.get()
+        if new_size <= self._current_size:
+            messagebox.showinfo("No Change", "New size must be larger than the current size.", parent=self)
+            return
+        if not _confirm_oversized_map(self, new_size):
+            return
+        self.result = new_size
         self.destroy()
 
 # ─── Fixed Island Picker ────────────────────────────────────────────────────────────

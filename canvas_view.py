@@ -72,6 +72,39 @@ def _snap(v: float, grid: int = config.GRID_SNAP) -> int:
 
 # ─── Placeholder image generator ─────────────────────────────────────────────
 
+def _symmetry_partners(isl: "IslandElement", map_size: Tuple[int, int],
+                       mode: int) -> List[Tuple[Tuple[int, int], int]]:
+    """
+    Where the mirrored copies of *isl* belong, as (position, quarter turns CW).
+
+    Partners are the island rotated about the map centre - 180° for mode 2,
+    90°/180°/270° for mode 4.  Rotation rather than reflection is what a
+    multiplayer map wants: every player then faces the same layout in the same
+    handedness, which a mirrored copy would not give.
+
+    Positions land exactly on the snap grid and the operation is its own inverse
+    (twice for mode 2, four times for mode 4), so a partner can be recognised
+    later by an exact position match - see MapCanvas._symmetry_partner_elements.
+    """
+    if mode not in (2, 4):
+        return []
+
+    cx, cy = map_size[0] / 2.0, map_size[1] / 2.0
+    # A spawn is a bare point; an island is anchored at its SW corner, so rotate
+    # its centre and convert back afterwards.
+    half = 0.0 if isl.is_ship_spawn else isl.size_pixels / 2.0
+    dx = isl.position[0] + half - cx
+    dy = isl.position[1] + half - cy
+
+    out: List[Tuple[Tuple[int, int], int]] = []
+    for turns in ((2,) if mode == 2 else (1, 2, 3)):
+        rx, ry = dx, dy
+        for _ in range(turns):
+            rx, ry = ry, -rx        # 90° clockwise, same convention as rotate_selection
+        out.append(((_snap(cx + rx - half), _snap(cy + ry - half)), turns))
+    return out
+
+
 def _hex_to_rgb(h: str) -> Tuple[int, int, int]:
     h = h.lstrip("#")
     return (int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16))
@@ -239,6 +272,21 @@ class MapCanvas(tk.Canvas):
 
         # Pan (middle-mouse drag)
         self._pan_start_s: Optional[Tuple[float, float]] = None
+
+        # When True, island/spawn collision checks are bypassed everywhere (placement, drag, arrow-key nudge).
+        self.ignore_collisions = False
+
+        # When True, multi-island moves (paste-placement, multi-select drag, arrow-key nudge)
+        # are blocked as a whole instead of letting the map/PA edge clamp each member
+        # independently - keeps a copied/dragged formation's exact shape intact at the edge.
+        self.lock_formation = False
+
+        # Mirror mode: 0 = off, 2 = opposite corner, 4 = all four.  While on,
+        # every newly placed island gets partner copies rotated about the map
+        # centre, and dragging one island drags the partners that are still
+        # sitting exactly where the symmetry puts them.
+        self.symmetry_mode = 0
+        self._sym_ghosts: List[IslandElement] = []
 
         # Image toggle
         self.show_images = True
@@ -416,6 +464,7 @@ class MapCanvas(tk.Canvas):
 
     def cancel_placing(self) -> None:
         self._placing = None
+        self._sym_ghosts = []
         self._paste_ghosts = []
         self._paste_ghost_offsets = []
         self.config(cursor="")
@@ -459,6 +508,148 @@ class MapCanvas(tk.Canvas):
         if self.on_modify:
             self.on_modify()
         self.redraw()
+
+    def rotate_selection(self, direction: int) -> None:
+        """Rotate every non-locked selected island/spawn together as one rigid group.
+
+        direction: +1 for 90° CW, -1 for 90° CCW. Pivots around the bounding-box
+        centre of the whole selection (not the map), so a selected cluster spins
+        in place - useful for e.g. re-orienting a hand-built starter layout that
+        will then be copy/pasted into a rotationally symmetric multiplayer map.
+        Each island's own rotation90 is rotated in step so fixed-island artwork
+        stays visually consistent with the new group orientation.
+        """
+        if self.template is None:
+            return
+        eids: set = set(self._multi_select)
+        if self.selected_eid is not None:
+            eids.add(self.selected_eid)
+        if not eids:
+            return
+
+        group = [isl for isl in self.template.elements if isl._eid in eids and not isl.locked]
+        if not group:
+            return
+
+        # Ship spawns are pure points (no footprint) everywhere else in the model,
+        # so use position for them and the AABB centre for real islands.
+        def _pivot_point(isl):
+            return isl.position if isl.is_ship_spawn else isl.center
+
+        xs = [p[0] for p in (_pivot_point(isl) for isl in group)]
+        ys = [p[1] for p in (_pivot_point(isl) for isl in group)]
+        pivot_x = (min(xs) + max(xs)) / 2.0
+        pivot_y = (min(ys) + max(ys)) / 2.0
+
+        pa = self.template.playable_area
+        map_size = self.template.size
+        external = [e for e in self.template.islands if e._eid not in eids]
+
+        proposed: Dict[int, Tuple[int, int]] = {}
+        for isl in group:
+            cx, cy = _pivot_point(isl)
+            dx, dy = cx - pivot_x, cy - pivot_y
+            # x is East and y is North, and the isometric transform preserves
+            # orientation, so (dx, dy) -> (dy, -dx) is what actually reads as
+            # clockwise on screen.
+            if direction >= 0:
+                ndx, ndy = dy, -dx    # 90° CW
+            else:
+                ndx, ndy = -dy, dx    # 90° CCW
+            new_cx, new_cy = pivot_x + ndx, pivot_y + ndy
+            if isl.is_ship_spawn:
+                nx = _snap(new_cx)
+                ny = _snap(new_cy)
+            else:
+                s = isl.size_pixels
+                nx = _snap(new_cx - s / 2.0)
+                ny = _snap(new_cy - s / 2.0)
+            proposed[isl._eid] = (nx, ny)
+
+        # Validate the whole group atomically: stay within bounds, and (unless
+        # ignore_collisions is on) don't collide with anything outside the group.
+        for isl in group:
+            nx, ny = proposed[isl._eid]
+            if isl.is_ship_spawn:
+                cnx = max(pa[0], min(nx, pa[2]))
+                cny = max(pa[1], min(ny, pa[3]))
+                if (cnx, cny) != (nx, ny):
+                    return  # blocked - would leave the playable area
+                if not self.ignore_collisions and self.template.spawn_in_island((nx, ny)):
+                    return
+                continue
+            if _clamp_island_to_pa(isl, pa, nx, ny, map_size) != (nx, ny):
+                return  # blocked - would leave the valid placement bounds
+            if self.ignore_collisions:
+                continue
+            sz = isl.size_pixels
+            for ext in external:
+                gap = (config.XL_COLLISION_GAP
+                       if (isl.size == "ExtraLarge" and ext.size == "Continental") or
+                          (isl.size == "Continental" and ext.size == "ExtraLarge")
+                       else 0)
+                bx1, by1, bx2, by2 = ext.bounds
+                if not (nx + sz + gap > bx1 and bx2 + gap > nx
+                        and ny + sz + gap > by1 and by2 + gap > ny):
+                    continue
+                if gap == 0:
+                    if ext.size == "Continental" and isl.size != "Continental":
+                        ix1 = max(nx, bx1); iy1 = max(ny, by1)
+                        ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
+                        if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * sz * sz:
+                            continue
+                    elif isl.size == "Continental" and ext.size != "Continental":
+                        ext_px = config.ISLAND_SIZE_PX.get(ext.size, sz)
+                        ix1 = max(nx, bx1); iy1 = max(ny, by1)
+                        ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
+                        if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * ext_px * ext_px:
+                            continue
+                return  # blocked - collides with an island outside the selection
+            if self.template.island_covers_spawn((nx, ny), sz):
+                return  # blocked - would cover a ship spawn
+
+        self.push_undo()
+        for isl in group:
+            isl.position = proposed[isl._eid]
+            if not isl.is_ship_spawn:
+                # rotation90 counts the other way round, so subtract to keep the
+                # artwork turning with the group.
+                isl.rotation90 = (isl.rotation90 - direction) % 4
+        self.template.modified = True
+        self._img_cache.clear()
+        if self.on_modify:
+            self.on_modify()
+        if self.on_select and self.selected_eid is not None:
+            sel_isl = self._eid_map.get(self.selected_eid) or self.template.find_by_eid(self.selected_eid)
+            if sel_isl:
+                self.on_select(sel_isl)
+        self.redraw()
+
+    def resize_map(self, new_size: int) -> bool:
+        """Grow the template's total map size. Only enlarging is supported -
+        new_size must exceed the current size. New space is added on the
+        north/east edges (x2/y2) only; the Playable Area's existing border
+        widths - and therefore every island already placed - are left
+        untouched, so nothing needs to move or be revalidated.
+        """
+        if self.template is None:
+            return False
+        old_size = max(self.template.size)
+        if new_size <= old_size:
+            return False
+        delta = new_size - old_size
+        pa = self.template.playable_area
+        self.template.size = (new_size, new_size)
+        self.template.playable_area = (pa[0], pa[1], pa[2] + delta, pa[3] + delta)
+        self.template.modified = True
+        self._update_transform()
+        self._default_scale = self._scale
+        self._default_cx = self._cx
+        self._default_cy = self._cy
+        if self.on_modify:
+            self.on_modify()
+        self.redraw()
+        return True
 
     def get_selected(self) -> Optional[IslandElement]:
         if self.template is None or self.selected_eid is None:
@@ -1205,19 +1396,75 @@ class MapCanvas(tk.Canvas):
                 cy_r = (sw[1] + se[1] + ne[1] + nw[1]) / 4 + 22
                 self.create_text(cx_r, cy_r, text=f"{isl.rotation90 * 90}°", fill="#ffffff", font=config.FONT_FB_BOLD, tags=tags)
 
+    # ── Symmetry helpers ──────────────────────────────────────────────────────
+
+    def _placement_fits(self, isl: IslandElement) -> bool:
+        """Whether *isl* could be added to the template at its current position."""
+        if self.template is None:
+            return False
+        pa = self.template.playable_area
+        ms = self.template.size
+        x, y = isl.position
+
+        if isl.is_ship_spawn:
+            if not (pa[0] <= x <= pa[2] and pa[1] <= y <= pa[3]):
+                return False
+            return self.ignore_collisions or not self.template.spawn_in_island((x, y))
+
+        if _clamp_island_to_pa(isl, pa, x, y, ms) != (x, y):
+            return False
+        if self.ignore_collisions:
+            return True
+        sz = isl.size_pixels
+        return not (
+            self.template.islands_overlap_or_too_close(
+                (x, y), sz, size_str=isl.size, exclude_eid=isl._eid)
+            or self.template.island_covers_spawn((x, y), sz)
+        )
+
+    def _symmetry_partner_elements(self, isl: IslandElement
+                                   ) -> List[Tuple[IslandElement, int]]:
+        """
+        The elements that currently sit exactly where *isl*'s partners belong.
+
+        Matching is exact on purpose. An island the user moved by hand, or one
+        placed while the mode was off, simply stops matching and is left alone -
+        so toggling the mode on and off never drags unrelated islands around.
+        """
+        if self.template is None or not self.symmetry_mode:
+            return []
+        found: List[Tuple[IslandElement, int]] = []
+        taken: set = {isl._eid}
+        for pos, turns in _symmetry_partners(isl, self.template.size, self.symmetry_mode):
+            for other in self.template.elements:
+                if (other._eid not in taken and not other.locked
+                        and other.element_type == isl.element_type
+                        and other.size == isl.size
+                        and other.position == pos):
+                    found.append((other, turns))
+                    taken.add(other._eid)
+                    break
+        return found
+
     # ── Ghost (placement mode) ────────────────────────────────────────────────
 
-    def _draw_ghost(self) -> None:
-        if self._placing is None:
-            return
-        if self._placing.is_ship_spawn:
-            sx, sy = self.gts(*self._placing.position)
+    def _draw_ghost_one(self, isl: IslandElement) -> None:
+        if isl.is_ship_spawn:
+            sx, sy = self.gts(*isl.position)
             color = config.GHOST_VALID if self._ghost_valid else config.GHOST_INVALID
             r = 14
             self.create_oval(sx - r, sy - r, sx + r, sy + r, fill=color, outline="#ffffff", width=1, tags="ghost")
             self.create_text(sx, sy, text="⚓", fill="#ffffff", font=config.FONT_SPAWN_ICON, tags="ghost")
         else:
-            self._draw_one_island(self._placing, ghost=True, valid=self._ghost_valid)
+            self._draw_one_island(isl, ghost=True, valid=self._ghost_valid)
+
+    def _draw_ghost(self) -> None:
+        if self._placing is None:
+            return
+        self._draw_ghost_one(self._placing)
+        # Mirrored previews - same validity colour as the anchor
+        for sg in self._sym_ghosts:
+            self._draw_ghost_one(sg)
         # Secondary paste ghosts (multi-paste mode) - share the anchor's validity colour
         for pg in self._paste_ghosts:
             self._draw_one_island(pg, ghost=True, valid=self._ghost_valid)
@@ -1237,67 +1484,122 @@ class MapCanvas(tk.Canvas):
             new_x = _snap(gx - ds / 2)
             new_y = _snap(gy - ds / 2)
 
-        # Clamp to playable area
+        # Clamp to playable area (skipped for regular islands when lock_formation is
+        # on - a pasted group's shape must not get warped by clamping each member
+        # independently; out-of-bounds members are flagged invalid below instead).
         if self.template is not None:
             pa = self.template.playable_area  # (x1, y1, x2, y2)
             ms = self.template.size
             if self._placing.is_ship_spawn:
                 new_x = max(pa[0], min(new_x, pa[2]))
                 new_y = max(pa[1], min(new_y, pa[3]))
-            else:
+            elif not self.lock_formation:
                 new_x, new_y = _clamp_island_to_pa(self._placing, pa, new_x, new_y, ms)
 
         self._placing.position = (new_x, new_y)
+
+        # Mirrored previews. The ghost objects are reused between motion events
+        # rather than re-cloned, so the image cache (keyed by element id) does
+        # not grow with every mouse move.
+        partners = ([] if self.template is None else
+                    _symmetry_partners(self._placing, self.template.size, self.symmetry_mode))
+        if len(self._sym_ghosts) != len(partners):
+            self._sym_ghosts = [self._placing.clone() for _ in partners]
+        for sg, (pos, turns) in zip(self._sym_ghosts, partners):
+            sg.position = pos
+            if not sg.is_ship_spawn:
+                sg.rotation90 = (self._placing.rotation90 - turns) % 4
 
         # Reposition secondary paste ghosts relative to the anchor
         if self.template is not None and self._paste_ghosts:
             pa = self.template.playable_area
             ms = self.template.size
             for pg, (dx, dy) in zip(self._paste_ghosts, self._paste_ghost_offsets):
-                pg.position = _clamp_island_to_pa(pg, pa, _snap(new_x + dx), _snap(new_y + dy), ms)
+                raw = (_snap(new_x + dx), _snap(new_y + dy))
+                pg.position = raw if self.lock_formation else _clamp_island_to_pa(pg, pa, raw[0], raw[1], ms)
 
         sp = self._placing.size_pixels
         self._ghost_valid = True
         if self.template is not None:
             if self._placing.is_ship_spawn:
-                self._ghost_valid = not self.template.spawn_in_island((new_x, new_y))
+                if not self.ignore_collisions:
+                    self._ghost_valid = not self.template.spawn_in_island((new_x, new_y))
             else:
-                self._ghost_valid = not (
-                    self.template.islands_overlap_or_too_close((new_x, new_y), sp, size_str=self._placing.size)
-                    or self.template.island_covers_spawn((new_x, new_y), sp)
-                )
-            # Validate paste ghosts against all existing template islands
-            if self._ghost_valid and self._paste_ghosts:
-                for pg in self._paste_ghosts:
-                    pg_sz = pg.size_pixels
-                    pgx, pgy = pg.position
-                    if (self.template.islands_overlap_or_too_close((pgx, pgy), pg_sz, size_str=pg.size)
-                            or self.template.island_covers_spawn((pgx, pgy), pg_sz)):
-                        self._ghost_valid = False
-                        break
+                if self.lock_formation and _clamp_island_to_pa(self._placing, pa, new_x, new_y, ms) != (new_x, new_y):
+                    self._ghost_valid = False
+                if self._ghost_valid and not self.ignore_collisions:
+                    self._ghost_valid = not (
+                        self.template.islands_overlap_or_too_close((new_x, new_y), sp, size_str=self._placing.size)
+                        or self.template.island_covers_spawn((new_x, new_y), sp)
+                    )
+                # Validate paste ghosts: bounds (lock_formation) and/or collisions (unless ignored)
+                if self._ghost_valid and self._paste_ghosts:
+                    for pg in self._paste_ghosts:
+                        pg_sz = pg.size_pixels
+                        pgx, pgy = pg.position
+                        if self.lock_formation and _clamp_island_to_pa(pg, pa, pgx, pgy, ms) != (pgx, pgy):
+                            self._ghost_valid = False
+                            break
+                        if not self.ignore_collisions and (
+                                self.template.islands_overlap_or_too_close((pgx, pgy), pg_sz, size_str=pg.size)
+                                or self.template.island_covers_spawn((pgx, pgy), pg_sz)):
+                            self._ghost_valid = False
+                            break
         self._request_redraw()
 
     # ── Ghost rotation ───────────────────────────────────────────────────────
 
-    def _rotate_ghost_cw(self) -> None:
-        """Rotate the ghost island 90° clockwise (fixed islands only)."""
-        if self._placing is None or self._placing.is_ship_spawn or not self._placing.is_fixed:
+    def _rotate_ghost(self, direction: int) -> None:
+        """Rotate the ghost currently being placed. direction: +1 = CW, -1 = CCW.
+
+        A fixed island's own artwork rotates (rotation90); random/spawn islands
+        have no meaningful orientation so that part is skipped for them. When a
+        multi-paste is in progress (self._paste_ghosts non-empty), the whole
+        pasted group also rotates as a rigid formation around the anchor - each
+        secondary ghost's offset from the anchor is rotated 90°, and repositioned
+        immediately - so a copied cluster of islands can be spun into a new
+        orientation before it's committed (e.g. to mirror a starter layout for
+        a rotationally symmetric multiplayer map).
+        """
+        if self._placing is None or self._placing.is_ship_spawn:
             return
-        self._placing.rotation90 = (self._placing.rotation90 + 1) % 4
-        eid = self._placing._eid
-        self._img_cache = {k: v for k, v in self._img_cache.items() if not (isinstance(k, tuple) and k[0] == eid)}
+        if not self._placing.is_fixed and not self._paste_ghosts:
+            return  # a lone random island has no orientation and no group to spin
+
+        touched_eids = [self._placing._eid]
+        if self._placing.is_fixed:
+            self._placing.rotation90 = (self._placing.rotation90 - direction) % 4
+
+        for i, pg in enumerate(self._paste_ghosts):
+            dx, dy = self._paste_ghost_offsets[i]
+            if direction >= 0:
+                ndx, ndy = dy, -dx    # 90° CW (matches rotate_selection's convention)
+            else:
+                ndx, ndy = -dy, dx    # 90° CCW
+            self._paste_ghost_offsets[i] = (ndx, ndy)
+            if pg.is_fixed:
+                pg.rotation90 = (pg.rotation90 - direction) % 4
+            touched_eids.append(pg._eid)
+
+        if self.template is not None and self._paste_ghosts:
+            pa = self.template.playable_area
+            ms = self.template.size
+            ax, ay = self._placing.position
+            for pg, (dx, dy) in zip(self._paste_ghosts, self._paste_ghost_offsets):
+                pg.position = _clamp_island_to_pa(pg, pa, _snap(ax + dx), _snap(ay + dy), ms)
+
+        self._img_cache = {k: v for k, v in self._img_cache.items()
+                            if not (isinstance(k, tuple) and k[0] in touched_eids)}
         self._request_redraw()
+
+    def _rotate_ghost_cw(self) -> None:
+        self._rotate_ghost(1)
 
     def _on_rotate_cw(self, _: tk.Event) -> None:
         self._rotate_ghost_cw()
 
     def _on_rotate_ccw(self, _: tk.Event) -> None:
-        if self._placing is None or self._placing.is_ship_spawn or not self._placing.is_fixed:
-            return
-        self._placing.rotation90 = (self._placing.rotation90 - 1) % 4
-        eid = self._placing._eid
-        self._img_cache = {k: v for k, v in self._img_cache.items() if not (isinstance(k, tuple) and k[0] == eid)}
-        self._request_redraw()
+        self._rotate_ghost(-1)
 
     def _on_double_click(self, event: tk.Event) -> None:
         """Double-click an island or spawn point to clone it into placement mode."""
@@ -1357,6 +1659,20 @@ class MapCanvas(tk.Canvas):
 
                 self.template.add_element(isl)
 
+                # Mirrored copies. Each is validated on its own; one that does
+                # not fit is skipped rather than blocking the placement, and the
+                # user is told once so a broken symmetry is never silent.
+                skipped = 0
+                for pos, turns in _symmetry_partners(isl, ms, self.symmetry_mode):
+                    mirror = isl.clone()
+                    mirror.position = pos
+                    if not mirror.is_ship_spawn:
+                        mirror.rotation90 = (isl.rotation90 - turns) % 4
+                    if self._placement_fits(mirror):
+                        self.template.add_element(mirror)
+                    else:
+                        skipped += 1
+
                 # Secondary paste ghosts (multi-paste mode)
                 new_multi: set = set()
                 for pg in self._paste_ghosts:
@@ -1373,9 +1689,19 @@ class MapCanvas(tk.Canvas):
                     self.on_select(isl)
                 if self.on_modify:
                     self.on_modify()
+                if skipped:
+                    messagebox.showinfo(
+                        "Mirror Mode",
+                        f"{skipped} mirrored "
+                        f"{'copy was' if skipped == 1 else 'copies were'} skipped - "
+                        "no room at the mirrored position.\n\n"
+                        "The island itself was placed. Move it, or turn on "
+                        "'Ignore collisions', to get the full set.",
+                        parent=self)
             else:
                 messagebox.showwarning("Placement Invalid", "Cannot place island here: too close to another island or out of bounds.")
             self._placing = None
+            self._sym_ghosts = []
             self._paste_ghosts = []
             self._paste_ghost_offsets = []
             self.config(cursor="")
@@ -1479,52 +1805,66 @@ class MapCanvas(tk.Canvas):
             pa = self.template.playable_area
             ms = self.template.size
 
-            # Compute proposed positions for every movable group member
+            # Compute proposed positions for every movable group member.
+            # With lock_formation on, clamping is skipped here (it would warp the
+            # group's shape); an out-of-bounds member instead blocks the whole
+            # drag step below, so the formation stops rigid at the edge.
             group = [e for e in self.template.islands
                      if e._eid in self._multi_select and not e.locked]
             proposed: Dict[int, Tuple[int, int]] = {}
+            out_of_bounds = False
             for isl in group:
                 orig = self._multi_drag_orig_positions.get(isl._eid, isl.position)
                 nx = _snap(orig[0] + d_gx)
                 ny = _snap(orig[1] + d_gy)
-                proposed[isl._eid] = _clamp_island_to_pa(isl, pa, nx, ny, ms)
+                if self.lock_formation:
+                    if _clamp_island_to_pa(isl, pa, nx, ny, ms) != (nx, ny):
+                        out_of_bounds = True
+                    proposed[isl._eid] = (nx, ny)
+                else:
+                    proposed[isl._eid] = _clamp_island_to_pa(isl, pa, nx, ny, ms)
+
+            if out_of_bounds:
+                self._request_redraw()
+                return
 
             # Validate: check each proposed position against islands outside the group
             blocked = False
             external = [e for e in self.template.islands if e._eid not in self._multi_select]
-            for isl in group:
-                nx, ny = proposed[isl._eid]
-                sz = isl.size_pixels
-                # Overlap check vs. external islands
-                for ext in external:
-                    gap = (config.XL_COLLISION_GAP
-                           if (isl.size == "ExtraLarge" and ext.size == "Continental") or
-                              (isl.size == "Continental" and ext.size == "ExtraLarge")
-                           else 0)
-                    bx1, by1, bx2, by2 = ext.bounds
-                    if not (nx + sz + gap > bx1 and bx2 + gap > nx
-                            and ny + sz + gap > by1 and by2 + gap > ny):
-                        continue
-                    if gap == 0:
-                        if ext.size == "Continental" and isl.size != "Continental":
-                            ix1 = max(nx, bx1); iy1 = max(ny, by1)
-                            ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
-                            if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * sz * sz:
-                                continue
-                        elif isl.size == "Continental" and ext.size != "Continental":
-                            ext_px = config.ISLAND_SIZE_PX.get(ext.size, sz)
-                            ix1 = max(nx, bx1); iy1 = max(ny, by1)
-                            ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
-                            if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * ext_px * ext_px:
-                                continue
-                    blocked = True
-                    break
-                if blocked:
-                    break
-                # Spawn-coverage check
-                if self.template.island_covers_spawn((nx, ny), sz):
-                    blocked = True
-                    break
+            if not self.ignore_collisions:
+                for isl in group:
+                    nx, ny = proposed[isl._eid]
+                    sz = isl.size_pixels
+                    # Overlap check vs. external islands
+                    for ext in external:
+                        gap = (config.XL_COLLISION_GAP
+                               if (isl.size == "ExtraLarge" and ext.size == "Continental") or
+                                  (isl.size == "Continental" and ext.size == "ExtraLarge")
+                               else 0)
+                        bx1, by1, bx2, by2 = ext.bounds
+                        if not (nx + sz + gap > bx1 and bx2 + gap > nx
+                                and ny + sz + gap > by1 and by2 + gap > ny):
+                            continue
+                        if gap == 0:
+                            if ext.size == "Continental" and isl.size != "Continental":
+                                ix1 = max(nx, bx1); iy1 = max(ny, by1)
+                                ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
+                                if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * sz * sz:
+                                    continue
+                            elif isl.size == "Continental" and ext.size != "Continental":
+                                ext_px = config.ISLAND_SIZE_PX.get(ext.size, sz)
+                                ix1 = max(nx, bx1); iy1 = max(ny, by1)
+                                ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
+                                if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * ext_px * ext_px:
+                                    continue
+                        blocked = True
+                        break
+                    if blocked:
+                        break
+                    # Spawn-coverage check
+                    if self.template.island_covers_spawn((nx, ny), sz):
+                        blocked = True
+                        break
 
             if not blocked:
                 for isl in group:
@@ -1593,7 +1933,7 @@ class MapCanvas(tk.Canvas):
             new_x, new_y = _clamp_island_to_pa(isl, pa, new_x, new_y, ms)
 
         # Collision check
-        if self.template is not None:
+        if self.template is not None and not self.ignore_collisions:
             if isl.is_ship_spawn:
                 if self.template.spawn_in_island((new_x, new_y)):
                     return  # blocked - keep current position
@@ -1605,6 +1945,34 @@ class MapCanvas(tk.Canvas):
                     or self.template.island_covers_spawn((new_x, new_y), sz)
                 ):
                     return  # blocked - keep current position
+
+        # Drag the mirrored partners along, but only those still sitting exactly
+        # where the symmetry puts them - see _symmetry_partner_elements. Anchor
+        # and partners move as one atomic step: apply, validate, roll back if any
+        # of them does not fit, so the layout never half-moves out of symmetry.
+        #
+        # The anchor's own collision check above still runs against the partners'
+        # old positions, so a drag can be refused near the map centre where an
+        # island and its 180° partner nearly touch. It errs towards blocking.
+        partners = self._symmetry_partner_elements(isl)
+        if partners:
+            previous = {e._eid: e.position for e, _ in partners}
+            previous[isl._eid] = isl.position
+
+            probe = isl.clone()
+            probe.position = (new_x, new_y)
+            dests = {turns: pos for pos, turns in
+                     _symmetry_partners(probe, self.template.size, self.symmetry_mode)}
+
+            isl.position = (new_x, new_y)
+            for other, turns in partners:
+                other.position = dests[turns]
+
+            if not all(self._placement_fits(other) for other, _ in partners):
+                for other, _ in partners:
+                    other.position = previous[other._eid]
+                isl.position = previous[isl._eid]
+                return
 
         isl.position = (new_x, new_y)
         if self.template:
@@ -1823,55 +2191,67 @@ class MapCanvas(tk.Canvas):
         map_size = self.template.size
         external = [e for e in self.template.islands if e._eid not in eids]
 
-        # Compute proposed positions
+        # Compute proposed positions. With lock_formation on, clamping is skipped
+        # (it would warp the group's shape); an out-of-bounds member instead
+        # blocks the whole nudge below, keeping the formation rigid at the edge.
         proposed: Dict[int, Tuple[int, int]] = {}
+        out_of_bounds = False
         for isl in movable:
             nx = isl.position[0] + dgx
             ny = isl.position[1] + dgy
             if isl.is_ship_spawn:
-                nx = max(pa[0], min(nx, pa[2]))
-                ny = max(pa[1], min(ny, pa[3]))
+                cnx = max(pa[0], min(nx, pa[2]))
+                cny = max(pa[1], min(ny, pa[3]))
             else:
-                nx, ny = _clamp_island_to_pa(isl, pa, nx, ny, map_size)
-            proposed[isl._eid] = (nx, ny)
+                cnx, cny = _clamp_island_to_pa(isl, pa, nx, ny, map_size)
+            if self.lock_formation:
+                if (cnx, cny) != (nx, ny):
+                    out_of_bounds = True
+                proposed[isl._eid] = (nx, ny)
+            else:
+                proposed[isl._eid] = (cnx, cny)
+
+        if out_of_bounds:
+            return
 
         # Validate against external islands
         blocked = False
-        for isl in movable:
-            nx, ny = proposed[isl._eid]
-            if isl.is_ship_spawn:
-                if self.template.spawn_in_island((nx, ny)):
+        if not self.ignore_collisions:
+            for isl in movable:
+                nx, ny = proposed[isl._eid]
+                if isl.is_ship_spawn:
+                    if self.template.spawn_in_island((nx, ny)):
+                        blocked = True
+                        break
+                    continue
+                sz = isl.size_pixels
+                for ext in external:
+                    gap = (config.XL_COLLISION_GAP
+                           if (isl.size == "ExtraLarge" and ext.size == "Continental") or (isl.size == "Continental" and ext.size == "ExtraLarge")
+                           else 0)
+                    bx1, by1, bx2, by2 = ext.bounds
+                    if not (nx + sz + gap > bx1 and bx2 + gap > nx
+                            and ny + sz + gap > by1 and by2 + gap > ny):
+                        continue
+                    if gap == 0:
+                        if ext.size == "Continental" and isl.size != "Continental":
+                            ix1 = max(nx, bx1); iy1 = max(ny, by1)
+                            ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
+                            if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * sz * sz:
+                                continue
+                        elif isl.size == "Continental" and ext.size != "Continental":
+                            ext_px = config.ISLAND_SIZE_PX.get(ext.size, sz)
+                            ix1 = max(nx, bx1); iy1 = max(ny, by1)
+                            ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
+                            if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * ext_px * ext_px:
+                                continue
                     blocked = True
                     break
-                continue
-            sz = isl.size_pixels
-            for ext in external:
-                gap = (config.XL_COLLISION_GAP
-                       if (isl.size == "ExtraLarge" and ext.size == "Continental") or (isl.size == "Continental" and ext.size == "ExtraLarge")
-                       else 0)
-                bx1, by1, bx2, by2 = ext.bounds
-                if not (nx + sz + gap > bx1 and bx2 + gap > nx
-                        and ny + sz + gap > by1 and by2 + gap > ny):
-                    continue
-                if gap == 0:
-                    if ext.size == "Continental" and isl.size != "Continental":
-                        ix1 = max(nx, bx1); iy1 = max(ny, by1)
-                        ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
-                        if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * sz * sz:
-                            continue
-                    elif isl.size == "Continental" and ext.size != "Continental":
-                        ext_px = config.ISLAND_SIZE_PX.get(ext.size, sz)
-                        ix1 = max(nx, bx1); iy1 = max(ny, by1)
-                        ix2 = min(nx + sz, bx2); iy2 = min(ny + sz, by2)
-                        if max(0, ix2 - ix1) * max(0, iy2 - iy1) <= 0.10 * ext_px * ext_px:
-                            continue
-                blocked = True
-                break
-            if blocked:
-                break
-            if self.template.island_covers_spawn((nx, ny), sz):
-                blocked = True
-                break
+                if blocked:
+                    break
+                if self.template.island_covers_spawn((nx, ny), sz):
+                    blocked = True
+                    break
 
         if blocked:
             return
@@ -1915,6 +2295,10 @@ class MapCanvas(tk.Canvas):
             label="Duplicate",
             command=lambda: self._duplicate_island(isl),
         )
+        n_selected = len(self._multi_select | {isl._eid})
+        rotate_label = f"Rotate Selection ({n_selected}) 90°" if n_selected > 1 else "Rotate 90°"
+        menu.add_command(label=f"{rotate_label} CW",  command=lambda: self.rotate_selection(1))
+        menu.add_command(label=f"{rotate_label} CCW", command=lambda: self.rotate_selection(-1))
         if isl.locked:
             menu.add_command(
                 label="Unlock",

@@ -49,8 +49,9 @@ FILEDB_CANDIDATES = [
     resource_path(os.path.join("tools", _FDB_EXE)),
     os.path.join(".", _FDB_EXE),
     os.path.join(".", "tools", _FDB_EXE),
-    resource_path(_settings.get("fdb_path"))
 ]
+if _settings.get("fdb_path"):
+    FILEDB_CANDIDATES.append(resource_path(_settings.get("fdb_path")))
 
 EXTRACTED_DIR = os.path.join(_app_data_dir(), "extracted")
 
@@ -65,8 +66,9 @@ ASSETS_XML       = os.path.join(EXTRACTED_DIR, "data", "base", "config", "export
 RDACONSOLE_CANDIDATES = [
     resource_path(os.path.join("tools", "RdaConsole.exe" if IS_WINDOWS else "RdaConsole")),
     os.path.join(".", "tools", "RdaConsole.exe" if IS_WINDOWS else "RdaConsole"),
-    resource_path(_settings.get("rda_path"))
 ]
+if _settings.get("rda_path"):
+    RDACONSOLE_CANDIDATES.append(resource_path(_settings.get("rda_path")))
 
 ANNO_INSTALL_CANDIDATES: list = []
 if IS_WINDOWS:
