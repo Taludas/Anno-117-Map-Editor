@@ -32,6 +32,7 @@
     - [6.10 Island Properties Dialog](#610-island-properties-dialog)
     - [6.11 Validation and Limits](#611-validation-and-limits)
     - [6.12 Placement Aids (Mirror Mode, Ignore Collisions, Lock Formation)](#612-placement-aids-mirror-mode-ignore-collisions-lock-formation)
+    - [6.13 Aegyptus (DLC03)](#613-aegyptus-dlc03)
   - [7. Saving and Exporting](#7-saving-and-exporting)
     - [7.1 XML Save / Load](#71-xml-save--load)
     - [7.2 Export to .a7tinfo](#72-export-to-a7tinfo)
@@ -64,6 +65,7 @@
 - Pin specific game island files as fixed islands with rotation, island label, and handcrafted fertility assignments.
 - Position ship spawn points.
 - Configure the Playable Area and, for DLC01-enabled maps, the Enlarged Playable Area.
+- Customise the fixed Aegyptus map of DLC03 *Dawn of the Delta*: fertilities, island variants and whole island complexes.
 - Export the result directly to a ready-to-install playable mod `.zip` package for all three difficulty variants or - for more experienced modders - to .a7tinfo or xml files.
 
 TAMPER operates as a standalone GUI application (Tkinter) and does not modify game files in place. It reads and writes Anno's proprietary binary format via the open-source **FileDBReader** tool.
@@ -222,6 +224,15 @@ Opens a plain XML file previously saved by the editor. No FileDBReader required.
 - Playable area: rendered as a diamond outline. Enlarged maps show both the full PA and the Initial PA.
 
 **Legend and statistics:** Panels in the corners shows keyboard/mouse controls, island size/type abbreviations, and per-type island counts for the current template.
+
+**Island images:** `View → Island Images` switches every island on every tab between two looks:
+
+| Style | Shows |
+|---|---|
+| Game artwork (default) | The game's own island images. |
+| Tile maps | Each island's actual tile grid at one pixel per tile, one flat colour per tile type: buildable land, fertile ground, riverbank, river, marsh, harbour and unbuildable terrain. Useful to judge how much usable land an island really has. |
+
+The choice is remembered between sessions. Unticking "Show island images" in a tab's side panel still switches that tab to plain coloured shapes.
 
 ---
 
@@ -383,6 +394,44 @@ The side panel's **View** section has three toggles that make laying out symmetr
 
 ---
 
+### 6.13 Aegyptus (DLC03)
+
+DLC03 *Dawn of the Delta* adds the Aegyptus session. Unlike Latium and Albion it is not generated from random island slots: it is **one fixed map** (2560 × 2560) of the Nile delta, and every island always lands in the same place, whatever map type or seed is chosen. The **Aegyptus** tab edits this map.
+
+**Getting started:** click **Load Vanilla Aegyptus Map** in the side panel (the vanilla template ships with the editor), or open a saved Aegyptus XML / `.a7tinfo`, or pick it in `File → Import from Game…` (region *Aegyptus*). Aegyptus files are recognised automatically and always open in this tab.
+
+**How the map is built:** the delta consists of four **complexes** (quadrants: North, East, South, West), each holding about ten islands. The islands' playable territories fit together like a jigsaw, and their borders run straight across land rather than along the coast - every island's land touches its neighbours'.
+
+**Editing an island** (double-click, **Edit Island…**, or right-click → Edit):
+
+| Setting | Effect |
+|---|---|
+| Random fertilities | The game rolls the island's Egyptian fertility set, as in vanilla. |
+| Fixed fertilities | Exactly the ticked fertilities, in click order, on every construction area of the island. The Egyptian fertilities (Sesame, Blue Lotus, Hippos, Pomegranate, Gold Ore, …) are listed first. |
+| Fertility group | *Normal (with gold)* or *Hard (no gold)* - decides which Egyptian set the game rolls when fertilities are random. |
+| Island variant | *Game decides by map size* (vanilla: on medium/small maps the game swaps some islands for smaller versions at random), *Always the full island*, or *Always the reduced island*. Also available via right-click → Island variant. |
+
+Islands with fixed fertilities show their fertility icons on the map; reduced islands are marked with ↓, starters with ★.
+
+**Complexes:** select one with its **Select** button or via right-click on one of its islands. **Remove / Restore:** the **Remove** button, the Delete key, or the context menu. A removed complex leaves open sea; **Restore** puts it back at its original place (unrotated).
+
+**Moving and rotating (experimental):** because island borders cut through land, moving or rotating anything tears the landscape apart in the game - straight cliffs and gaps, overlaps, rivers ending abruptly, possibly unusable NPCs or start positions. It is therefore locked. Ticking **Unlock moving / rotating** shows this warning and asks for confirmation. Once unlocked:
+- **Drag** an island to move it on its own; **Ctrl+drag** (or tick *Drag whole complexes*) moves its whole complex.
+- **Rotate** the selected island by 90° with `.` / `,`, **Ctrl+R** / **Shift+Ctrl+R**, or the context menu.
+- Moves and rotations are blocked while the island's territory would overlap another island's (and complexes may not overlap each other), unless *Ignore collisions* is ticked - which is needed for nearly every change inside the delta.
+
+Keep a saved copy and test every such map in the game before publishing.
+
+**Ship spawn:** drag the anchor to move it.
+
+**Views:** with "Show island images" on, the map shows the game's artwork of the delta (or the tile maps, see 6.3), and every island's territory is outlined in the same border colours Latium/Albion use with images (normal, starter, 3rd party for villages / trader / sector project, pirate). With it off, every island's land is shown as a **cutout** in the look of the other tabs' placeholder islands, labelled L, M, S, 3RD (villages / trader / sector project) or RAIDER, and outlined in their no-image border colours: turquoise for normal islands, green for starters (filled like Large islands), violet for 3rd party and red for the raider. Decorations stay grey without an outline. The Nile channels stay open so the delta remains readable. Starters are marked with ★ in both views.
+
+**Warnings:** a box in the map's lower-left corner warns when a complex lies outside the vanilla land area, when islands were moved or rotated on their own, when starters are missing, and when a removed complex takes NPC islands (villages, trader, pirate) with it.
+
+Fertilities, island variants and removing/moving islands have been verified in game. Rotating islands, moving complexes outside the playable area and removing complexes that carry NPC islands have not - test those before publishing.
+
+---
+
 ## 7. Saving and Exporting
 
 ### 7.1 XML Save / Load
@@ -417,6 +466,7 @@ The region name (e.g. "Latium") is stamped onto the top-left corner of the image
 - `assets.xml` with full `MapTemplate` asset definitions including horizon islands and DLC settings.
 - `modinfo.json` with the mod name, description, GUID range, and dependency information.
 - Locale XML files for all 12 supported languages (name and description are pre-filled in English; use your own translation tools for other languages).
+- If an Aegyptus map is loaded and "Include the Aegyptus map (DLC03)" is ticked: the Aegyptus `.a7tinfo` with the DLC's own terrain, a `MapTemplate` that replaces the Aegyptus session's map while the mod is active, and the DLC3 dependency in `modinfo.json`. Aegyptus can also be exported on its own, without Latium/Albion.
 
 **Dialog options:**
 
@@ -424,7 +474,8 @@ The region name (e.g. "Latium") is stamped onto the top-left corner of the image
 |---|---|
 | Mod Name | Lowercase, hyphens only, no underscores. Used as file names and ModID. |
 | Description | English description for the mod manager. |
-| Start GUID | The first GUID in the range. Seven consecutive GUIDs are reserved. |
+| Start GUID | The first GUID in the range. Eight consecutive GUIDs are reserved (the last one for the Aegyptus map). |
+| Include the Aegyptus map | Only shown when an Aegyptus map is loaded. |
 | Personal GUID range | A private testing range (2001001000–2001009999). Exports in this range install directly; no shareable zip is produced. |
 | Own reserved range | Enter a community-registered GUID range for public publication. |
 | Auto-derive difficulties | When enabled, Medium and Hard difficulty variants are generated algorithmically by scaling island sizes rather than copying the source template identically (see below). |

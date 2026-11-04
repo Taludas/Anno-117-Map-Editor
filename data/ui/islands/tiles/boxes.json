@@ -1,0 +1,1586 @@
+{
+ "celtic_island_3rdparty_pirate_01": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   24,
+   0,
+   312,
+   320
+  ]
+ },
+ "celtic_island_3rdparty_trader_01": {
+  "map_size": [
+   192,
+   192
+  ],
+  "box": [
+   0,
+   0,
+   192,
+   192
+  ]
+ },
+ "celtic_island_3rdparty_trader_02": {
+  "map_size": [
+   192,
+   192
+  ],
+  "box": [
+   0,
+   0,
+   192,
+   192
+  ]
+ },
+ "celtic_island_deco_01": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   0,
+   0,
+   128,
+   128
+  ]
+ },
+ "celtic_island_deco_02": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   8,
+   0,
+   128,
+   128
+  ]
+ },
+ "celtic_island_deco_03": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   0,
+   0,
+   112,
+   128
+  ]
+ },
+ "celtic_island_deco_04": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   0,
+   8,
+   112,
+   128
+  ]
+ },
+ "celtic_island_deco_05": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   8,
+   16,
+   128,
+   112
+  ]
+ },
+ "celtic_island_deco_06": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   16,
+   8,
+   112,
+   104
+  ]
+ },
+ "celtic_island_deco_07": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   16,
+   24,
+   112,
+   112
+  ]
+ },
+ "celtic_island_deco_08": {
+  "map_size": [
+   64,
+   64
+  ],
+  "box": [
+   0,
+   0,
+   64,
+   64
+  ]
+ },
+ "celtic_island_large_01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   56,
+   48,
+   400,
+   456
+  ]
+ },
+ "celtic_island_large_02": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   72,
+   56,
+   424,
+   464
+  ]
+ },
+ "celtic_island_large_03": {
+  "map_size": [
+   384,
+   384
+  ],
+  "box": [
+   16,
+   16,
+   368,
+   360
+  ]
+ },
+ "celtic_island_large_04": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   64,
+   56,
+   400,
+   448
+  ]
+ },
+ "celtic_island_large_05": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   80,
+   80,
+   440,
+   488
+  ]
+ },
+ "celtic_island_large_06": {
+  "map_size": [
+   384,
+   384
+  ],
+  "box": [
+   0,
+   0,
+   376,
+   384
+  ]
+ },
+ "celtic_island_large_07": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   0,
+   0,
+   304,
+   320
+  ]
+ },
+ "celtic_island_large_08": {
+  "map_size": [
+   384,
+   384
+  ],
+  "box": [
+   16,
+   16,
+   384,
+   368
+  ]
+ },
+ "celtic_island_medium_01": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   16,
+   24,
+   224,
+   232
+  ]
+ },
+ "celtic_island_medium_02": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   0,
+   0,
+   256,
+   256
+  ]
+ },
+ "celtic_island_medium_03": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   0,
+   8,
+   248,
+   256
+  ]
+ },
+ "celtic_island_medium_04": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   24,
+   16,
+   256,
+   256
+  ]
+ },
+ "celtic_island_medium_05": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   8,
+   32,
+   304,
+   320
+  ]
+ },
+ "celtic_island_medium_06": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   8,
+   24,
+   312,
+   296
+  ]
+ },
+ "celtic_island_medium_07": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   24,
+   8,
+   232,
+   256
+  ]
+ },
+ "celtic_island_small_01": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   0,
+   0,
+   256,
+   256
+  ]
+ },
+ "celtic_island_small_02": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   24,
+   16,
+   256,
+   232
+  ]
+ },
+ "celtic_island_small_03": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   40,
+   8,
+   224,
+   248
+  ]
+ },
+ "celtic_island_small_04": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   16,
+   16,
+   240,
+   232
+  ]
+ },
+ "celtic_island_small_05": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   40,
+   0,
+   216,
+   232
+  ]
+ },
+ "celtic_island_small_06": {
+  "map_size": [
+   192,
+   192
+  ],
+  "box": [
+   32,
+   16,
+   184,
+   144
+  ]
+ },
+ "celtic_island_small_07": {
+  "map_size": [
+   192,
+   192
+  ],
+  "box": [
+   0,
+   0,
+   192,
+   192
+  ]
+ },
+ "egypt_dlc_03_valley_deco_01": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   0,
+   0,
+   288,
+   216
+  ]
+ },
+ "egypt_dlc_03_valley_deco_02": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   0,
+   384,
+   456,
+   512
+  ]
+ },
+ "egypt_dlc_03_valley_deco_03": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   8,
+   344,
+   439,
+   512
+  ]
+ },
+ "egypt_dlc_03_valley_deco_04": {
+  "map_size": [
+   384,
+   384
+  ],
+  "box": [
+   152,
+   11,
+   384,
+   362
+  ]
+ },
+ "egypt_dlc_03_valley_deco_05": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   56,
+   0,
+   195,
+   230
+  ]
+ },
+ "egypt_dlc_03_valley_deco_06": {
+  "map_size": [
+   384,
+   384
+  ],
+  "box": [
+   72,
+   38,
+   292,
+   336
+  ]
+ },
+ "egypt_dlc_03_valley_deco_07": {
+  "map_size": [
+   576,
+   576
+  ],
+  "box": [
+   102,
+   281,
+   548,
+   429
+  ]
+ },
+ "egypt_dlc_03_valley_deco_08": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   40,
+   0,
+   439,
+   376
+  ]
+ },
+ "egypt_dlc_03_valley_deco_09": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   40,
+   16,
+   200,
+   200
+  ]
+ },
+ "egypt_dlc_03_valley_deco_10": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   0,
+   0,
+   208,
+   405
+  ]
+ },
+ "egypt_dlc_03_valley_deco_11": {
+  "map_size": [
+   384,
+   384
+  ],
+  "box": [
+   16,
+   0,
+   360,
+   192
+  ]
+ },
+ "egypt_dlc_03_valley_deco_12": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   43,
+   0,
+   296,
+   216
+  ]
+ },
+ "egypt_dlc_03_valley_deco_13": {
+  "map_size": [
+   384,
+   384
+  ],
+  "box": [
+   57,
+   200,
+   323,
+   384
+  ]
+ },
+ "egypt_dlc_03_valley_deco_14": {
+  "map_size": [
+   576,
+   576
+  ],
+  "box": [
+   48,
+   41,
+   328,
+   508
+  ]
+ },
+ "egypt_dlc_03_valley_deco_15": {
+  "map_size": [
+   384,
+   384
+  ],
+  "box": [
+   112,
+   0,
+   384,
+   361
+  ]
+ },
+ "egypt_dlc_03_valley_large_01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   39,
+   0,
+   418,
+   285
+  ]
+ },
+ "egypt_dlc_03_valley_large_01_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   39,
+   0,
+   418,
+   285
+  ]
+ },
+ "egypt_dlc_03_valley_large_02": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   16,
+   0,
+   288,
+   408
+  ]
+ },
+ "egypt_dlc_03_valley_large_02_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   16,
+   0,
+   288,
+   408
+  ]
+ },
+ "egypt_dlc_03_valley_large_03": {
+  "map_size": [
+   576,
+   576
+  ],
+  "box": [
+   0,
+   0,
+   568,
+   168
+  ]
+ },
+ "egypt_dlc_03_valley_large_03_layer01": {
+  "map_size": [
+   576,
+   576
+  ],
+  "box": [
+   0,
+   0,
+   568,
+   168
+  ]
+ },
+ "egypt_dlc_03_valley_large_04": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   0,
+   9,
+   384,
+   241
+  ]
+ },
+ "egypt_dlc_03_valley_large_04_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   0,
+   9,
+   384,
+   241
+  ]
+ },
+ "egypt_dlc_03_valley_large_05": {
+  "map_size": [
+   704,
+   704
+  ],
+  "box": [
+   41,
+   177,
+   655,
+   432
+  ]
+ },
+ "egypt_dlc_03_valley_large_05_layer01": {
+  "map_size": [
+   704,
+   704
+  ],
+  "box": [
+   41,
+   177,
+   655,
+   432
+  ]
+ },
+ "egypt_dlc_03_valley_large_06": {
+  "map_size": [
+   384,
+   384
+  ],
+  "box": [
+   16,
+   16,
+   368,
+   254
+  ]
+ },
+ "egypt_dlc_03_valley_large_06_layer01": {
+  "map_size": [
+   384,
+   384
+  ],
+  "box": [
+   16,
+   16,
+   368,
+   254
+  ]
+ },
+ "egypt_dlc_03_valley_large_07": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   8,
+   319,
+   461,
+   512
+  ]
+ },
+ "egypt_dlc_03_valley_large_07_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   8,
+   319,
+   461,
+   512
+  ]
+ },
+ "egypt_dlc_03_valley_large_08": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   75,
+   20,
+   512,
+   408
+  ]
+ },
+ "egypt_dlc_03_valley_large_08_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   75,
+   20,
+   512,
+   408
+  ]
+ },
+ "egypt_dlc_03_valley_large_09": {
+  "map_size": [
+   576,
+   576
+  ],
+  "box": [
+   72,
+   38,
+   576,
+   560
+  ]
+ },
+ "egypt_dlc_03_valley_large_09_layer01": {
+  "map_size": [
+   576,
+   576
+  ],
+  "box": [
+   72,
+   38,
+   576,
+   560
+  ]
+ },
+ "egypt_dlc_03_valley_large_10": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   0,
+   72,
+   409,
+   448
+  ]
+ },
+ "egypt_dlc_03_valley_large_10_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   0,
+   72,
+   409,
+   448
+  ]
+ },
+ "egypt_dlc_03_valley_medium_01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   88,
+   15,
+   504,
+   464
+  ]
+ },
+ "egypt_dlc_03_valley_medium_01_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   88,
+   15,
+   504,
+   464
+  ]
+ },
+ "egypt_dlc_03_valley_medium_02": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   0,
+   49,
+   391,
+   404
+  ]
+ },
+ "egypt_dlc_03_valley_medium_02_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   0,
+   49,
+   391,
+   404
+  ]
+ },
+ "egypt_dlc_03_valley_medium_03": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   35,
+   16,
+   424,
+   380
+  ]
+ },
+ "egypt_dlc_03_valley_medium_03_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   35,
+   16,
+   424,
+   380
+  ]
+ },
+ "egypt_dlc_03_valley_medium_04": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   8,
+   104,
+   488,
+   492
+  ]
+ },
+ "egypt_dlc_03_valley_medium_04_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   8,
+   104,
+   488,
+   492
+  ]
+ },
+ "egypt_dlc_03_valley_pirate_01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   24,
+   0,
+   416,
+   252
+  ]
+ },
+ "egypt_dlc_03_valley_sectorproject_01": {
+  "map_size": [
+   640,
+   640
+  ],
+  "box": [
+   0,
+   8,
+   536,
+   624
+  ]
+ },
+ "egypt_dlc_03_valley_small_01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   88,
+   21,
+   512,
+   443
+  ]
+ },
+ "egypt_dlc_03_valley_small_01_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   88,
+   21,
+   512,
+   443
+  ]
+ },
+ "egypt_dlc_03_valley_small_02": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   0,
+   22,
+   208,
+   290
+  ]
+ },
+ "egypt_dlc_03_valley_small_02_layer01": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   0,
+   22,
+   208,
+   290
+  ]
+ },
+ "egypt_dlc_03_valley_small_03": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   0,
+   23,
+   448,
+   332
+  ]
+ },
+ "egypt_dlc_03_valley_small_03_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   0,
+   23,
+   448,
+   332
+  ]
+ },
+ "egypt_dlc_03_valley_small_04": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   24,
+   48,
+   410,
+   347
+  ]
+ },
+ "egypt_dlc_03_valley_small_04_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   24,
+   48,
+   410,
+   347
+  ]
+ },
+ "egypt_dlc_03_valley_trader_02": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   0,
+   32,
+   320,
+   192
+  ]
+ },
+ "egypt_dlc_03_valley_vilage_03": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   0,
+   73,
+   240,
+   448
+  ]
+ },
+ "egypt_dlc_03_valley_village_01": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   39,
+   16,
+   248,
+   217
+  ]
+ },
+ "egypt_dlc_03_valley_village_02": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   0,
+   52,
+   232,
+   256
+  ]
+ },
+ "roman_dlc01_island_continental_01": {
+  "map_size": [
+   768,
+   768
+  ],
+  "box": [
+   0,
+   0,
+   768,
+   768
+  ]
+ },
+ "roman_dlc01_island_medium_01": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   16,
+   8,
+   304,
+   296
+  ]
+ },
+ "roman_dlc01_island_medium_02": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   0,
+   0,
+   320,
+   320
+  ]
+ },
+ "roman_dlc01_island_medium_03": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   0,
+   0,
+   320,
+   312
+  ]
+ },
+ "roman_dlc01_island_small_02": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   8,
+   8,
+   256,
+   240
+  ]
+ },
+ "roman_dlc_01_island_small_01": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   16,
+   24,
+   216,
+   240
+  ]
+ },
+ "roman_island_3rdparty_pirate_01": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   48,
+   48,
+   288,
+   272
+  ]
+ },
+ "roman_island_3rdparty_trader_01": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   32,
+   32,
+   256,
+   208
+  ]
+ },
+ "roman_island_3rdparty_trader_02": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   0,
+   0,
+   256,
+   248
+  ]
+ },
+ "roman_island_deco_01": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   16,
+   8,
+   120,
+   104
+  ]
+ },
+ "roman_island_deco_02": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   8,
+   8,
+   120,
+   112
+  ]
+ },
+ "roman_island_deco_03": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   16,
+   0,
+   128,
+   120
+  ]
+ },
+ "roman_island_deco_04": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   16,
+   8,
+   112,
+   120
+  ]
+ },
+ "roman_island_deco_05": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   0,
+   0,
+   120,
+   120
+  ]
+ },
+ "roman_island_deco_06": {
+  "map_size": [
+   128,
+   128
+  ],
+  "box": [
+   8,
+   0,
+   120,
+   128
+  ]
+ },
+ "roman_island_extralarge_01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   56,
+   40,
+   472,
+   456
+  ]
+ },
+ "roman_island_extralarge_02": {
+  "map_size": [
+   448,
+   448
+  ],
+  "box": [
+   24,
+   16,
+   440,
+   432
+  ]
+ },
+ "roman_island_extralarge_03": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   56,
+   72,
+   472,
+   464
+  ]
+ },
+ "roman_island_extralarge_04": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   24,
+   32,
+   440,
+   448
+  ]
+ },
+ "roman_island_large_01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   32,
+   48,
+   448,
+   464
+  ]
+ },
+ "roman_island_large_02": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   80,
+   64,
+   416,
+   480
+  ]
+ },
+ "roman_island_large_03": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   48,
+   56,
+   432,
+   472
+  ]
+ },
+ "roman_island_large_04": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   48,
+   48,
+   464,
+   424
+  ]
+ },
+ "roman_island_large_05": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   80,
+   72,
+   456,
+   448
+  ]
+ },
+ "roman_island_large_06": {
+  "map_size": [
+   384,
+   384
+  ],
+  "box": [
+   0,
+   0,
+   384,
+   384
+  ]
+ },
+ "roman_island_large_07": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   80,
+   48,
+   488,
+   432
+  ]
+ },
+ "roman_island_large_09": {
+  "map_size": [
+   512,
+   512
+  ],
+  "box": [
+   24,
+   40,
+   440,
+   400
+  ]
+ },
+ "roman_island_medium_01": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   24,
+   0,
+   296,
+   320
+  ]
+ },
+ "roman_island_medium_02": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   0,
+   0,
+   256,
+   256
+  ]
+ },
+ "roman_island_medium_03": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   24,
+   0,
+   288,
+   320
+  ]
+ },
+ "roman_island_medium_04": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   0,
+   0,
+   320,
+   320
+  ]
+ },
+ "roman_island_medium_05": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   0,
+   0,
+   256,
+   256
+  ]
+ },
+ "roman_island_medium_06": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   0,
+   0,
+   312,
+   296
+  ]
+ },
+ "roman_island_medium_07": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   0,
+   0,
+   320,
+   320
+  ]
+ },
+ "roman_island_medium_08": {
+  "map_size": [
+   320,
+   320
+  ],
+  "box": [
+   16,
+   8,
+   320,
+   320
+  ]
+ },
+ "roman_island_small_01": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   0,
+   0,
+   256,
+   240
+  ]
+ },
+ "roman_island_small_02": {
+  "map_size": [
+   192,
+   192
+  ],
+  "box": [
+   0,
+   8,
+   192,
+   176
+  ]
+ },
+ "roman_island_small_03": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   40,
+   16,
+   200,
+   208
+  ]
+ },
+ "roman_island_small_04": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   0,
+   0,
+   248,
+   240
+  ]
+ },
+ "roman_island_small_05": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   8,
+   8,
+   248,
+   232
+  ]
+ },
+ "roman_island_small_06": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   8,
+   16,
+   248,
+   248
+  ]
+ },
+ "roman_island_small_07": {
+  "map_size": [
+   256,
+   256
+  ],
+  "box": [
+   16,
+   0,
+   256,
+   248
+  ]
+ }
+}

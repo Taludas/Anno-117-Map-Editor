@@ -35,7 +35,7 @@ from fertility_set_registry import FertilitySetRegistry
 # a published range when exporting in personal mode.
 _PERSONAL_GUID_MIN = 2001001000
 _PERSONAL_GUID_MAX = 2001009999
-_PERSONAL_GUID_STEP = 7   # six consecutive GUIDs claimed per export + 1 gap
+_PERSONAL_GUID_STEP = 8   # Start_GUID … Start_GUID+7 claimed per export (the +7 is the Aegyptus template)
 
 
 # ─── Template folder paths ────────────────────────────────────────────────────
@@ -44,6 +44,10 @@ _PERSONAL_GUID_STEP = 7   # six consecutive GUIDs claimed per export + 1 gap
 _TEMPLATE_DIR = config.resource_path("[Map] $ModName (TAMPER)")
 # Enlarged (DLC01) template folder
 _TEMPLATE_DIR_ENL = config.resource_path("[Map] $ModName Enlarged (TAMPER)")
+# Enlarged + Aegyptus (DLC03): the Enlarged folder plus the Aegyptus block of assets.xml and the Egypt terrain
+_TEMPLATE_DIR_DLC03 = config.resource_path("[Map] $ModName Enlarged DLC03 (TAMPER)")
+_EGYPT_BLOCK_MARKER = "<!-- DLC03 replacement -->"
+_EGYPT_POOL = os.path.join("data", "tamper", "provinces", "egypt", "templates", "pool")
 
 # Province/suffix per region
 _REGION_INFO = {
@@ -110,11 +114,12 @@ def _substitute(text: str, slug: str, display_name: str, description: str, start
       7. "Start_GUID" → str(start_guid)
     """
     text = text.replace("$ModName_", slug + "_")
+    text = text.replace("tamper-enlarged-dlc03-map-$ModName", f"tamper-enlarged-dlc03-map-{slug}")
     text = text.replace("tamper-enlargedmap-$ModName", f"tamper-enlargedmap-{slug}")
     text = text.replace("tamper-map-$ModName", f"tamper-map-{slug}")
     text = text.replace("$ModName", display_name)
     text = text.replace("$Description", description)
-    for i in range(6, 0, -1):
+    for i in range(7, 0, -1):
         text = text.replace(f"Start_GUID+{i}", str(start_guid + i))
     text = text.replace("Start_GUID", str(start_guid))
     return text
@@ -164,6 +169,67 @@ class _TerrainCache:
         with open(os.path.join(dst_dir, stem + ".a7te"), "w",
                   encoding="utf-8", newline="") as f:
             f.write(a7te)
+
+
+def _egypt_block(excluded_stems) -> str:
+    """
+    The Aegyptus part of the DLC03 assets.xml (session ModOp + MapTemplate), with every island in
+    *excluded_stems* taken out of ReduceSizeIslands so the game keeps the file the template names.
+    """
+    with open(os.path.join(_TEMPLATE_DIR_DLC03, "data", "base", "config", "export", "assets.xml"),
+              encoding="utf-8") as fh:
+        text = fh.read()
+    block = text[text.index(_EGYPT_BLOCK_MARKER):text.rindex("</ModOps>")].rstrip()
+    for stem in excluded_stems:
+        block = re.sub(r"\s*<IslandFilename>[^<]*/%s\.a7m</IslandFilename>\s*"
+                       r"<ReducedIslandFilename>[^<]*</ReducedIslandFilename>" % re.escape(stem), "", block)
+    block = re.sub(r"\s*<(Small|Medium|Large)>\s*<Island>\s*</Island>\s*</\1>", "", block)
+    block = re.sub(r"\s*<ReduceSizeIslands>\s*</ReduceSizeIslands>", "", block)
+    return block
+
+
+def _write_egypt(mod_root: str, slug: str, egypt, debug_dir: Optional[str]) -> None:
+    """The Aegyptus .a7tinfo (compressed from the lossless template) plus the DLC's own .a7t/.a7te."""
+    stem = f"{slug}_egypt"
+    pool = os.path.join(mod_root, _EGYPT_POOL, stem)
+    os.makedirs(pool, exist_ok=True)
+    src = os.path.join(_TEMPLATE_DIR_DLC03, _EGYPT_POOL, "$ModName_egypt")
+    for ext in (".a7t", ".a7te"):
+        shutil.copyfile(os.path.join(src, "$ModName_egypt" + ext), os.path.join(pool, stem + ext))
+    fd, tmp_xml = tempfile.mkstemp(suffix=".xml")
+    os.close(fd)
+    try:
+        with open(tmp_xml, "w", encoding="utf-8") as fh:
+            fh.write(egypt.to_xml_string())
+        if debug_dir:
+            shutil.copy2(tmp_xml, os.path.join(debug_dir, stem + ".xml"))
+        _fdb.compress(tmp_xml, os.path.join(pool, stem + ".a7tinfo"), interpreter_path=config.INTERPRETER_PATH)
+    finally:
+        try:
+            os.unlink(tmp_xml)
+        except OSError:
+            pass
+
+
+def _egypt_modinfo(modinfo_text: str, egypt_only: bool) -> str:
+    """Add the DLC03 dependency (and, for an Aegyptus-only mod, its own name/ID) to a substituted modinfo."""
+    import json
+    info = json.loads(modinfo_text)
+    deps = ["DawnofDelta"] if egypt_only else list(dict.fromkeys((info.get("DLCDependencies") or []) + ["DawnofDelta"]))
+    info["DLCDependencies"] = deps
+    desc = info.get("Description") or {}
+    eng = desc.get("English") or ""
+    dlc3 = "DLC3 'Dawn of Delta'"
+    if egypt_only:
+        eng = eng.split(" - requires")[0] + f" - requires {dlc3} to work correctly"
+    elif "Dawn of Delta" not in eng:
+        if " - requires " in eng:
+            eng = eng.replace(" to work correctly", "") + f" and {dlc3} to work correctly"
+        else:
+            eng = eng + f" - requires {dlc3} to work correctly"
+    desc["English"] = eng
+    info["Description"] = desc
+    return json.dumps(info, indent=2, ensure_ascii=False)
 
 
 def _make_initial_copy(tmpl):
@@ -318,6 +384,7 @@ def build_mod_zip(
     debug_xml: bool = False,             # if True, save pre-compression XMLs next to the zip
     auto_derive: bool = False,           # if True, derive Medium/Hard from the source difficulty
     progress: Optional[Callable[[str], None]] = None,   # status message sink
+    egypt=None,                          # EgyptTemplate: replaces the Aegyptus (DLC03) map template
 ) -> None:
     """
     Build a complete mod zip file from the given templates.
@@ -431,17 +498,30 @@ def build_mod_zip(
                         except OSError:
                             pass
 
-        # ── assets.xml ────────────────────────────────────────────────────
-        assets_xml_src = os.path.join(
-            tmpl_dir, "data", "base", "config", "export", "assets.xml")
-        with open(assets_xml_src, "r", encoding="utf-8") as fh:
-            assets_text = _substitute(fh.read(), slug, display_name, description, start_guid)
+        # ── Aegyptus (DLC03) template ─────────────────────────────────────
+        if egypt is not None:
+            if progress:
+                progress("Aegyptus...")
+            _write_egypt(mod_root, slug, egypt, debug_dir)
 
-        # The backdrop lives here, at absolute world coordinates authored for a
-        # 2048 map - it has to follow the map size like the terrain does.
-        # Substitution runs first so the stems in TemplateFilename match.
-        assets_text = terrain_builder.scale_horizon_islands(
-            assets_text, terrain.size_by_stem)
+        # ── assets.xml ────────────────────────────────────────────────────
+        if templates:
+            assets_xml_src = os.path.join(
+                tmpl_dir, "data", "base", "config", "export", "assets.xml")
+            with open(assets_xml_src, "r", encoding="utf-8") as fh:
+                assets_text = _substitute(fh.read(), slug, display_name, description, start_guid)
+
+            # The backdrop lives here, at absolute world coordinates authored for a
+            # 2048 map - it has to follow the map size like the terrain does.
+            # Substitution runs first so the stems in TemplateFilename match.
+            assets_text = terrain_builder.scale_horizon_islands(
+                assets_text, terrain.size_by_stem)
+        else:
+            assets_text = "<ModOps>\n</ModOps>\n"
+        if egypt is not None:
+            block = _substitute(_egypt_block(egypt.reduce_size_exclusions()), slug, display_name, description, start_guid)
+            cut = assets_text.rindex("</ModOps>")
+            assets_text = assets_text[:cut].rstrip() + "\n\n  " + block + "\n\n" + assets_text[cut:]
 
         assets_dir = os.path.join(mod_root, "data", "base", "config", "export")
         os.makedirs(assets_dir, exist_ok=True)
@@ -449,9 +529,20 @@ def build_mod_zip(
             fh.write(assets_text)
 
         # ── modinfo.json ──────────────────────────────────────────────────
-        modinfo_src = os.path.join(tmpl_dir, "modinfo.json")
+        egypt_only = egypt is not None and not templates
+        if egypt is not None and (is_enlarged_export or egypt_only):
+            modinfo_src = os.path.join(_TEMPLATE_DIR_DLC03, "modinfo.json")
+        else:
+            modinfo_src = os.path.join(tmpl_dir, "modinfo.json")
         with open(modinfo_src, "r", encoding="utf-8") as fh:
-            modinfo_text = _substitute(fh.read(), slug, display_name, description, start_guid)
+            raw = fh.read()
+        if egypt_only:
+            raw = raw.replace("tamper-enlarged-dlc03-map-$ModName", "tamper-egypt-map-$ModName") \
+                     .replace("$ModName - enlarged with DLC03 (TAMPER)", "$ModName - Aegyptus (TAMPER)")
+            raw = raw.replace("tamper-egypt-map-$ModName", f"tamper-egypt-map-{slug}")
+        modinfo_text = _substitute(raw, slug, display_name, description, start_guid)
+        if egypt is not None:
+            modinfo_text = _egypt_modinfo(modinfo_text, egypt_only)
         with open(os.path.join(mod_root, "modinfo.json"), "w", encoding="utf-8") as fh:
             fh.write(modinfo_text)
 
@@ -498,9 +589,12 @@ class ModExportDialog(tk.Toplevel):
       None                                       — user cancelled
     """
 
-    def __init__(self, parent: tk.Misc, app):
+    def __init__(self, parent: tk.Misc, app, has_regions: bool = True, has_egypt: bool = False):
         super().__init__(parent)
         self._app    = app
+        self._has_regions = has_regions
+        self._has_egypt = has_egypt
+        self._include_egypt = has_egypt
         # result: (slug, display_name, description, start_guid, zip_path, install_path_or_None, debug_xml)
         self._result: Optional[Tuple[str, str, str, int, str, Optional[str], bool]] = None
 
@@ -604,7 +698,7 @@ class ModExportDialog(tk.Toplevel):
 
         tk.Label(
             self,
-            text="Seven consecutive GUIDs will be reserved (Start_GUID … Start_GUID+6).\n"
+            text="Eight consecutive GUIDs will be reserved (Start_GUID … Start_GUID+7).\n"
                  "Unchecked: uses the personal range (local testing only, installs directly).",
             bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_XSMALL, justify="left").pack(anchor="w", padx=px)
 
@@ -641,7 +735,26 @@ class ModExportDialog(tk.Toplevel):
 
         tk.Frame(self, bg=config.FG_SEPARATOR, height=1).pack(fill="x", padx=px, pady=(6, 4))
 
+        # ── Aegyptus (DLC03) ──────────────────────────────────────────────
+        self._egypt_var = tk.BooleanVar(value=self._has_egypt)
+        if self._has_egypt:
+            tk.Checkbutton(
+                self, text="Include the Aegyptus map (DLC03)",
+                variable=self._egypt_var, state="normal" if self._has_regions else "disabled",
+                bg=config.BG_SECTION, fg=config.FG_MAIN, activebackground=config.BG_SECTION, activeforeground=config.FG_GOLD,
+                selectcolor=config.BG_MAIN, font=config.FONT_SMALL).pack(anchor="w", padx=px, pady=(4, 0))
+            tk.Label(
+                self,
+                text="Replaces the Aegyptus session's map template while the mod is active\n"
+                     "(requires DLC3 'Dawn of Delta').",
+                bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_XSMALL, justify="left").pack(anchor="w", padx=px + 4, pady=(0, 4))
+            tk.Frame(self, bg=config.FG_SEPARATOR, height=1).pack(fill="x", padx=px, pady=(6, 4))
+
         # ── Difficulty derivation ─────────────────────────────────────────
+        self._auto_derive_var = tk.BooleanVar(value=True)
+        if not self._has_regions:
+            self._build_buttons(px)
+            return
         tk.Label(self, text="Difficulty Variants", bg=config.BG_SECTION, fg=config.FG_MAIN, font=config.FONT_BOLD_SMALL).pack(anchor="w", padx=px, pady=(4, 0))
 
         # Show which difficulty each loaded region template is set to
@@ -657,7 +770,6 @@ class ModExportDialog(tk.Toplevel):
             text="  ·  ".join(diff_lines) if diff_lines else "No templates loaded",
             bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_XSMALL).pack(anchor="w", padx=px)
 
-        self._auto_derive_var = tk.BooleanVar(value=True)
         tk.Checkbutton(
             self,
             text="Auto-derive other difficulty variants from this map",
@@ -668,6 +780,9 @@ class ModExportDialog(tk.Toplevel):
                  "When off: all three difficulties use the same island layout.",
             bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_XSMALL, justify="left").pack(anchor="w", padx=px + 4, pady=(0, 4))
 
+        self._build_buttons(px)
+
+    def _build_buttons(self, px: int):
         # ── Debug XML (hidden — uncomment checkbox to re-enable) ──────────
         self._debug_xml_var = tk.BooleanVar(value=False)
         # tk.Checkbutton(
@@ -799,5 +914,6 @@ class ModExportDialog(tk.Toplevel):
                 next_guid = _PERSONAL_GUID_MIN
             _settings.set("next_personal_guid", next_guid)
 
+        self._include_egypt = self._has_egypt and self._egypt_var.get()
         self._result = (slug, display_name, description, start_guid, zip_path, install_path, self._debug_xml_var.get(), self._auto_derive_var.get())
         self.destroy()

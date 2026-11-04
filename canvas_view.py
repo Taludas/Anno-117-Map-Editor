@@ -191,6 +191,20 @@ def _make_placeholder_no_text(island: IslandElement, px_size: int) -> "Image.Ima
     return img
 
 
+def _tile_image(island: IslandElement, reg: IslandRegistry) -> Optional["Image.Image"]:
+    """The seed-finder tile map of the island's .a7m on its full square map, or None."""
+    import egypt_data
+    stem = None
+    if island.is_fixed and island.map_file_path:
+        stem = os.path.basename(island.map_file_path).replace(".a7m", "")
+    else:
+        assigner: Optional[PoolImageAssigner] = getattr(island, '_pool_assigner', None)
+        if assigner and reg.is_loaded:
+            asset = assigner.get_asset(getattr(island, '_region', 'Latium'), island.size, island.island_type)
+            stem = asset.a7m_name if asset else None
+    return egypt_data.tile_square_image(stem) if stem else None
+
+
 def _island_image(island: IslandElement, img_size_px: int, show_real: bool) -> Optional["Image.Image"]:
     """Load a real island image or fall back to a generated placeholder."""
     if not PIL_AVAILABLE:
@@ -198,6 +212,11 @@ def _island_image(island: IslandElement, img_size_px: int, show_real: bool) -> O
 
     reg = IslandRegistry.instance()
     image_path: Optional[str] = None
+
+    if show_real and getattr(config, "ISLAND_IMAGE_STYLE", "artwork") == "tiles":
+        tile = _tile_image(island, reg)
+        if tile is not None:
+            return tile.resize((img_size_px, img_size_px), Image.NEAREST if img_size_px >= 128 else Image.LANCZOS)
 
     if show_real and reg.is_loaded:
         if island.is_fixed and island.map_file_path:
@@ -1191,7 +1210,8 @@ class MapCanvas(tk.Canvas):
         s = isl.render_size_pixels
         # Cap max image size to 1024px to prevent gigantic allocations and slowdowns at high zoom levels
         img_px = min(256, max(4, int(s * self._scale)))
-        cache_key = (isl._eid, img_px, isl.island_type, isl.size, self.show_images, isl.rotation90)
+        cache_key = (isl._eid, img_px, isl.island_type, isl.size, self.show_images, isl.rotation90,
+                     getattr(config, "ISLAND_IMAGE_STYLE", "artwork"), isl.map_file_path)
 
         if cache_key not in self._img_cache:
             pil_img = _island_image(isl, img_px, self.show_images)

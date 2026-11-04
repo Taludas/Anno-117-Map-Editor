@@ -29,9 +29,12 @@ ASSET_TYPE_MAP = {
 
 # Maps IslandRegion → our region tab name
 ASSET_REGION_MAP = {
-    "Roman":  "Latium",
-    "Celtic": "Albion",
+    "Roman":     "Latium",
+    "Celtic":    "Albion",
+    "Egyptian":  "Aegyptus",
 }
+# Regions whose islands only make sense on their own fixed map (never offered in the Latium/Albion pickers).
+_SELF_CONTAINED_REGIONS = {"Aegyptus"}
 
 
 @dataclass
@@ -321,13 +324,14 @@ class IslandRegistry:
 
     def for_region(self, region: str,
                    include_other_regions: bool = True) -> List[IslandAsset]:
+        islands = [i for i in self._islands if i.region not in _SELF_CONTAINED_REGIONS or i.region == region]
         if region in ("Both", "all", "All"):
-            return list(self._islands)
+            return islands
         if not include_other_regions:
-            return [i for i in self._islands if i.region == region]
+            return [i for i in islands if i.region == region]
         # Both regions show all islands, with native-region islands listed first
-        native = [i for i in self._islands if i.region == region]
-        other  = [i for i in self._islands if i.region != region]
+        native = [i for i in islands if i.region == region]
+        other  = [i for i in islands if i.region != region]
         return native + other
 
     def for_region_size_type(self, region: str, size: str,
@@ -360,6 +364,11 @@ class PoolImageAssigner:
         self._counters: Dict[str, int] = {}
 
     def get_image(self, region: str, size: str, island_type: str) -> Optional[str]:
+        asset = self.get_asset(region, size, island_type)
+        return asset.image_path if asset else _placeholder_for(size, island_type)
+
+    def get_asset(self, region: str, size: str, island_type: str) -> Optional[IslandAsset]:
+        """The pool island (with an image) this random island is drawn as, cycling through the pool."""
         key = f"{region}_{size}_{island_type}"
         pool = IslandRegistry.instance().for_region_size_type(region, size, island_type)
 
@@ -388,9 +397,8 @@ class PoolImageAssigner:
                     break
 
         if not pool_with_img:
-            # Fall back to placeholder
-            return _placeholder_for(size, island_type)
+            return None
 
         idx = self._counters.get(key, 0) % len(pool_with_img)
         self._counters[key] = idx + 1
-        return pool_with_img[idx].image_path
+        return pool_with_img[idx]

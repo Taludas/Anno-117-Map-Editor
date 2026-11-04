@@ -35,7 +35,8 @@ class FertilityAsset:
     def display_name(self) -> str:
         """Short name stripped of region/category prefix for UI display."""
         for prefix in (
-            "Fertility Roman ", "Fertility Celtic ", "Fertility ", "Deposit Roman ",  "Deposit Celtic ",  "Deposit ",
+            "Fertility Roman ", "Fertility Celtic ", "Fertility Egyptian ", "Fertility ",
+            "Deposit Roman ", "Deposit Celtic ", "Deposit Egyptian ", "Deposit ",
         ):
             if self.name.startswith(prefix):
                 return self.name[len(prefix):]
@@ -88,11 +89,13 @@ class FertilityRegistry:
                 name = (asset.findtext("Values/Standard/Name") or "").strip()
                 icon_rel = (asset.findtext("Values/Standard/IconFilename") or "").strip()
 
-                # Region rule: Roman → Latium only, Celtic → Albion only, else Both
+                # Region rule: Roman → Latium only, Celtic → Albion only, Egyptian → Aegyptus only, else Both
                 if "Roman" in name:
                     region = "Latium"
                 elif "Celtic" in name:
                     region = "Albion"
+                elif "Egyptian" in name:
+                    region = "Aegyptus"
                 else:
                     region = "Both"
 

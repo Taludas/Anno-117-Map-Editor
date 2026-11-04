@@ -21,6 +21,7 @@ RELEVANT_RDA_PATTERNS = [
     "provinces_celtic.rda",
     "provinces_roman.rda",
     "dlc01_provinces.rda",
+    "dlc03_provinces.rda",
     "config.rda"
 ]
 # Also match any rda starting with "dlc01" (for future DLC content)

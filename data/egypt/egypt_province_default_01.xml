@@ -1,0 +1,1561 @@
+<Content>
+  <MapTemplate>
+    <Size>2560 2560</Size>
+    <EnlargementOffset>0 0</EnlargementOffset>
+    <IslandShift>0000000000000000</IslandShift>
+    <PlayableArea>20 20 1890 1890</PlayableArea>
+    <InitialPlayableArea>0 0 0 0</InitialPlayableArea>
+    <RandomlyPlacedThirdParties />
+    <ElementCount>40</ElementCount>
+    <TemplateElement>
+      <Element>
+        <Position>1344 1344</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_deco_07/egypt_dlc_03_valley_deco_07.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_07</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>1536 1232</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_deco_06/egypt_dlc_03_valley_deco_06.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>960 1408</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_medium_02/egypt_dlc_03_valley_medium_02.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Hard</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>4</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>448 280</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_large_08/egypt_dlc_03_valley_large_08.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>1400 1120</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_small_02/egypt_dlc_03_valley_small_02.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Hard</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Medium</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>1152 1120</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_village_01/egypt_dlc_03_valley_village_01.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_village_01</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>ThirdParty</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>3</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>3</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Small</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>448 448</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_medium_04/egypt_dlc_03_valley_medium_04.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>384 352</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_large_09/egypt_dlc_03_valley_large_09.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_large_09</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>1472 960</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_deco_05/egypt_dlc_03_valley_deco_05.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_05</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>1472 0</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_deco_08/egypt_dlc_03_valley_deco_08.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_08</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>1472 512</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_small_04/egypt_dlc_03_valley_small_04.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_small_04</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Hard</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>6</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>960 704</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_village_02/egypt_dlc_03_valley_village_02.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_village_02</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Small</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>1280 360</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_medium_03/egypt_dlc_03_valley_medium_03.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_medium_03</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Hard</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>5</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>1184 448</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_large_07/egypt_dlc_03_valley_large_07.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_large_07</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Starter</id>
+            </Type>
+            <Difficulty>
+              <id>Hard</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>7</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>1664 360</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_deco_09/egypt_dlc_03_valley_deco_09.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_09</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Small</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>960 392</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_small_03/egypt_dlc_03_valley_small_03.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_small_03</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>4</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>1144 176</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_large_06/egypt_dlc_03_valley_large_06.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_large_06</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Starter</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>3</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>1152 0</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_deco_11/egypt_dlc_03_valley_deco_11.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_11</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>960 0</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_deco_10/egypt_dlc_03_valley_deco_10.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_10</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>576 0</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_15/egypt_dlc_03_valley_deco_15.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_15</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>272 0</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_pirate_01/egypt_dlc_03_valley_pirate_01.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_pirate_01</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>PirateIsland</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>4</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>4</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>0 0</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_12/egypt_dlc_03_valley_deco_12.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_12</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Medium</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>0 136</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_vilage_03/egypt_dlc_03_valley_vilage_03.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_village_03</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>3</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>0 512</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_large_10/egypt_dlc_03_valley_large_10.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_large_10</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>128 224</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_14/egypt_dlc_03_valley_deco_14.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_14</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>336 576</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_13/egypt_dlc_03_valley_deco_13.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_13</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>960 1120</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_large_04/egypt_dlc_03_valley_large_04.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Hard</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>1</id>
+                </value>
+              </None>
+              <None>3</None>
+              <None>
+                <value>
+                  <id>1</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>960 960</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_large_03/egypt_dlc_03_valley_large_03.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_large_03</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>5</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>960 1216</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_large_05/egypt_dlc_03_valley_large_05.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_large_05</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Starter</id>
+            </Type>
+            <Difficulty>
+              <id>Hard</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>1</id>
+                </value>
+              </None>
+              <None>2</None>
+              <None>
+                <value>
+                  <id>1</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>0 960</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_01/egypt_dlc_03_valley_deco_01.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_01</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Medium</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>0 1408</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_02/egypt_dlc_03_valley_deco_02.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_02</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>448 1408</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_03/egypt_dlc_03_valley_deco_03.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_03</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>576 960</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_04/egypt_dlc_03_valley_deco_04.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_deco_04</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Decoration</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>2</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>448 960</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_large_01/egypt_dlc_03_valley_large_01.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>Starter</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>1</id>
+                </value>
+              </None>
+              <None>6</None>
+              <None>
+                <value>
+                  <id>1</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>272 960</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_large_02/egypt_dlc_03_valley_large_02.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_large_02</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Hard</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>3</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>448 1072</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_medium_01/egypt_dlc_03_valley_medium_01.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_medium_01</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Hard</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>4</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>448 1376</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_small_01/egypt_dlc_03_valley_small_01.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_small_01</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type />
+            <Difficulty>
+              <id>Hard</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>5</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Large</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>216 1600</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_trader_02/egypt_dlc_03_valley_trader_02.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_trader_02</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>ThirdParty</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>3</id>
+                </value>
+              </None>
+              <None>2</None>
+              <None>
+                <value>
+                  <id>3</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <Element>
+        <Position>0 1168</Position>
+        <MapFilePath>data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_sectorproject_01/egypt_dlc_03_valley_sectorproject_01.a7m</MapFilePath>
+        <Rotation90>0</Rotation90>
+        <IslandLabel>egypt_dlc_03_valley_sectorproject_01</IslandLabel>
+        <FertilityGuids>
+        </FertilityGuids>
+        <FertilitiesPerAreaIndex />
+        <RandomizeFertilities>0</RandomizeFertilities>
+        <MineSlotActivation />
+        <RandomIslandConfig>
+          <value>
+            <Type>
+              <id>ThirdParty</id>
+            </Type>
+            <Difficulty>
+              <id>Normal</id>
+            </Difficulty>
+            <TypePerConstructionArea>
+              <None>0</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+              <None>1</None>
+              <None>
+                <value>
+                  <id>0</id>
+                </value>
+              </None>
+            </TypePerConstructionArea>
+          </value>
+        </RandomIslandConfig>
+        <FertilitySetGUIDs />
+        <IslandSize>
+          <value>
+            <id>Continental</id>
+          </value>
+        </IslandSize>
+      </Element>
+    </TemplateElement>
+    <TemplateElement>
+      <ElementType>2</ElementType>
+      <Element>
+        <Position>392 1672</Position>
+      </Element>
+    </TemplateElement>
+  </MapTemplate>
+</Content>

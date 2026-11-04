@@ -36,6 +36,18 @@ class TemplateEntry:
         # This covers cases like Rift enlarged templates that may omit the suffix.
         _in_dlc01_dir = "/dlc01/" in path_norm
 
+        # Pattern 0: the Aegyptus (DLC03) template - one fixed map for every size/type
+        m0 = re.match(r"egypt_province_(.+?)_(\d+)$", self.basename)
+        if m0:
+            self.culture  = "egypt"
+            self.ptype    = m0.group(1)
+            self.num      = m0.group(2)
+            self.diff     = "-"
+            self.enlarged = False
+            self.region   = "Aegyptus"
+            self.valid    = True
+            return
+
         # Pattern 1: pool templates
         # roman_province_{type}_{num}_{difficulty}[_dlc01expanded]
         m = re.match(
@@ -120,7 +132,7 @@ class ImportDialog(tk.Toplevel):
 
         # Region filter
         self._region_var = tk.StringVar(value="All")
-        for label in ("All", "Latium", "Albion"):
+        for label in ("All", "Latium", "Albion", "Aegyptus"):
             tk.Radiobutton(fbar, text=label, variable=self._region_var, value=label, command=self._populate, bg=config.BG_SECTION, fg=config.FG_MAIN, selectcolor=config.BG_HOVER, font=config.FONT_SMALL, activebackground=config.BG_SECTION).pack(side="left", padx=4)
 
         tk.Label(fbar, text="|", bg=config.BG_SECTION, fg=config.FG_MAIN, font=config.FONT_BODY).pack(side="left", padx=(8, 8))

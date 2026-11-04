@@ -1,0 +1,81 @@
+{
+  "Version": "1.0.0",
+  "Anno": 8,
+  "ModID": "tamper-enlarged-dlc03-map-$ModName",
+  "Difficulty": "unchanged",
+  "GameSetup": {
+    "RequiresNewGame": true,
+    "SafeToRemove": false,
+    "Multiplayer": true,
+    "Campaign": false
+  },
+  "Dependencies": {
+    "Require": [],
+    "Optional": [],
+    "LoadAfter": [],
+    "Deprecate": [],
+    "Incompatible": []
+  },
+  "Category": {
+    "Chinese": "Map",
+    "English": "Map",
+    "French": "Map",
+    "German": "Map",
+    "Italian": "Map",
+    "Japanese": "Map",
+    "Korean": "Map",
+    "Polish": "Map",
+    "Russian": "Map",
+    "Spanish": "Map",
+    "Taiwanese": "Map"
+  },
+  "ModName": {
+    "Chinese": "$ModName - enlarged with DLC03 (TAMPER)",
+    "English": "$ModName - enlarged with DLC03 (TAMPER)",
+    "French": "$ModName - enlarged with DLC03 (TAMPER)",
+    "German": "$ModName - enlarged with DLC03 (TAMPER)",
+    "Italian": "$ModName - enlarged with DLC03 (TAMPER)",
+    "Japanese": "$ModName - enlarged with DLC03 (TAMPER)",
+    "Korean": "$ModName - enlarged with DLC03 (TAMPER)",
+    "Polish": "$ModName - enlarged with DLC03 (TAMPER)",
+    "Russian": "$ModName - enlarged with DLC03 (TAMPER)",
+    "Spanish": "$ModName - enlarged with DLC03 (TAMPER)",
+    "Taiwanese": "$ModName - enlarged with DLC03 (TAMPER)"
+  },
+  "Description": {
+    "Chinese": null,
+    "English": "$Description - requires DLC1 'Prophecies of Ashes' and DLC3 'Dawn of Delta' to work correctly",
+    "French": null,
+    "German": null,
+    "Italian": null,
+    "Japanese": null,
+    "Korean": null,
+    "Polish": null,
+    "Russian": null,
+    "Spanish": null,
+    "Taiwanese": null
+  },
+  "KnownIssues":
+  [
+    {
+      "Chinese": null,
+      "English": null,
+      "French": null,
+      "German": null,
+      "Italian": null,
+      "Japanese": null,
+      "Korean": null,
+      "Polish": null,
+      "Russian": null,
+      "Spanish": null,
+      "Taiwanese": null
+    }
+  ],
+  "DLCDependencies": [
+    "PropheciesOfAshes",
+    "DawnofDelta"
+  ],
+  "CreatorName": "TAMPER",
+  "CreatorContact": "",
+  "Image": null
+}

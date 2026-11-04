@@ -34,6 +34,9 @@ import terrain_builder as _terrain
 from xml_io import load_xml, save_xml
 from dialogs import IslandPropertiesDialog, NewMapDialog, AboutDialog, ResizeMapDialog
 import mod_exporter as _mod_exp
+import egypt_data as _egy
+from egypt_model import EgyptTemplate
+from egypt_tab import EgyptTab
 
 
 # ─── Export progress window ─────────────────────────────────────────────────
@@ -579,6 +582,7 @@ class MapEditorApp(tk.Frame):
         self._rda_path_var  = tk.StringVar(value=_settings.get("rda_path", rda_handler.find_rda_console() or ""))
 
         self.region_tabs: Dict[str, RegionTab] = {}
+        self.egypt_tab: Optional[EgyptTab] = None
 
         _apply_ttk_style(root)
         config.load_custom_fonts()
@@ -648,6 +652,14 @@ class MapEditorApp(tk.Frame):
         view_menu.add_command(label="Zoom In",      accelerator="Ctrl++", command=lambda: self._zoom(1))
         view_menu.add_command(label="Zoom Out",     accelerator="Ctrl+-", command=lambda: self._zoom(-1))
         view_menu.add_command(label="Fit to Window",                      command=self._fit_view)
+        view_menu.add_separator()
+        self._image_style_var = tk.StringVar(value=_settings.get("island_image_style", "artwork"))
+        config.ISLAND_IMAGE_STYLE = self._image_style_var.get()
+        # Inline radio items instead of a cascade: Windows draws the cascade arrow natively in black,
+        # which is invisible on the dark menu.
+        view_menu.add_command(label="Island Images:", state="disabled")
+        view_menu.add_radiobutton(label="   Game artwork", variable=self._image_style_var, value="artwork", selectcolor="#ffffff", command=self._on_image_style)
+        view_menu.add_radiobutton(label="   Tile maps (buildable / fertile / river / harbour)", variable=self._image_style_var, value="tiles", selectcolor="#ffffff", command=self._on_image_style)
 
         # Options menu
         options_menu = tk.Menu(mb, tearoff=0, bg=config.BG_SECTION, fg=config.FG_MAIN, activebackground=config.BG_HOVER, activeforeground=config.FG_GOLD)
@@ -774,6 +786,16 @@ class MapEditorApp(tk.Frame):
                 self.notebook.add(tab, text=f"  {region}  ")
             self.region_tabs[region] = tab
 
+        # Aegyptus (DLC03) - only when the data from tools/build_egypt_data.py is bundled.
+        if _egy.available():
+            self.egypt_tab = EgyptTab(self.notebook, app=self)
+            ico_egy = _load_icon(EgyptTab.ICON, 24)
+            self._tab_icons[_egy.REGION] = ico_egy
+            if ico_egy:
+                self.notebook.add(self.egypt_tab, text=f" {_egy.REGION} ", image=ico_egy, compound="left")
+            else:
+                self.notebook.add(self.egypt_tab, text=f"  {_egy.REGION}  ")
+
         self.root.bind("<MouseWheel>", self._on_root_scroll)
 
         # ── Community buttons - overlaid in the notebook tab strip, right-aligned ──
@@ -814,12 +836,23 @@ class MapEditorApp(tk.Frame):
         if tab and tab.canvas_widget:
             tab.canvas_widget._on_scroll_all(event)
 
+    def _all_tabs(self) -> list:
+        return list(self.region_tabs.values()) + ([self.egypt_tab] if self.egypt_tab else [])
+
+    def _is_egypt(self, tab) -> bool:
+        return tab is not None and tab is self.egypt_tab
+
     def refresh_all_canvases(self):
         """Clear image caches and redraw all canvases. Called after island registry finishes loading."""
-        for tab in self.region_tabs.values():
+        for tab in self._all_tabs():
             if tab.canvas_widget:
                 tab.canvas_widget.clear_image_cache()
                 tab.canvas_widget.redraw()
+
+    def _on_image_style(self):
+        config.ISLAND_IMAGE_STYLE = self._image_style_var.get()
+        self._save_settings()
+        self.refresh_all_canvases()
 
     def set_status(self, msg: str):
         self._status_var.set(msg)
@@ -843,7 +876,13 @@ class MapEditorApp(tk.Frame):
 
     def _current_tab(self) -> Optional[RegionTab]:
         name = self.notebook.tab(self.notebook.select(), "text").strip()
+        if self.egypt_tab is not None and name == _egy.REGION:
+            return self.egypt_tab
         return self.region_tabs.get(name)
+
+    def _select_egypt_tab(self) -> None:
+        if self.egypt_tab is not None:
+            self.notebook.select(self.egypt_tab)
 
     def _zoom(self, direction: int):
         tab = self._current_tab()
@@ -878,6 +917,11 @@ class MapEditorApp(tk.Frame):
     def _resize_map(self):
         tab = self._current_tab()
         canvas = tab.canvas_widget if tab else None
+        if self._is_egypt(tab):
+            messagebox.showinfo("Fixed Map Size",
+                                "The Aegyptus map has a fixed size of 2560×2560; its terrain ships with the DLC "
+                                "and cannot be regenerated.", parent=self.root)
+            return
         if canvas is None or canvas.template is None:
             messagebox.showinfo("No Map", "Please open or create a map first.", parent=self.root)
             return
@@ -1024,11 +1068,14 @@ class MapEditorApp(tk.Frame):
         return True
 
     def _save_settings(self):
-        _settings.save({
+        data = _settings.load()
+        data.update({
             "game_path": self._game_path_var.get().strip(),
             "fdb_path":  self._fdb_path_var.get().strip(),
             "rda_path":  self._rda_path_var.get().strip(),
+            "island_image_style": self._image_style_var.get(),
         })
+        _settings.save(data)
 
     def _on_close(self):
         self._save_settings()
@@ -1123,9 +1170,44 @@ class MapEditorApp(tk.Frame):
             return
         tab = self._current_tab()
         region = tab.region if tab else "Latium"
+        if self._xml_is_egyptian(path):
+            region = _egy.REGION
         self._load_xml_file(path, region=region)
 
+    @staticmethod
+    def _xml_is_egyptian(path: str) -> bool:
+        try:
+            with open(path, encoding="utf-8", errors="ignore") as fh:
+                return _egy.PREFIX in fh.read(200_000)
+        except OSError:
+            return False
+
+    def _load_egypt_xml(self, xml_path: str, display_name: str, source_file: Optional[str]) -> bool:
+        if self.egypt_tab is None:
+            messagebox.showerror("Aegyptus Not Available",
+                                 "This is an Aegyptus (DLC03) template, but the Aegyptus data is not bundled "
+                                 "with this build (run tools/build_egypt_data.py).", parent=self.root)
+            return False
+        try:
+            tmpl = EgyptTemplate.load(xml_path)
+        except Exception as exc:
+            messagebox.showerror("Load Error", str(exc), parent=self.root)
+            return False
+        tmpl.source_path = source_file
+        self.egypt_tab.load_template(tmpl)
+        self.egypt_tab.set_template_name(display_name)
+        self._select_egypt_tab()
+        return True
+
     def _load_xml_file(self, path: str, region: str = "Latium"):
+        if region == _egy.REGION:
+            if self._load_egypt_xml(path, os.path.basename(path), path):
+                self._current_file = path
+                self._import_name = ""
+                self._modified = False
+                self._update_title()
+                self.set_status(f"Loaded Aegyptus map: {os.path.basename(path)}")
+            return
         try:
             self.set_status(f"Loading {os.path.basename(path)}…")
             tmpl = load_xml(path, region=region)
@@ -1195,6 +1277,18 @@ class MapEditorApp(tk.Frame):
         """Called by ImportDialog when user confirms a selection."""
         import re
         src_norm = path.replace("\\", "/").lower()
+        if "/egypt/" in src_norm or os.path.basename(src_norm).startswith("egypt_"):
+            try:
+                xml_path = self._cached_decompress(path)
+            except Exception as exc:
+                messagebox.showerror("Import Error (Aegyptus)", str(exc), parent=self.root)
+                return
+            if self._load_egypt_xml(xml_path, os.path.basename(path).replace(".a7tinfo", ""), None):
+                self._current_file = None
+                self._modified = True
+                self._update_title()
+                self.set_status("Imported the Aegyptus map template.")
+            return
         region = "Albion" if "celtic" in src_norm else "Latium"
         other  = "Albion" if region == "Latium" else "Latium"
 
@@ -1272,6 +1366,10 @@ class MapEditorApp(tk.Frame):
         try:
             self.set_status(f"Decompressing {os.path.basename(src)}…")
             xml_path = _fdb.decompress(src, interpreter_path=config.INTERPRETER_PATH)
+            if self._xml_is_egyptian(xml_path):
+                return self._load_egypt_xml(xml_path, os.path.basename(src).replace(".a7tinfo", ""), None)
+            if region == _egy.REGION:
+                region = "Latium"
             tmpl = load_xml(xml_path, region=region)
             # Detect difficulty from the filename (e.g. "…_easy.a7tinfo")
             import re as _re
@@ -1361,6 +1459,16 @@ class MapEditorApp(tk.Frame):
         tmpl = tab.get_template() if tab else None
         if tmpl is None:
             messagebox.showinfo("Nothing to Save", "No map loaded.", parent=self.root)
+            return
+        if self._is_egypt(tab):
+            try:
+                tmpl.save(path)
+                self._current_file = path
+                self._modified = False
+                self._update_title()
+                self.set_status(f"Saved Aegyptus map: {os.path.basename(path)}")
+            except Exception as exc:
+                messagebox.showerror("Save Error", str(exc), parent=self.root)
             return
         if not self._warn_before_export([tmpl]):
             return
@@ -1532,7 +1640,8 @@ class MapEditorApp(tk.Frame):
         if not tmpl:
             messagebox.showinfo("Nothing to Export", "No map loaded.", parent=self.root)
             return
-        if not self._warn_before_export([tmpl]):
+        egypt = self._is_egypt(tab)
+        if not egypt and not self._warn_before_export([tmpl]):
             return
 
         xml_path = filedialog.asksaveasfilename(
@@ -1549,8 +1658,12 @@ class MapEditorApp(tk.Frame):
         try:
             with tempfile.NamedTemporaryFile(suffix=".xml", delete=False) as tmp:
                 tmp_xml = tmp.name
-            self._resolve_and_save_xml(tmpl, tmp_xml)
-            self.set_status(f"Compressing {tmpl.region}…")
+            if egypt:
+                with open(tmp_xml, "w", encoding="utf-8") as fh:
+                    fh.write(tmpl.to_xml_string())
+            else:
+                self._resolve_and_save_xml(tmpl, tmp_xml)
+            self.set_status(f"Compressing {tab.region}…")
             if self._compress_xml(tmp_xml, xml_path):
                 self.set_status(f"Exported: {os.path.basename(xml_path)}")
         except Exception as exc:
@@ -1655,14 +1768,38 @@ class MapEditorApp(tk.Frame):
             return
 
         tmpls = [t for t in (tab.get_template() for tab in self.region_tabs.values()) if t]
-        if not tmpls:
+        egypt_tmpl = self.egypt_tab.get_template() if self.egypt_tab else None
+        if not tmpls and egypt_tmpl is None:
             messagebox.showinfo("Nothing to Export", "No map loaded.", parent=self.root)
             return
 
+        if egypt_tmpl is not None:
+            egy_warn = egypt_tmpl.warnings()
+            if egy_warn and not messagebox.askyesno(
+                    "Aegyptus Map Warnings",
+                    "\n".join("• " + w for w in egy_warn) + "\n\nProceed with export anyway?", parent=self.root):
+                return
+
+        if tmpls and not self._export_checks_latium_albion(tmpls):
+            return
+
+        # Show dialog - collects mod name, description, GUID, and output path
+        dlg = _mod_exp.ModExportDialog(self.root, self, has_regions=bool(tmpls), has_egypt=egypt_tmpl is not None)
+        self.root.wait_window(dlg)
+        if dlg._result is None:
+            return  # user cancelled
+        if not dlg._include_egypt:
+            egypt_tmpl = None
+        if not tmpls and egypt_tmpl is None:
+            return
+
+        self._run_mod_export(dlg, tmpls, egypt_tmpl)
+
+    def _export_checks_latium_albion(self, tmpls) -> bool:
         if not self._require_deployment_ready(tmpls):
-            return
+            return False
         if not self._warn_before_export(tmpls):
-            return
+            return False
         if self._has_foreign_region_islands(tmpls):
             if not messagebox.askyesno(
                 "Foreign-Region Islands",
@@ -1674,7 +1811,7 @@ class MapEditorApp(tk.Frame):
                 "Proceed with export anyway?",
                 parent=self.root,
             ):
-                return
+                return False
 
         # DLC01 enlargement warning - non-enlarged maps won't grow with Continental islands
         if not any(t.is_enlarged for t in tmpls):
@@ -1686,7 +1823,7 @@ class MapEditorApp(tk.Frame):
                 "Proceed with export anyway?",
                 parent=self.root,
             ):
-                return
+                return False
 
         # Enlarged template with no locked islands - base-game file will be empty
         for tmpl in tmpls:
@@ -1699,14 +1836,10 @@ class MapEditorApp(tk.Frame):
                     "Proceed with export anyway?",
                     parent=self.root,
                 ):
-                    return
+                    return False
+        return True
 
-        # Show dialog - collects mod name, description, GUID, and output path
-        dlg = _mod_exp.ModExportDialog(self.root, self)
-        self.root.wait_window(dlg)
-        if dlg._result is None:
-            return  # user cancelled
-
+    def _run_mod_export(self, dlg, tmpls, egypt_tmpl) -> None:
         slug, display_name, description, start_guid, zip_path, install_path, debug_xml, auto_derive = dlg._result
         personal_mode = getattr(dlg, "_personal_mode", False)
 
@@ -1734,6 +1867,7 @@ class MapEditorApp(tk.Frame):
                     debug_xml=debug_xml,
                     auto_derive=auto_derive,
                     progress=_post,
+                    egypt=egypt_tmpl,
                 )
             except Exception as exc:
                 failure.append(exc)

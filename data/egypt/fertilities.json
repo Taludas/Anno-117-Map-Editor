@@ -1,0 +1,299 @@
+{
+ "fertilities": {
+  "2202": {
+   "name": "Fertility Flax",
+   "icon": "data/ui/fhd/base/icon_content/production_goods/icon_3d_flax_goods.png"
+  },
+  "2205": {
+   "name": "Fertility Roman Grapes",
+   "icon": "data/ui/fhd/base/icon_content/production_goods/icon_3d_grapes_goods.png"
+  },
+  "2209": {
+   "name": "Fertility Roman Lavender",
+   "icon": "data/ui/fhd/base/icon_content/production_goods/icon_3d_lavender_goods.png"
+  },
+  "2210": {
+   "name": "Fertility Roman Olives",
+   "icon": "data/ui/fhd/base/icon_content/production_goods/icon_3d_olives_goods.png"
+  },
+  "2212": {
+   "name": "Fertility Celtic Barley",
+   "icon": "data/ui/fhd/base/icon_content/production_goods/icon_3d_barley_goods.png"
+  },
+  "4049": {
+   "name": "Deposit Iron",
+   "icon": "data/ui/fhd/base/icon_content/production_goods/icon_3d_iron_ore_goods.png"
+  },
+  "4053": {
+   "name": "Deposit Roman Minerals",
+   "icon": "data/ui/fhd/base/icon_content/production_goods/icon_3d_minerals_goods.png"
+  },
+  "4063": {
+   "name": "Deposit Celtic Copper",
+   "icon": "data/ui/fhd/base/icon_content/production_goods/icon_3d_copper_ore_goods.png"
+  },
+  "4064": {
+   "name": "Deposit Celtic Tin",
+   "icon": "data/ui/fhd/base/icon_content/production_goods/icon_3d_tin_ore_goods.png"
+  },
+  "4066": {
+   "name": "Deposit Celtic Granite",
+   "icon": "data/ui/fhd/base/icon_content/production_goods/icon_3d_granite_goods.png"
+  },
+  "149818": {
+   "name": "Fertility Egyptian Sesame",
+   "icon": "data/ui/fhd/dlc03/icon_content/production_goods/icon_3d_sesame_goods.png"
+  },
+  "149819": {
+   "name": "Fertility Egyptian Blue Lotus",
+   "icon": "data/ui/fhd/dlc03/icon_content/production_goods/icon_3d_blue_lotus_goods.png"
+  },
+  "149820": {
+   "name": "Fertility Egyptian Hippos",
+   "icon": "data/ui/fhd/dlc03/icon_content/production_goods/icon_3d_hippos_goods.png"
+  },
+  "150477": {
+   "name": "Fertility Egyptian Pomegranate",
+   "icon": "data/ui/fhd/dlc03/icon_content/production_goods/icon_3d_pomegranates_goods.png"
+  },
+  "150506": {
+   "name": "Deposit Egyptian Gold Ore",
+   "icon": "data/ui/fhd/base/icon_content/production_goods/icon_3d_gold_ore_goods.png"
+  }
+ },
+ "pools": {
+  "149800": [
+   2212,
+   2202
+  ],
+  "150502": [
+   2209,
+   2205
+  ],
+  "150503": [
+   4049,
+   4066
+  ],
+  "150504": [
+   4063,
+   149818,
+   2210,
+   4053
+  ],
+  "150505": [
+   149819,
+   149820,
+   150477,
+   4064
+  ],
+  "159841": [
+   4066,
+   4066,
+   2209,
+   2205
+  ],
+  "159842": [
+   2212,
+   2202,
+   2209,
+   2205
+  ],
+  "159843": [
+   2212,
+   2202,
+   4049,
+   4066
+  ],
+  "166385": [
+   149819,
+   149820,
+   150477,
+   4064,
+   150506,
+   150506,
+   150506,
+   150506,
+   150506,
+   150506
+  ]
+ },
+ "sets": {
+  "149806": {
+   "name": "Fertility Set Egyptian 1st Island Easy No Gold",
+   "island_type": "Starter",
+   "entries": [
+    149800,
+    150502,
+    4049,
+    150505,
+    150505,
+    150505
+   ]
+  },
+  "149807": {
+   "name": "Fertility Set Egyptian 2nd Island Easy No Gold",
+   "island_type": "Normal",
+   "entries": [
+    149800,
+    150502,
+    150503,
+    150504,
+    150504,
+    150505
+   ]
+  },
+  "149808": {
+   "name": "Fertility Set Egyptian 3rd Island Easy No Gold",
+   "island_type": "Normal",
+   "entries": [
+    149800,
+    150504,
+    150504,
+    159841,
+    150505,
+    150505
+   ]
+  },
+  "149821": {
+   "name": "Fertility Set Egyptian 1st Island Medium",
+   "island_type": "Starter",
+   "entries": [
+    149800,
+    150502,
+    4049,
+    150505,
+    150505
+   ]
+  },
+  "149822": {
+   "name": "Fertility Set Egyptian 2nd Island Medium No Gold",
+   "island_type": "Normal",
+   "entries": [
+    159842,
+    150503,
+    150504,
+    150504,
+    150505
+   ]
+  },
+  "149823": {
+   "name": "Fertility Set Egyptian 3rd Island Medium No Gold",
+   "island_type": "Normal",
+   "entries": [
+    149800,
+    159841,
+    150504,
+    150504,
+    150505
+   ]
+  },
+  "149824": {
+   "name": "Fertility Set Egyptian 1st Island Hard",
+   "island_type": "Starter",
+   "entries": [
+    149800,
+    150502,
+    150505,
+    150505
+   ]
+  },
+  "149825": {
+   "name": "Fertility Set Egyptian 2nd Island Hard No Gold",
+   "island_type": "Normal",
+   "entries": [
+    159842,
+    150503,
+    150504,
+    150505
+   ]
+  },
+  "149826": {
+   "name": "Fertility Set Egyptian 3rd Island Hard No Gold",
+   "island_type": "Normal",
+   "entries": [
+    159843,
+    150504,
+    150504,
+    150505
+   ]
+  },
+  "166383": {
+   "name": "Fertility Set Egyptian 2nd Island Easy Gold",
+   "island_type": "Normal",
+   "entries": [
+    149800,
+    150502,
+    150503,
+    150504,
+    150504,
+    166385
+   ]
+  },
+  "166384": {
+   "name": "Fertility Set Egyptian 3rd Island Easy Gold",
+   "island_type": "Normal",
+   "entries": [
+    149800,
+    150504,
+    150504,
+    159841,
+    150505,
+    150506
+   ]
+  },
+  "166386": {
+   "name": "Fertility Set Egyptian 2nd Island Medium Gold",
+   "island_type": "Normal",
+   "entries": [
+    159842,
+    150503,
+    150504,
+    150504,
+    166385
+   ]
+  },
+  "166387": {
+   "name": "Fertility Set Egyptian 3rd Island Medium Gold",
+   "island_type": "Normal",
+   "entries": [
+    149800,
+    159841,
+    150504,
+    150504,
+    166385
+   ]
+  },
+  "166392": {
+   "name": "Fertility Set Egyptian 2nd Island Hard Gold",
+   "island_type": "Normal",
+   "entries": [
+    159842,
+    150503,
+    150504,
+    166385
+   ]
+  },
+  "166393": {
+   "name": "Fertility Set Egyptian 3rd Island Hard Gold",
+   "island_type": "Normal",
+   "entries": [
+    159843,
+    150504,
+    150504,
+    166385
+   ]
+  },
+  "166396": {
+   "name": "Fertility Set Egyptian 1st Island Easy Gold",
+   "island_type": "Starter",
+   "entries": [
+    149800,
+    150502,
+    4049,
+    150505,
+    150505,
+    166385
+   ]
+  }
+ }
+}

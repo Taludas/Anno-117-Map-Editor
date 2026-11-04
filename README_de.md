@@ -32,6 +32,7 @@
     - [6.10 Inseleigenschaften-Dialog](#610-inseleigenschaften-dialog)
     - [6.11 Validierung und Limits](#611-validierung-und-limits)
     - [6.12 Platzierungshilfen (Spiegelmodus, Kollisionen ignorieren, Formation sperren)](#612-platzierungshilfen-spiegelmodus-kollisionen-ignorieren-formation-sperren)
+    - [6.13 Aegyptus (DLC03)](#613-aegyptus-dlc03)
   - [7. Speichern und Exportieren](#7-speichern-und-exportieren)
     - [7.1 XML speichern / laden](#71-xml-speichern--laden)
     - [7.2 Als .a7tinfo exportieren](#72-als-a7tinfo-exportieren)
@@ -64,6 +65,7 @@
 - Bestimmte Spielinseln als feste Inseln mit Rotation, Inselbeschriftung und individuell zugewiesenen Fruchtbarkeiten einbinden.
 - Schiffsstartpunkte setzen.
 - Den spielbaren Bereich und - bei DLC01-aktivierten Karten - den erweiterten spielbaren Bereich konfigurieren.
+- Die feste Aegyptus-Karte aus DLC03 *Dawn of the Delta* anpassen: Fruchtbarkeiten, Inselvarianten und ganze Inselkomplexe.
 - Das Ergebnis als fertig installierbare Mod-`.zip`-Datei für alle drei Schwierigkeitsvarianten exportieren oder - für erfahrenere Modder - in .a7tinfo- oder XML-Dateien.
 
 TAMPER ist eine eigenständige GUI-Anwendung (Tkinter) und verändert keine Spieldateien direkt. Ubisoft's proprietäres Binärformat wird über das Open-Source-Tool **FileDBReader** gelesen und geschrieben.
@@ -222,6 +224,15 @@ Importiert direkt eine beliebige `.a7tinfo`-Binärdatei. Dekomprimiert sie per F
 - Spielbarer Bereich: Als Diamant-Umriss dargestellt. Bei erweiterten Karten werden sowohl der volle PA als auch der Initial-PA angezeigt.
 
 **Legende und Statistiken:** Panele in den Ecken zeigen Tastatur-/Maussteuerung, Inselgrößen- und Typabkürzungen sowie Inselzahlen pro Typ für die aktuelle Vorlage.
+
+**Inselbilder:** `Ansicht → Inselbilder` schaltet alle Inseln in allen Tabs zwischen zwei Darstellungen um:
+
+| Darstellung | Zeigt |
+|---|---|
+| Spielgrafik (Standard) | Die Inselbilder des Spiels. |
+| Kachelkarten | Das tatsächliche Kachelraster jeder Insel mit einem Pixel pro Kachel und einer Farbe pro Kacheltyp: bebaubares Land, fruchtbarer Boden, Uferbereich, Fluss, Sumpf, Hafen und unbebaubares Gelände. Nützlich, um einzuschätzen, wie viel nutzbares Land eine Insel wirklich hat. |
+
+Die Auswahl wird zwischen Sitzungen gespeichert. „Inselbilder anzeigen" in der Seitenleiste eines Tabs abzuwählen, schaltet diesen Tab weiterhin auf einfache farbige Formen um.
 
 ---
 
@@ -383,6 +394,44 @@ Der Bereich **Ansicht** in der Seitenleiste enthält drei Schalter, die symmetri
 
 ---
 
+### 6.13 Aegyptus (DLC03)
+
+DLC03 *Dawn of the Delta* bringt die Session Aegyptus. Anders als Latium und Albion wird sie nicht aus zufälligen Inselplätzen erzeugt: Sie ist **eine feste Karte** (2560 × 2560) des Nildeltas, und jede Insel landet immer an derselben Stelle, unabhängig von Kartentyp oder Seed. Der Tab **Aegyptus** bearbeitet diese Karte.
+
+**Erste Schritte:** In der Seitenleiste auf **Load Vanilla Aegyptus Map** klicken (die Vanilla-Vorlage ist im Editor enthalten), eine gespeicherte Aegyptus-XML / `.a7tinfo` öffnen oder sie über `Datei → Import aus Spiel…` (Region *Aegyptus*) wählen. Aegyptus-Dateien werden automatisch erkannt und öffnen sich immer in diesem Tab.
+
+**Aufbau der Karte:** Das Delta besteht aus vier **Komplexen** (Quadranten: Nord, Ost, Süd, West) mit je etwa zehn Inseln. Die spielbaren Gebiete der Inseln greifen wie ein Puzzle ineinander, und ihre Grenzen verlaufen gerade quer durch das Land statt entlang der Küste - das Land jeder Insel berührt das ihrer Nachbarn.
+
+**Insel bearbeiten** (Doppelklick, **Edit Island…** oder Rechtsklick → Edit):
+
+| Einstellung | Wirkung |
+|---|---|
+| Zufällige Fruchtbarkeiten | Das Spiel würfelt das ägyptische Fruchtbarkeits-Set der Insel, wie im Vanilla-Spiel. |
+| Feste Fruchtbarkeiten | Genau die angehakten Fruchtbarkeiten, in Klick-Reihenfolge, auf jedem Baugebiet der Insel. Die ägyptischen Fruchtbarkeiten (Sesam, Blauer Lotus, Nilpferde, Granatapfel, Golderz, …) stehen oben. |
+| Fruchtbarkeitsgruppe | *Normal (mit Gold)* oder *Hard (ohne Gold)* - bestimmt, welches ägyptische Set das Spiel bei zufälligen Fruchtbarkeiten würfelt. |
+| Inselvariante | *Spiel entscheidet nach Kartengröße* (Vanilla: auf mittleren/kleinen Karten tauscht das Spiel zufällig einige Inseln gegen kleinere Versionen), *Immer die volle Insel* oder *Immer die verkleinerte Insel*. Auch über Rechtsklick → Island variant. |
+
+Inseln mit festen Fruchtbarkeiten zeigen deren Symbole auf der Karte; verkleinerte Inseln sind mit ↓ markiert, Startinseln mit ★.
+
+**Komplexe:** Einen Komplex über seine **Select**-Schaltfläche oder per Rechtsklick auf eine seiner Inseln auswählen. **Entfernen / Wiederherstellen:** Schaltfläche **Remove**, Entf-Taste oder Kontextmenü. Ein entfernter Komplex hinterlässt offenes Meer; **Restore** setzt ihn an seine ursprüngliche Stelle zurück (ungedreht).
+
+**Verschieben und Drehen (experimentell):** Weil die Inselgrenzen durch das Land schneiden, reißt jedes Verschieben oder Drehen die Landschaft im Spiel auseinander - gerade Klippen und Lücken, Überlappungen, abrupt endende Flüsse, eventuell unbrauchbare NPCs oder Startpositionen. Deshalb ist es gesperrt. **Unlock moving / rotating** anzuhaken zeigt diese Warnung und fragt nach Bestätigung. Danach:
+- Eine Insel **ziehen**, um sie allein zu verschieben; **Strg+Ziehen** (oder *Drag whole complexes* anhaken) verschiebt ihren ganzen Komplex.
+- Die ausgewählte Insel mit `.` / `,`, **Strg+R** / **Umschalt+Strg+R** oder über das Kontextmenü um 90° **drehen**.
+- Verschieben und Drehen werden blockiert, solange sich das Gebiet der Insel mit dem einer anderen überlappen würde (und Komplexe sich überlappen), außer *Ignore collisions* ist angehakt - was für fast jede Änderung innerhalb des Deltas nötig ist.
+
+Eine gespeicherte Kopie behalten und jede solche Karte vor einer Veröffentlichung im Spiel testen.
+
+**Schiffsstartpunkt:** Den Anker ziehen, um ihn zu verschieben.
+
+**Ansichten:** Mit „Inselbilder anzeigen" zeigt die Karte die Spielgrafik des Deltas (oder die Kachelkarten, siehe 6.3), und das Gebiet jeder Insel wird in denselben Randfarben umrandet, die Latium/Albion mit Bildern verwenden (normal, Startinsel, Drittpartei für Dörfer / Händler / Sektorprojekt, Pirat). Ohne sie wird das Land jeder Insel als **Ausschnitt** im Stil der Platzhalterinseln der anderen Tabs gezeigt, beschriftet mit L, M, S, 3RD (Dörfer / Händler / Sektorprojekt) oder RAIDER und umrandet in deren Randfarben ohne Bilder: Türkis für normale Inseln, Grün für Startinseln (gefüllt wie große Inseln), Violett für Drittparteien und Rot für den Piraten. Dekorationen bleiben grau und ohne Umrandung. Die Nilarme bleiben frei, damit das Delta erkennbar bleibt. Startinseln sind in beiden Ansichten mit ★ markiert.
+
+**Warnungen:** Ein Kasten unten links auf der Karte warnt, wenn ein Komplex außerhalb des Vanilla-Landbereichs liegt, wenn Inseln einzeln verschoben oder gedreht wurden, wenn Startinseln fehlen und wenn ein entfernter Komplex NPC-Inseln (Dörfer, Händler, Pirat) mitnimmt.
+
+Fruchtbarkeiten, Inselvarianten sowie das Entfernen/Verschieben von Inseln wurden im Spiel geprüft. Das Drehen von Inseln, Komplexe außerhalb des spielbaren Bereichs und das Entfernen von Komplexen mit NPC-Inseln noch nicht - vor einer Veröffentlichung testen.
+
+---
+
 ## 7. Speichern und Exportieren
 
 ### 7.1 XML speichern / laden
@@ -417,6 +466,7 @@ Der Regionsname (z. B. „Latium") wird standardmäßig oben links in das Bild e
 - `assets.xml` mit vollständigen `MapTemplate`-Asset-Definitionen inkl. Horizont-Inseln und DLC-Einstellungen.
 - `modinfo.json` mit Mod-Name, Beschreibung, GUID-Bereich und Abhängigkeitsinformationen.
 - Locale-XML-Dateien für alle 12 unterstützten Sprachen (Name und Beschreibung werden auf Englisch vorausgefüllt; für andere Sprachen eigene Übersetzungstools verwenden).
+- Wenn eine Aegyptus-Karte geladen und „Include the Aegyptus map (DLC03)" angehakt ist: die Aegyptus-`.a7tinfo` mit dem Terrain des DLCs, ein `MapTemplate`, das die Karte der Aegyptus-Session ersetzt, solange die Mod aktiv ist, und die DLC3-Abhängigkeit in `modinfo.json`. Aegyptus lässt sich auch allein exportieren, ohne Latium/Albion.
 
 **Dialog-Optionen:**
 
@@ -424,7 +474,8 @@ Der Regionsname (z. B. „Latium") wird standardmäßig oben links in das Bild e
 |---|---|
 | Mod-Name | Kleinbuchstaben, nur Bindestriche, keine Unterstriche. Wird als Dateiname und Mod-ID verwendet. |
 | Beschreibung | Englische Beschreibung für den Mod-Manager. |
-| Start-GUID | Die erste GUID im Bereich. Sieben aufeinanderfolgende GUIDs werden reserviert. |
+| Start-GUID | Die erste GUID im Bereich. Acht aufeinanderfolgende GUIDs werden reserviert (die letzte für die Aegyptus-Karte). |
+| Include the Aegyptus map | Nur sichtbar, wenn eine Aegyptus-Karte geladen ist. |
 | Persönlicher GUID-Bereich | Ein privater Testbereich (2001001000–2001009999). Exporte in diesem Bereich werden direkt installiert; kein teilbares Zip wird erstellt. |
 | Eigener reservierter Bereich | Gib einen community-registrierten GUID-Bereich für die öffentliche Veröffentlichung ein. |
 | Schwierigkeiten automatisch ableiten | Wenn aktiviert, werden Mittel- und Schwer-Varianten algorithmisch durch Skalierung der Inselgrößen generiert, anstatt die Quellvorlage identisch zu kopieren (siehe unten). |

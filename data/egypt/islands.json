@@ -1,0 +1,1819 @@
+{
+ "egypt_dlc_03_valley_deco_01": {
+  "map_size": [
+   320,
+   320
+  ],
+  "active_rect": [
+   0,
+   0,
+   288,
+   216
+  ],
+  "grid": [
+   40,
+   40
+  ],
+  "grid_bits": "/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_01/egypt_dlc_03_valley_deco_01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_01.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_01_layer01": {
+  "map_size": [
+   320,
+   320
+  ],
+  "active_rect": [
+   0,
+   0,
+   288,
+   216
+  ],
+  "grid": [
+   40,
+   40
+  ],
+  "grid_bits": "/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAA/////w8AAAD/////DwAAAP////8PAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_01",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_01/egypt_dlc_03_valley_deco_01_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_01_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_02": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   0,
+   384,
+   456,
+   512
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////////wH/////////Af////////8B/////////wH/////////Af////////8B/////////wH/////////Af////////8B/////////wH/////////Af////////8B/////////wH/////////Af////////8B/////////wE=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_02/egypt_dlc_03_valley_deco_02.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_02.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_02_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   0,
+   384,
+   456,
+   512
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////////wH/////////Af////////8B/////////wH/////////Af////////8B/////////wH/////////Af////////8B/////////wH/////////Af////////8B/////////wH/////////Af////////8B/////////wE=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_02",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_02/egypt_dlc_03_valley_deco_02_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_02_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_03": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   8,
+   344,
+   512,
+   512
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+//////8HAP7//////wcA/v//////BwD+//////8PAP7//////x8A/v//////HwD+//////8/AP7//////z8A/v//////fwD+//////9/AP7//////38A/v///////wD+////////AP7///////8B/v///////wH+//////////7//////////v/////////+//////////7//////////v////////8=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_03/egypt_dlc_03_valley_deco_03.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_03.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_03_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   8,
+   344,
+   512,
+   512
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+//////8HAP7//////wcA/v//////BwD+//////8PAP7//////x8A/v//////HwD+//////8/AP7//////z8A/v//////fwD+//////9/AP7//////38A/v///////wD+////////AP7///////8B/v///////wH+//////////7//////////v/////////+//////////7//////////v////////8=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_03",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_03/egypt_dlc_03_valley_deco_03_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_03_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_04": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   144,
+   0,
+   384,
+   368
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "AAD8////AAAAAPz///8AAAAA+P///wAAAADw////AAAAAOD///8AAAAAwP///wAAAACA////AAAAAAD///8AAAAAAP7//wAAAAAA/P//AAAAAAD8//8AAAAAAPj//wAAAAAA4P//AAAAAADA//8AAAAAAMD//wAAAAAAgP//AAAAAAAA//8AAAAAAAD+/wAAAAAAAPz/AAAAAAAA/P8AAAAAAAD8/wAAAAAAAPz/AAAAAAAA/P8AAAAAAAD8/wAAAAAAAPz/AAAAAAAA+P8AAAAAAADw/wAAAAAAAPD/AAAAAAAA4P8AAAAAAADg/wAAAAAAAOD/AAAAAAAAwP8AAAAAAADA/wAAAAAAAMD/AAAAAAAAwP8AAAAAAADA/wAAAAAAAMD/AAAAAAAAwP8AAAAAAADA/wAAAAAAAID/AAAAAAAAAP4AAAAAAAAA/AAAAAAAAADwAAAAAAAAAOAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_04/egypt_dlc_03_valley_deco_04.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_04.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_04_layer01": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   144,
+   0,
+   384,
+   368
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "AAD8////AAAAAPz///8AAAAA+P///wAAAADw////AAAAAOD///8AAAAAwP///wAAAACA////AAAAAAD///8AAAAAAP7//wAAAAAA/P//AAAAAAD8//8AAAAAAPj//wAAAAAA4P//AAAAAADA//8AAAAAAMD//wAAAAAAgP//AAAAAAAA//8AAAAAAAD+/wAAAAAAAPz/AAAAAAAA/P8AAAAAAAD8/wAAAAAAAPz/AAAAAAAA/P8AAAAAAAD8/wAAAAAAAPz/AAAAAAAA+P8AAAAAAADw/wAAAAAAAPD/AAAAAAAA4P8AAAAAAADg/wAAAAAAAOD/AAAAAAAAwP8AAAAAAADA/wAAAAAAAMD/AAAAAAAAwP8AAAAAAADA/wAAAAAAAMD/AAAAAAAAwP8AAAAAAADA/wAAAAAAAID/AAAAAAAAAP4AAAAAAAAA/AAAAAAAAADwAAAAAAAAAOAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_04",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_deco_04/egypt_dlc_03_valley_deco_04_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_04_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_05": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   56,
+   0,
+   448,
+   336
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "gP///////wCA////////AID///////8AgP///////wCA////////AID///////8AgP///////wCA////////AID///////8AgP///////wCA////////AID///////8AgP///////wCA////////AID///////8AgP///////wCA////////AID///////8AgP///////wCA////////AID///////8AgP///////wCA////////AID///////8AgP///////wCA////////AID///////8AgP///////wAA////////AAD8//////8AAPj//////wAA8P//////AADg//////8AAAD//////wAAAP//////AAAA/v////8AAAD+/////wAAAOD/////AAAAAP7///8AAAAA+P///wAAAADg////AAAAAAD+//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_deco_05/egypt_dlc_03_valley_deco_05.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_05.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_06": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   72,
+   24,
+   384,
+   352
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAAAAAAAA/gEAAAAAAAD+BwAAAAAAAP4fAAAAAAAA/v8BAAAAAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAPz/////AAAA/P////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_deco_06/egypt_dlc_03_valley_deco_06.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_06.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_06_layer01": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   72,
+   24,
+   384,
+   352
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAAAAAAAA/gEAAAAAAAD+BwAAAAAAAP4fAAAAAAAA/v8BAAAAAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAP7/////AAAA/v////8AAAD+/////wAAAPz/////AAAA/P////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_06",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_deco_06/egypt_dlc_03_valley_deco_06_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_06_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_07": {
+  "map_size": [
+   576,
+   576
+  ],
+  "active_rect": [
+   24,
+   240,
+   576,
+   576
+  ],
+  "grid": [
+   72,
+   72
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_deco_07/egypt_dlc_03_valley_deco_07.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_07.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_07_layer01": {
+  "map_size": [
+   576,
+   576
+  ],
+  "active_rect": [
+   24,
+   240,
+   576,
+   576
+  ],
+  "grid": [
+   72,
+   72
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAAAAAAAPz/////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA+P//////////AAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_07",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_deco_07/egypt_dlc_03_valley_deco_07_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_07_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_08": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   40,
+   0,
+   448,
+   376
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AOD///////8A4P///////wDg////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_deco_08/egypt_dlc_03_valley_deco_08.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_08.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_09": {
+  "map_size": [
+   256,
+   256
+  ],
+  "active_rect": [
+   40,
+   16,
+   256,
+   200
+  ],
+  "grid": [
+   32,
+   32
+  ],
+  "grid_bits": "AAAAAAAAAADg////4P///+D////g////4P///+D////g////4P///+D////g////4P///+D////g////4P///+D////g////4P///+D////g////4P///+D////g////4P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_deco_09/egypt_dlc_03_valley_deco_09.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_09.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_09_layer01": {
+  "map_size": [
+   256,
+   256
+  ],
+  "active_rect": [
+   40,
+   16,
+   256,
+   200
+  ],
+  "grid": [
+   32,
+   32
+  ],
+  "grid_bits": "AAAAAAAAAADg////4P///+D////g////4P///+D////g////4P///+D////g////4P///+D////g////4P///+D////g////4P///+D////g////4P///+D////g////4P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_09",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_deco_09/egypt_dlc_03_valley_deco_09_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_09_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_10": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   0,
+   0,
+   208,
+   448
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD+//8BAAAAAID//wEAAAAAAPD/AQAAAAAAgP8BAAAAAAAA/AEAAAAAAADwAQAAAAAAAAABAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_deco_10/egypt_dlc_03_valley_deco_10.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_10.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_10_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   0,
+   0,
+   208,
+   448
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD+//8BAAAAAID//wEAAAAAAPD/AQAAAAAAgP8BAAAAAAAA/AEAAAAAAADwAQAAAAAAAAABAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_10",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_deco_10/egypt_dlc_03_valley_deco_10_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_10_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_11": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   16,
+   0,
+   360,
+   192
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_deco_11/egypt_dlc_03_valley_deco_11.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_11.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_11_layer01": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   16,
+   0,
+   360,
+   192
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////HwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_11",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_deco_11/egypt_dlc_03_valley_deco_11_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_11_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_12": {
+  "map_size": [
+   320,
+   320
+  ],
+  "active_rect": [
+   0,
+   0,
+   296,
+   280
+  ],
+  "grid": [
+   40,
+   40
+  ],
+  "grid_bits": "/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP7///8fAAAA+P///x8AAADg////HwAAAID///8fAAAAAP7//x8AAAAA+P//HwAAAADw//8fAAAAAOD//x8AAAAAgP//HwAAAAAA//8fAAAAAAD8/x8AAAAAAPj/HwAAAAAA8P8fAAAAAADg/x8AAAAAAAD/HwAAAAAAAIAfAAAAAAAAgB8AAAAAAACAHwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_12/egypt_dlc_03_valley_deco_12.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_12.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_12_layer01": {
+  "map_size": [
+   320,
+   320
+  ],
+  "active_rect": [
+   0,
+   0,
+   296,
+   280
+  ],
+  "grid": [
+   40,
+   40
+  ],
+  "grid_bits": "/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP7///8fAAAA+P///x8AAADg////HwAAAID///8fAAAAAP7//x8AAAAA+P//HwAAAADw//8fAAAAAOD//x8AAAAAgP//HwAAAAAA//8fAAAAAAD8/x8AAAAAAPj/HwAAAAAA8P8fAAAAAADg/x8AAAAAAAD/HwAAAAAAAIAfAAAAAAAAgB8AAAAAAACAHwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_12",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_12/egypt_dlc_03_valley_deco_12_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_12_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_13": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   16,
+   160,
+   360,
+   384
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPABAAAAAAAA+AcAAAAAAAD4HwAAAAAAAPw/AAAAAAAA/H8AAAAAAAD8/wMAAAAAAPz/DwAAAAAA/P9/AAAAAAD8//8BAAAAAPz//wcAAAAA+P//HwAAAAD4//8/AAAAAPD//38AAAAA8P///wEAAADg////AwAAAMD///8HAAAAwP///x8AAACA////PwAAAID/////AAAAAP////8AAAAA/////wEAAAD+////AwAAAP7///8DAAAA/P///wcAAAD8////DwAAAPj///8PAAAA+P///x8AAADw////HwAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_13/egypt_dlc_03_valley_deco_13.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_13.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_13_layer01": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   16,
+   160,
+   360,
+   384
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPABAAAAAAAA+AcAAAAAAAD4HwAAAAAAAPw/AAAAAAAA/H8AAAAAAAD8/wMAAAAAAPz/DwAAAAAA/P9/AAAAAAD8//8BAAAAAPz//wcAAAAA+P//HwAAAAD4//8/AAAAAPD//38AAAAA8P///wEAAADg////AwAAAMD///8HAAAAwP///x8AAACA////PwAAAID/////AAAAAP////8AAAAA/////wEAAAD+////AwAAAP7///8DAAAA/P///wcAAAD8////DwAAAPj///8PAAAA+P///x8AAADw////HwAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_13",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_13/egypt_dlc_03_valley_deco_13_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_13_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_14": {
+  "map_size": [
+   576,
+   576
+  ],
+  "active_rect": [
+   24,
+   24,
+   328,
+   544
+  ],
+  "grid": [
+   72,
+   72
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+AAAAAAAAAAAAAAA+H8AAAAAAAAAAAAA+H8AAAAAAAAAAAAA+H8AAAAAAAAAAAAA+P////8AAAAAAAAA+P////8BAAAAAAAA+P////8BAAAAAAAAwP////8BAAAAAAAAAP////8BAAAAAAAAAP////8BAAAAAAAAAP////8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAPz///8BAAAAAAAAAPj///8BAAAAAAAAAPj///8BAAAAAAAAAPD///8BAAAAAAAAAOD///8BAAAAAAAAAMD///8BAAAAAAAAAMD///8BAAAAAAAAAID///8BAAAAAAAAAAD///8BAAAAAAAAAAD///8BAAAAAAAAAAD///8BAAAAAAAAAAD+//8BAAAAAAAAAAD+//8BAAAAAAAAAAD8//8BAAAAAAAAAAD4//8BAAAAAAAAAAD4//8BAAAAAAAAAADw//8BAAAAAAAAAADg//8BAAAAAAAAAADg//8BAAAAAAAAAADg//8BAAAAAAAAAADg//8BAAAAAAAAAADg//8BAAAAAAAAAADg//8BAAAAAAAAAADA//8BAAAAAAAAAADA//8BAAAAAAAAAACA//8BAAAAAAAAAACA//8BAAAAAAAAAAAA//8BAAAAAAAAAAAA/v8BAAAAAAAAAAAA/v8BAAAAAAAAAAAA/P8BAAAAAAAAAAAA/P8BAAAAAAAAAAAA/P8BAAAAAAAAAAAA+P8BAAAAAAAAAAAA8P8BAAAAAAAAAAAA8P8BAAAAAAAAAAAA4P8BAAAAAAAAAAAAwP8BAAAAAAAAAAAAwP8BAAAAAAAAAAAAgP8BAAAAAAAAAAAAAP8BAAAAAAAAAAAAAP8BAAAAAAAAAAAAAPgBAAAAAAAAAAAAAOABAAAAAAAAAAAAAIABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_14/egypt_dlc_03_valley_deco_14.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_14.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_14_layer01": {
+  "map_size": [
+   576,
+   576
+  ],
+  "active_rect": [
+   24,
+   24,
+   328,
+   544
+  ],
+  "grid": [
+   72,
+   72
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+AAAAAAAAAAAAAAA+H8AAAAAAAAAAAAA+H8AAAAAAAAAAAAA+H8AAAAAAAAAAAAA+P////8AAAAAAAAA+P////8BAAAAAAAA+P////8BAAAAAAAAwP////8BAAAAAAAAAP////8BAAAAAAAAAP////8BAAAAAAAAAP////8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAP7///8BAAAAAAAAAPz///8BAAAAAAAAAPj///8BAAAAAAAAAPj///8BAAAAAAAAAPD///8BAAAAAAAAAOD///8BAAAAAAAAAMD///8BAAAAAAAAAMD///8BAAAAAAAAAID///8BAAAAAAAAAAD///8BAAAAAAAAAAD///8BAAAAAAAAAAD///8BAAAAAAAAAAD+//8BAAAAAAAAAAD+//8BAAAAAAAAAAD8//8BAAAAAAAAAAD4//8BAAAAAAAAAAD4//8BAAAAAAAAAADw//8BAAAAAAAAAADg//8BAAAAAAAAAADg//8BAAAAAAAAAADg//8BAAAAAAAAAADg//8BAAAAAAAAAADg//8BAAAAAAAAAADg//8BAAAAAAAAAADA//8BAAAAAAAAAADA//8BAAAAAAAAAACA//8BAAAAAAAAAACA//8BAAAAAAAAAAAA//8BAAAAAAAAAAAA/v8BAAAAAAAAAAAA/v8BAAAAAAAAAAAA/P8BAAAAAAAAAAAA/P8BAAAAAAAAAAAA/P8BAAAAAAAAAAAA+P8BAAAAAAAAAAAA8P8BAAAAAAAAAAAA8P8BAAAAAAAAAAAA4P8BAAAAAAAAAAAAwP8BAAAAAAAAAAAAwP8BAAAAAAAAAAAAgP8BAAAAAAAAAAAAAP8BAAAAAAAAAAAAAP8BAAAAAAAAAAAAAPgBAAAAAAAAAAAAAOABAAAAAAAAAAAAAIABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_14",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_14/egypt_dlc_03_valley_deco_14_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_14_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_deco_15": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   112,
+   0,
+   384,
+   368
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "AMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAAPj///8AAAAAAP///wAAAAAA4P//AAAAAACA//8AAAAAAAD4/wAAAAAAAOD/AAAAAAAAgP8AAAAAAAAA/AAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Decoration",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_15/egypt_dlc_03_valley_deco_15.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_15.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_deco_15_layer01": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   112,
+   0,
+   384,
+   368
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "AMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAwP////8AAADA/////wAAAMD/////AAAAAPj///8AAAAAAP///wAAAAAA4P//AAAAAACA//8AAAAAAAD4/wAAAAAAAOD/AAAAAAAAgP8AAAAAAAAA/AAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Decoration",
+  "layer_of": "egypt_dlc_03_valley_deco_15",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_deco_15/egypt_dlc_03_valley_deco_15_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_deco_15_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_large_01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   8,
+   0,
+   432,
+   304
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "/v///wMAAAD+////AwAAAPz///8HAAAA/P///w8AAAD4////HwAAAPj///8/AAAA8P///38AAADw/////wAAAOD/////AQAAwP////8DAACA/////wMAAID/////BwAAAP////8fAAAA/v///z8AAAAA////PwAAAAD+//9/AAAAAPz///8AAAAA4P///wEAAADA////AwAAAID///8DAAAAAP///wMAAAAA/P//AwAAAAD4//8DAAAAAPD//wMAAAAA4P//AwAAAADA//8HAAAAAMD//w8AAAAAgP//DwAAAAAA//8fAAAAAAD+/x8AAAAAAPD/HwAAAAAAwP8/AAAAAAAA/z8AAAAAAADgPwAAAAAAAIA/AAAAAAAAAD8AAAAAAAAAPAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Large",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_large_01/egypt_dlc_03_valley_large_01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_01.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_large_01_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   8,
+   0,
+   432,
+   304
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "/v///wMAAAD+////AwAAAPz///8HAAAA/P///w8AAAD4////HwAAAPj///8/AAAA8P///38AAADw/////wAAAOD/////AQAAwP////8DAACA/////wMAAID/////BwAAAP////8fAAAA/v///z8AAAAA////PwAAAAD+//9/AAAAAPz///8AAAAA4P///wEAAADA////AwAAAID///8DAAAAAP///wMAAAAA/P//AwAAAAD4//8DAAAAAPD//wMAAAAA4P//AwAAAADA//8HAAAAAMD//w8AAAAAgP//DwAAAAAA//8fAAAAAAD+/x8AAAAAAPD/HwAAAAAAwP8/AAAAAAAA/z8AAAAAAADgPwAAAAAAAIA/AAAAAAAAAD8AAAAAAAAAPAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Large",
+  "layer_of": "egypt_dlc_03_valley_large_01",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_large_01/egypt_dlc_03_valley_large_01_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_01_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_large_02": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   16,
+   0,
+   304,
+   408
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "/P9/AAAAAAD8/38AAAAAAPz//wAAAAAA/P//AAAAAAD8//8BAAAAAPz//wEAAAAA/P//AwAAAAD8//8DAAAAAPz//wcAAAAA/P//DwAAAAD8//8fAAAAAPz//x8AAAAA/P//PwAAAAD8//9/AAAAAPz///8AAAAA/P///wAAAAD8////AAAAAPz///8AAAAA/P///wAAAAD8////AAAAAPz///8AAAAA/P///wAAAAD8////AQAAAPz///8BAAAA/P///wEAAAD8////AQAAAPz///8DAAAA8P///wMAAADg////BwAAAMD///8HAAAAgP///w8AAAAA////DwAAAAD+//8fAAAAAPz//x8AAAAA/P//HwAAAAD4//8fAAAAAPD//z8AAAAA4P//PwAAAADA//8/AAAAAID//z8AAAAAAP//PwAAAAAA/v8/AAAAAAD8/x8AAAAAAPz/HwAAAAAA+P8fAAAAAADw/w8AAAAAAOD/DwAAAAAA4P8HAAAAAADA/wcAAAAAAID/BwAAAAAAgP8HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Large",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_large_02/egypt_dlc_03_valley_large_02.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_02.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_large_02_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   16,
+   0,
+   304,
+   408
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "/P9/AAAAAAD8/38AAAAAAPz//wAAAAAA/P//AAAAAAD8//8BAAAAAPz//wEAAAAA/P//AwAAAAD8//8DAAAAAPz//wcAAAAA/P//DwAAAAD8//8fAAAAAPz//x8AAAAA/P//PwAAAAD8//9/AAAAAPz///8AAAAA/P///wAAAAD8////AAAAAPz///8AAAAA/P///wAAAAD8////AAAAAPz///8AAAAA/P///wAAAAD8////AQAAAPz///8BAAAA/P///wEAAAD8////AQAAAPz///8DAAAA8P///wMAAADg////BwAAAMD///8HAAAAgP///w8AAAAA////DwAAAAD+//8fAAAAAPz//x8AAAAA/P//HwAAAAD4//8fAAAAAPD//z8AAAAA4P//PwAAAADA//8/AAAAAID//z8AAAAAAP//PwAAAAAA/v8/AAAAAAD8/x8AAAAAAPz/HwAAAAAA+P8fAAAAAADw/w8AAAAAAOD/DwAAAAAA4P8HAAAAAADA/wcAAAAAAID/BwAAAAAAgP8HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Large",
+  "layer_of": "egypt_dlc_03_valley_large_02",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_large_02/egypt_dlc_03_valley_large_02_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_02_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_large_03": {
+  "map_size": [
+   576,
+   576
+  ],
+  "active_rect": [
+   0,
+   0,
+   568,
+   216
+  ],
+  "grid": [
+   72,
+   72
+  ],
+  "grid_bits": "//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAAAOD///8/APx/AAAAAID///8DAOB/AAAAAAAAAAAAAAB/AAAAAAAAAAAAAAB8AAAAAAAAAAAAAAB4AAAAAAAAAAAAAABwAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Large",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_large_03/egypt_dlc_03_valley_large_03.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_03.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_large_03_layer01": {
+  "map_size": [
+   576,
+   576
+  ],
+  "active_rect": [
+   0,
+   0,
+   568,
+   216
+  ],
+  "grid": [
+   72,
+   72
+  ],
+  "grid_bits": "//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAA//////////9/AAAAAOD///8/APx/AAAAAID///8DAOB/AAAAAAAAAAAAAAB/AAAAAAAAAAAAAAB8AAAAAAAAAAAAAAB4AAAAAAAAAAAAAABwAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Large",
+  "layer_of": "egypt_dlc_03_valley_large_03",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_large_03/egypt_dlc_03_valley_large_03_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_03_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_large_04": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   0,
+   0,
+   440,
+   264
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "/x8AAAAAAAD/fwAAAAAAAP///wAAAAAA////AAAAAAD///8AAAAAAP///wAAAAAA////AwAAAAD///8HAAAAAP///x8AAAAA////fwAAAAD///9/AAAAAP////8DAAAA/////wMAAAD/////HwAAAP////8/AAAA/////z8AAAD//////wAAAP//////AQAA//////8DAAD//////wcAAP//////HwAA//////8/AAD///////8AAP///////wAA////////AQD///////8DAP///////wcA////////DwD///////8fAP///////38A////////fwD///////9/AP///////38AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Large",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_large_04/egypt_dlc_03_valley_large_04.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_04.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_large_05": {
+  "map_size": [
+   704,
+   704
+  ],
+  "active_rect": [
+   0,
+   168,
+   656,
+   432
+  ],
+  "grid": [
+   88,
+   88
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//////////8DAAAA//////////8DAAAA//////////8DAAAA//////////8DAAAA//////////8DAAAA//////////8DAAAA/////////////wEA+P///////////wEA8P///////////wEA4P///////////wEAwP///////////wEAAP///////////wEAAP7//////////wEAAPz//////////wEAAPD//////////wEAAOD//////////wEAAMD//////////wEAAAD//////////wEAAAD+/////////wEAAAD4/////////wEAAADw/////////wEAAADA/////////wEAAAAA/v///////wEAAAAAwP///////wMAAAAAAPj//////wMAAAAAAPD//////wMAAAAAAPD//////wMAAAAAAID//////wMAAAAAAAD//////wMAAAAAAAD4/////wMAAAAAAADg/////wMAAAAAAACA/////wMAAAAAAACA/////wMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Large",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_large_05/egypt_dlc_03_valley_large_05.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_05.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_large_05_layer01": {
+  "map_size": [
+   704,
+   704
+  ],
+  "active_rect": [
+   0,
+   168,
+   656,
+   432
+  ],
+  "grid": [
+   88,
+   88
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//////////8DAAAA//////////8DAAAA//////////8DAAAA//////////8DAAAA//////////8DAAAA//////////8DAAAA/////////////wEA+P///////////wEA8P///////////wEA4P///////////wEAwP///////////wEAAP///////////wEAAP7//////////wEAAPz//////////wEAAPD//////////wEAAOD//////////wEAAMD//////////wEAAAD//////////wEAAAD+/////////wEAAAD4/////////wEAAADw/////////wEAAADA/////////wEAAAAA/v///////wEAAAAAwP///////wMAAAAAAPj//////wMAAAAAAPD//////wMAAAAAAPD//////wMAAAAAAID//////wMAAAAAAAD//////wMAAAAAAAD4/////wMAAAAAAADg/////wMAAAAAAACA/////wMAAAAAAACA/////wMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Large",
+  "layer_of": "egypt_dlc_03_valley_large_05",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_large_05/egypt_dlc_03_valley_large_05_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_05_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_large_06": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   16,
+   16,
+   368,
+   272
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////BwAA/P////8AAAD8////PwAAAPz///8HAAAA/P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Large",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_large_06/egypt_dlc_03_valley_large_06.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_06.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_large_06_layer01": {
+  "map_size": [
+   384,
+   384
+  ],
+  "active_rect": [
+   16,
+   16,
+   368,
+   272
+  ],
+  "grid": [
+   48,
+   48
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////PwAA/P////8/AAD8/////z8AAPz/////HwAA/P////8fAAD8/////x8AAPz/////BwAA/P////8AAAD8////PwAAAPz///8HAAAA/P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Large",
+  "layer_of": "egypt_dlc_03_valley_large_06",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_large_06/egypt_dlc_03_valley_large_06_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_06_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_large_07": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   8,
+   280,
+   496,
+   512
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP4/AAAAAAAA/j8AAAAAAAD+PwAAAAAAAP7///9/AAAA/v///38AAAD+////fwAAAP7///9/AAAA/v///38AAAD+////fwAAAP7/////AAAA/v////8HAAD+/////w8AAP7/////PwAA/v////9/AAD+//////8BAP7//////w8A/v//////PwD+//////9/AP7///////8D/v///////x/+////////H/7///////8f/v///////x/+////////H/7///////8f/v///////x/+////////P/7///////8//v///////z8=",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Large",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_large_07/egypt_dlc_03_valley_large_07.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_07.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_large_07_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   8,
+   280,
+   496,
+   512
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP4/AAAAAAAA/j8AAAAAAAD+PwAAAAAAAP7///9/AAAA/v///38AAAD+////fwAAAP7///9/AAAA/v///38AAAD+////fwAAAP7/////AAAA/v////8HAAD+/////w8AAP7/////PwAA/v////9/AAD+//////8BAP7//////w8A/v//////PwD+//////9/AP7///////8D/v///////x/+////////H/7///////8f/v///////x/+////////H/7///////8f/v///////x/+////////P/7///////8//v///////z8=",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Large",
+  "layer_of": "egypt_dlc_03_valley_large_07",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_large_07/egypt_dlc_03_valley_large_07_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_07_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_large_08": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   0,
+   0,
+   512,
+   408
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "/wcAAAAAAAD+//8/AAAAAP7///8HAAAA/v////8AAAD+/////x8AAP7/////fwAA/v//////BwD+//////8fAP7//////38A+P///////wPA////////H8D/////////AP////////8A/P///////wDw////////AMD///////8AAP///////wAA/v//////AAD4//////8AAOD//////wAAgP//////AAAA/v////8AAAD4/////wAAAOD/////AAAAgP////8AAAAA/////wAAAAD+////AAAAAPz///8AAAAA+P///wAAAADw////AAAAAOD///8AAAAAwP///wAAAAAA////AAAAAAD+//8AAAAAAPz//wAAAAAA+P//AAAAAADw//8AAAAAAMD//wAAAAAAgP//AAAAAAAA/v8AAAAAAAD8/wAAAAAAAPj/AAAAAAAA8P8AAAAAAADg/wAAAAAAAID/AAAAAAAAgP8AAAAAAAAA/wAAAAAAAAD+AAAAAAAAAPwAAAAAAAAA+AAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Large",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_large_08/egypt_dlc_03_valley_large_08.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_08.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_large_08_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   0,
+   0,
+   512,
+   408
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "/wcAAAAAAAD+//8/AAAAAP7///8HAAAA/v////8AAAD+/////x8AAP7/////fwAA/v//////BwD+//////8fAP7//////38A+P///////wPA////////H8D/////////AP////////8A/P///////wDw////////AMD///////8AAP///////wAA/v//////AAD4//////8AAOD//////wAAgP//////AAAA/v////8AAAD4/////wAAAOD/////AAAAgP////8AAAAA/////wAAAAD+////AAAAAPz///8AAAAA+P///wAAAADw////AAAAAOD///8AAAAAwP///wAAAAAA////AAAAAAD+//8AAAAAAPz//wAAAAAA+P//AAAAAADw//8AAAAAAMD//wAAAAAAgP//AAAAAAAA/v8AAAAAAAD8/wAAAAAAAPj/AAAAAAAA8P8AAAAAAADg/wAAAAAAAID/AAAAAAAAgP8AAAAAAAAA/wAAAAAAAAD+AAAAAAAAAPwAAAAAAAAA+AAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Large",
+  "layer_of": "egypt_dlc_03_valley_large_08",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_large_08/egypt_dlc_03_valley_large_08_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_08_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_large_09": {
+  "map_size": [
+   576,
+   576
+  ],
+  "active_rect": [
+   72,
+   0,
+   576,
+   576
+  ],
+  "grid": [
+   72,
+   72
+  ],
+  "grid_bits": "AAYAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAD4AAAAAAAAAAAAAAP4AAAAAAAAAAAAAAP4DAAAAAAAAAAAAAP4PAAAAAAAAAAAAAP4/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP7/AQAAAAAAAAAAAP7/BwAAAAAAAAAAAP7/HwAAAAAAAAAAAP7/fwAAAAAAAAAAAP7//wEAAAAAAAAAAP7//wcAAAAAAAAAAP7//x8AAAAAAAAAAP7//38AAAAAAAAAAP7///8AAAAAAAAAAP7///8BAAAAAAAAAP7///8DAAAAAAAAAP7///8HAAAAAAAAAP7///8PAAAAAAAAAP7///8fAAAAAAAAAP7///8/AAAAAAAAAP7/////AAAAAAAAAP7/////AQAAAAAAAPz/////AwAAAAAAAPD/////BwAAAAAAAOD/////DwAAAAAAAMD/////PwAAAAAAAID/////fwAAAAAAAAD//////wEAAAAAAAD8/////wMAAAAAAADw/////wcAAAAAAADA/////w8AAAAAAAAA/////x8AAAAAAAAA+P///38AAAAAAAAA4P///38AAAAAAAAAgP////8AAAAAAAAAAP////8BAAAAAAAAAP7///8DAAAAAAAAAPj///8HAAAAAAAAAPD///8fAAAAAAAAAOD/////AAAAAAAAAID/////AAAAAAAAAAD/////AAAAAAAAAAD+////AAAAAAAAAAD4////AAAAAAAAAADg////AAAAAAAAAADA////AAAAAAAAAAAA////AAAAAAAAAAAA/v//AAAAAAAAAAAA/P//AAAAAAAAAAAA+P//AAAAAAAAAAAA8P//AAAAAAAAAAAA4P//AAAAAAAAAAAAwP//AAAAAAAAAAAAgP//AAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAPz/AAAAAAAAAAAAAPj/AAAAAAAAAAAAAPD/AAAAAAAAAAAAAOD/AAAAAAAAAAAAAMD/AAAAAAAAAAAAAID/AAAAAAAAAAAAAAD+AAAAAAAAAAAAAAD8AAAAAAAAAAAAAAD4AAAAAAAAAAAAAADwAAAAAAAAAAAAAADgAAAAAAAAAAAAAADgAAAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Large",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_large_09/egypt_dlc_03_valley_large_09.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_09.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_large_09_layer01": {
+  "map_size": [
+   576,
+   576
+  ],
+  "active_rect": [
+   72,
+   0,
+   576,
+   576
+  ],
+  "grid": [
+   72,
+   72
+  ],
+  "grid_bits": "AAYAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAD4AAAAAAAAAAAAAAP4AAAAAAAAAAAAAAP4DAAAAAAAAAAAAAP4PAAAAAAAAAAAAAP4/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP7/AQAAAAAAAAAAAP7/BwAAAAAAAAAAAP7/HwAAAAAAAAAAAP7/fwAAAAAAAAAAAP7//wEAAAAAAAAAAP7//wcAAAAAAAAAAP7//x8AAAAAAAAAAP7//38AAAAAAAAAAP7///8AAAAAAAAAAP7///8BAAAAAAAAAP7///8DAAAAAAAAAP7///8HAAAAAAAAAP7///8PAAAAAAAAAP7///8fAAAAAAAAAP7///8/AAAAAAAAAP7/////AAAAAAAAAP7/////AQAAAAAAAPz/////AwAAAAAAAPD/////BwAAAAAAAOD/////DwAAAAAAAMD/////PwAAAAAAAID/////fwAAAAAAAAD//////wEAAAAAAAD8/////wMAAAAAAADw/////wcAAAAAAADA/////w8AAAAAAAAA/////x8AAAAAAAAA+P///38AAAAAAAAA4P///38AAAAAAAAAgP////8AAAAAAAAAAP////8BAAAAAAAAAP7///8DAAAAAAAAAPj///8HAAAAAAAAAPD///8fAAAAAAAAAOD/////AAAAAAAAAID/////AAAAAAAAAAD/////AAAAAAAAAAD+////AAAAAAAAAAD4////AAAAAAAAAADg////AAAAAAAAAADA////AAAAAAAAAAAA////AAAAAAAAAAAA/v//AAAAAAAAAAAA/P//AAAAAAAAAAAA+P//AAAAAAAAAAAA8P//AAAAAAAAAAAA4P//AAAAAAAAAAAAwP//AAAAAAAAAAAAgP//AAAAAAAAAAAAAP//AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAPz/AAAAAAAAAAAAAPj/AAAAAAAAAAAAAPD/AAAAAAAAAAAAAOD/AAAAAAAAAAAAAMD/AAAAAAAAAAAAAID/AAAAAAAAAAAAAAD+AAAAAAAAAAAAAAD8AAAAAAAAAAAAAAD4AAAAAAAAAAAAAADwAAAAAAAAAAAAAADgAAAAAAAAAAAAAADgAAAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Large",
+  "layer_of": "egypt_dlc_03_valley_large_09",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_large_09/egypt_dlc_03_valley_large_09_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_09_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_large_10": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   0,
+   72,
+   432,
+   448
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////z8AAAD/////PwAAAP////9/AAAA/////38AAAD//////wAAAP//////AQAA//////8BAAD//////wMAAP//////AwAA//////8DAAD//////wcAAP//////DwAA//////8PAAD//////x8AAP//////PwAA//////8/AAD//////38AAP///////wAA////////AAD//////z8AAP//////HwAA//////8fAAD//////w8AAP//////DwAA//////8PAAD//////w8AAP//////DwAA//////8PAAD//////w8AAP//////HwAA//////8fAAD//////z8AAP//////PwAA//////9/AAD///////8AAP///////wAA////////AQD///////8BAP///////wMA////////AwD///////8HAP///////wcA////////DwD///////8PAP///////x8A////////HwD///////8/AA==",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Large",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_large_10/egypt_dlc_03_valley_large_10.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_10.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_large_10_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   0,
+   72,
+   432,
+   448
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////z8AAAD/////PwAAAP////9/AAAA/////38AAAD//////wAAAP//////AQAA//////8BAAD//////wMAAP//////AwAA//////8DAAD//////wcAAP//////DwAA//////8PAAD//////x8AAP//////PwAA//////8/AAD//////38AAP///////wAA////////AAD//////z8AAP//////HwAA//////8fAAD//////w8AAP//////DwAA//////8PAAD//////w8AAP//////DwAA//////8PAAD//////w8AAP//////HwAA//////8fAAD//////z8AAP//////PwAA//////9/AAD///////8AAP///////wAA////////AQD///////8BAP///////wMA////////AwD///////8HAP///////wcA////////DwD///////8PAP///////x8A////////HwD///////8/AA==",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Large",
+  "layer_of": "egypt_dlc_03_valley_large_10",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_large_10/egypt_dlc_03_valley_large_10_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_large_10_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_medium_01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   80,
+   0,
+   512,
+   504
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "APwAAAAAAAAA/AEAAAAAAAD8AwAAAAAAAPwfAAAAAAAA/D8AAAAAAAD8fwAAAAAAAPz/AAAAAAAA/P8DAAAAAAD4/wcAAAAAAPj/DwAAAAAA+P8fAAAAAAD4/z8AAAAAAPD/PwAAAAAA8P9/AAAAAADg//8AAAAAAOD//wEAAAAAwP//DwAAAADA//8/AAAAAID///8AAAAAgP///x8AAACA////fwAAAID/////AAAAAP////8DAAAA/////w8AAAD/////PwAAAP////9/AAAA//////8BAAD//////wMAgP//////DwCA//////8fAID//////38AwP//////fwDA////////AOD///////8A4P///////wDg////////AOD///////8A+P///////wD4////////APj/////fwAA+P////8BAAD4////BwAAAPj///8DAAAA+P///wEAAAD4////AAAAAPj//38AAAAA+P//PwAAAAD4//8fAAAAAPj//w8AAAAA+P//BwAAAAD4//8DAAAAAPj//wEAAAAA+P//AAAAAAD4/z8AAAAAAPj/DwAAAAAA+P8HAAAAAAD4/wcAAAAAAPj/AwAAAAAA+P8BAAAAAAD4/wAAAAAAAPj/AAAAAAAA+H8AAAAAAAD4PwAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Medium",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_medium_01/egypt_dlc_03_valley_medium_01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_medium_01.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_medium_01_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   80,
+   0,
+   512,
+   504
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "APwAAAAAAAAA/AEAAAAAAAD8AwAAAAAAAPwfAAAAAAAA/D8AAAAAAAD8fwAAAAAAAPz/AAAAAAAA/P8DAAAAAAD4/wcAAAAAAPj/DwAAAAAA+P8fAAAAAAD4/z8AAAAAAPD/PwAAAAAA8P9/AAAAAADg//8AAAAAAOD//wEAAAAAwP//DwAAAADA//8/AAAAAID///8AAAAAgP///x8AAACA////fwAAAID/////AAAAAP////8DAAAA/////w8AAAD/////PwAAAP////9/AAAA//////8BAAD//////wMAgP//////DwCA//////8fAID//////38AwP//////fwDA////////AOD///////8A4P///////wDg////////AOD///////8A+P///////wD4////////APj/////fwAA+P////8BAAD4////BwAAAPj///8DAAAA+P///wEAAAD4////AAAAAPj//38AAAAA+P//PwAAAAD4//8fAAAAAPj//w8AAAAA+P//BwAAAAD4//8DAAAAAPj//wEAAAAA+P//AAAAAAD4/z8AAAAAAPj/DwAAAAAA+P8HAAAAAAD4/wcAAAAAAPj/AwAAAAAA+P8BAAAAAAD4/wAAAAAAAPj/AAAAAAAA+H8AAAAAAAD4PwAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Medium",
+  "layer_of": "egypt_dlc_03_valley_medium_01",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_medium_01/egypt_dlc_03_valley_medium_01_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_medium_01_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_medium_02": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   0,
+   32,
+   408,
+   512
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAA8AAAAAAAAAHwAAAAAAAAA/AAAAAAAAAP8AAAAAAAAA/wEAAAAAAAD/AwAAAAAAAP8PAAAAAAAA/x8AAAAAAAD/PwAAAAAAAP//AAAAAAAA//8BAAAAAAD//wcAAAAAAP//DwAAAAAA//8/AAAAAAD///8BAAAAAP///z8AAAAA/////wcAAAD/////DwAAAP////8PAAAA/////38AAAD//////wAAAP//////BwAA//////8fAAD//////38AAP//////fwAA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwA=",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Medium",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_medium_02/egypt_dlc_03_valley_medium_02.a7m",
+  "image": "egypt/egypt_dlc_03_valley_medium_02.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_medium_02_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   0,
+   32,
+   408,
+   512
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAA8AAAAAAAAAHwAAAAAAAAA/AAAAAAAAAP8AAAAAAAAA/wEAAAAAAAD/AwAAAAAAAP8PAAAAAAAA/x8AAAAAAAD/PwAAAAAAAP//AAAAAAAA//8BAAAAAAD//wcAAAAAAP//DwAAAAAA//8/AAAAAAD///8BAAAAAP///z8AAAAA/////wcAAAD/////DwAAAP////8PAAAA/////38AAAD//////wAAAP//////BwAA//////8fAAD//////38AAP//////fwAA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwD///////8HAP///////wcA////////BwA=",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Medium",
+  "layer_of": "egypt_dlc_03_valley_medium_02",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_medium_02/egypt_dlc_03_valley_medium_02_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_medium_02_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_medium_03": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   16,
+   16,
+   424,
+   392
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAOD//x8AAAAA8P//HwAAAADw//8fAAAAAPD//x8AAAAA/P//HwAAAID///8fAAAA4P///x8AAAD8////HwAAgP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAID/////HwAAwP////8fAADg/////x8AAPj/////HwAA/P////8fAAD//////x8AwP//////HwDw//////8fAPz//////x8A/P//////HwD8//////8fAPz//////x8A/P//////HwD8//////8fAPz//////x8A/P//////HwD8//////8fAPz/////AAAA/P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Medium",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_medium_03/egypt_dlc_03_valley_medium_03.a7m",
+  "image": "egypt/egypt_dlc_03_valley_medium_03.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_medium_03_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   16,
+   16,
+   424,
+   392
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAOD//x8AAAAA8P//HwAAAADw//8fAAAAAPD//x8AAAAA/P//HwAAAID///8fAAAA4P///x8AAAD8////HwAAgP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAID/////HwAAwP////8fAADg/////x8AAPj/////HwAA/P////8fAAD//////x8AwP//////HwDw//////8fAPz//////x8A/P//////HwD8//////8fAPz//////x8A/P//////HwD8//////8fAPz//////x8A/P//////HwD8//////8fAPz/////AAAA/P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Medium",
+  "layer_of": "egypt_dlc_03_valley_medium_03",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_medium_03/egypt_dlc_03_valley_medium_03_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_medium_03_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_medium_04": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   8,
+   104,
+   512,
+   512
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA4AAAAAAAAAHgAAAAAAAAA+AAAAAAAAAH4AAAAAAAAA/gAAAAAAAAD+AwAAAAAAAP4PAAAAAAAA/j8AAAAAAAD+/wAAAAAAAP7/BwAAAAAA/v8fAAAAAAD+/38AAAAAAP7//wAAAAAA/v//AQAAAAD+//8HAAAAAP7//w8AAAAA/v//HwAAAAD+//9/AAAAAP7///8AAAAA/v///wEAAAD+////BwAAAP7///8fAAAA/v///z8AAAD+/////wAAAP7/////AQAA/v////8DAAD+/////wcAAPD/////DwAAwP////8fAAAA/v///z8AAAD4////fwAAAOD/////AAAAgP////8BAAAA/////wEAAAD+////AwAAAPj///8HAAAA8P///w8AAADg////HwAAAID///8/AAAAAP///38AAAAA/P///wEAAAD8////AwAAAPj///8HAAAA8P///w8AAADw////HwAAAOD///8fAAAAwP////8AAADA/////wAAAID/////AAAAgP////8=",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Medium",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_medium_04/egypt_dlc_03_valley_medium_04.a7m",
+  "image": "egypt/egypt_dlc_03_valley_medium_04.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_medium_04_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   8,
+   104,
+   512,
+   512
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA4AAAAAAAAAHgAAAAAAAAA+AAAAAAAAAH4AAAAAAAAA/gAAAAAAAAD+AwAAAAAAAP4PAAAAAAAA/j8AAAAAAAD+/wAAAAAAAP7/BwAAAAAA/v8fAAAAAAD+/38AAAAAAP7//wAAAAAA/v//AQAAAAD+//8HAAAAAP7//w8AAAAA/v//HwAAAAD+//9/AAAAAP7///8AAAAA/v///wEAAAD+////BwAAAP7///8fAAAA/v///z8AAAD+/////wAAAP7/////AQAA/v////8DAAD+/////wcAAPD/////DwAAwP////8fAAAA/v///z8AAAD4////fwAAAOD/////AAAAgP////8BAAAA/////wEAAAD+////AwAAAPj///8HAAAA8P///w8AAADg////HwAAAID///8/AAAAAP///38AAAAA/P///wEAAAD8////AwAAAPj///8HAAAA8P///w8AAADw////HwAAAOD///8fAAAAwP////8AAADA/////wAAAID/////AAAAgP////8=",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Medium",
+  "layer_of": "egypt_dlc_03_valley_medium_04",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_medium_04/egypt_dlc_03_valley_medium_04_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_medium_04_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_pirate_01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   24,
+   0,
+   416,
+   288
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAAAAAAD+/w8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Pirate",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_pirate_01/egypt_dlc_03_valley_pirate_01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_pirate_01.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_pirate_01_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   24,
+   0,
+   416,
+   288
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAPj//////w8A+P//////DwD4//////8PAAAAAAD+/w8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Pirate",
+  "layer_of": "egypt_dlc_03_valley_pirate_01",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_pirate_01/egypt_dlc_03_valley_pirate_01_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_pirate_01_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_sectorproject_01": {
+  "map_size": [
+   640,
+   640
+  ],
+  "active_rect": [
+   0,
+   8,
+   536,
+   624
+  ],
+  "grid": [
+   80,
+   80
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAA/////z8AAAAAAAAA/////38AAAAAAAAA//////8AAAAAAAAA//////8BAAAAAAAA//////8DAAAAAAAA//////8HAAAAAAAA//////8PAAAAAAAA//////8PAAAAAAAA//////8fAAAAAAAA//////8/AAAAAAAA//////9/AAAAAAAA////////AAAAAAAA////////AQAAAAAA////////AwAAAAAA////////BwAAAAAA////////DwAAAAAA////////DwAAAAAA////////HwAAAAAA////////PwAAAAAA////////fwAAAAAA////////fwAAAAAA/////////wAAAAAA/////////wEAAAAA/////////wEAAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////9xAAAAAAAA/////wMAAAAAAAAA/////wEAAAAAAAAA/////wEAAAAAAAAA/////wAAAAAAAAAA////fwAAAAAAAAAA////PwAAAAAAAAAA////PwAAAAAAAAAA////HwAAAAAAAAAA////DwAAAAAAAAAA////BwAAAAAAAAAA////BwAAAAAAAAAA////BwAAAAAAAAAA////BwAAAAAAAAAA////DwAAAAAAAAAA////DwAAAAAAAAAA////HwAAAAAAAAAA////HwAAAAAAAAAA////HwAAAAAAAAAA////HwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Project",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_sectorproject_01/egypt_dlc_03_valley_sectorproject_01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_sectorproject_01.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_sectorproject_01_layer01": {
+  "map_size": [
+   640,
+   640
+  ],
+  "active_rect": [
+   0,
+   8,
+   536,
+   624
+  ],
+  "grid": [
+   80,
+   80
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAA/////z8AAAAAAAAA/////38AAAAAAAAA//////8AAAAAAAAA//////8BAAAAAAAA//////8DAAAAAAAA//////8HAAAAAAAA//////8PAAAAAAAA//////8PAAAAAAAA//////8fAAAAAAAA//////8/AAAAAAAA//////9/AAAAAAAA////////AAAAAAAA////////AQAAAAAA////////AwAAAAAA////////BwAAAAAA////////DwAAAAAA////////DwAAAAAA////////HwAAAAAA////////PwAAAAAA////////fwAAAAAA////////fwAAAAAA/////////wAAAAAA/////////wEAAAAA/////////wEAAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////////8HAAAA//////9xAAAAAAAA/////wMAAAAAAAAA/////wEAAAAAAAAA/////wEAAAAAAAAA/////wAAAAAAAAAA////fwAAAAAAAAAA////PwAAAAAAAAAA////PwAAAAAAAAAA////HwAAAAAAAAAA////DwAAAAAAAAAA////BwAAAAAAAAAA////BwAAAAAAAAAA////BwAAAAAAAAAA////BwAAAAAAAAAA////DwAAAAAAAAAA////DwAAAAAAAAAA////HwAAAAAAAAAA////HwAAAAAAAAAA////HwAAAAAAAAAA////HwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Project",
+  "layer_of": "egypt_dlc_03_valley_sectorproject_01",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_sectorproject_01/egypt_dlc_03_valley_sectorproject_01_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_sectorproject_01_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_small_01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   88,
+   8,
+   512,
+   496
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAACA/wAAAAAAAP7/AAAAAAD4//8AAAAAAPz//wAAAAAA/v//AAAAAAD///8AAAAAgP///wAAAADA////AAAAAOD///8AAAAA8P///wAAAAD4////AAAAAPz///8AAAAA/v///wAAAAD/////AAAAwP////8AAADw/////wAAAPj/////AAAA+P////8AAAD8/////wAAAP7/////AAAA//////8AAAD//////wAAgP//////AADA//////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wAAAAAAAPj/AAAAAAAA+P8AAAAAAAD4/wAAAAAAAPD/AAAAAAAA4P8AAAAAAADg/wAAAAAAAMD/AAAAAAAAwP8AAAAAAACA/wAAAAAAAID/AAAAAAAAgP8AAAAAAAAA/wAAAAAAAAD/AAAAAAAAAP4AAAAAAAAA/gAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Small",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_small_01/egypt_dlc_03_valley_small_01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_small_01.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_small_01_layer01": {
+  "map_size": [
+   512,
+   512
+  ],
+  "active_rect": [
+   88,
+   8,
+   512,
+   496
+  ],
+  "grid": [
+   64,
+   64
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAACA/wAAAAAAAP7/AAAAAAD4//8AAAAAAPz//wAAAAAA/v//AAAAAAD///8AAAAAgP///wAAAADA////AAAAAOD///8AAAAA8P///wAAAAD4////AAAAAPz///8AAAAA/v///wAAAAD/////AAAAwP////8AAADw/////wAAAPj/////AAAA+P////8AAAD8/////wAAAP7/////AAAA//////8AAAD//////wAAgP//////AADA//////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A+P///////wAAAAAAAPj/AAAAAAAA+P8AAAAAAAD4/wAAAAAAAPD/AAAAAAAA4P8AAAAAAADg/wAAAAAAAMD/AAAAAAAAwP8AAAAAAACA/wAAAAAAAID/AAAAAAAAgP8AAAAAAAAA/wAAAAAAAAD/AAAAAAAAAP4AAAAAAAAA/gAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Small",
+  "layer_of": "egypt_dlc_03_valley_small_01",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_small_01/egypt_dlc_03_valley_small_01_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_small_01_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_small_02": {
+  "map_size": [
+   320,
+   320
+  ],
+  "active_rect": [
+   0,
+   0,
+   208,
+   312
+  ],
+  "grid": [
+   40,
+   40
+  ],
+  "grid_bits": "BwAAAAAAAAA/AAAAAAAAAP8BAAAAAAAA/wcAAAAAAAD/DwAAAAAAAP8fAAAAAAAA/38AAAAAAAD//wAAAAAAAP//AQAAAAAA//8HAAAAAAD//w8AAAAAAP//HwAAAAAA//8/AAAAAAD///8BAAAAAP///wEAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAA////AwAAAAD///8DAAAAAP///wMAAAAAAPj/AwAAAAAA+P8DAAAAAAD4/wMAAAAAAPj/AwAAAAAA+P8DAAAAAAD4/wMAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Small",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_small_02/egypt_dlc_03_valley_small_02.a7m",
+  "image": "egypt/egypt_dlc_03_valley_small_02.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_small_03": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   0,
+   0,
+   448,
+   336
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "AQAAAAAAAAB/AAAAAAAAAP8PAAAAAAAA/38AAAAAAAD//wMAAAAAAP//DwAAAAAA////AAAAAAD/////////AP////////8A/////////wD/////////AP////////8A/////////wD/////////AP////////8A/////////wD/////////AP////////8A/////////wD/////////AP////////8A/////////wD/////////AP////////8A/////////wD/////////AP///////38A////////PwD///////8fAP///////wcA////////AwD///////8AAP//////PwAA//////8PAAD//////wMAAP//////AwAA//////8DAAD//////wMAAP//////AwAA//////8DAAD//////wMAAP//////AwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Small",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_small_03/egypt_dlc_03_valley_small_03.a7m",
+  "image": "egypt/egypt_dlc_03_valley_small_03.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_small_03_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   0,
+   0,
+   448,
+   336
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "AQAAAAAAAAB/AAAAAAAAAP8PAAAAAAAA/38AAAAAAAD//wMAAAAAAP//DwAAAAAA////AAAAAAD/////////AP////////8A/////////wD/////////AP////////8A/////////wD/////////AP////////8A/////////wD/////////AP////////8A/////////wD/////////AP////////8A/////////wD/////////AP////////8A/////////wD/////////AP///////38A////////PwD///////8fAP///////wcA////////AwD///////8AAP//////PwAA//////8PAAD//////wMAAP//////AwAA//////8DAAD//////wMAAP//////AwAA//////8DAAD//////wMAAP//////AwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Small",
+  "layer_of": "egypt_dlc_03_valley_small_03",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_small_03/egypt_dlc_03_valley_small_03_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_small_03_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_small_04": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   24,
+   48,
+   448,
+   448
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAP//////AAD///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A8P///////wCA////////AAD///////8AAPz//////wAA+P//////AADg//////8AAAD//////wAAAPz/////AAAA+P////8AAADA/////wAAAAD+////AAAAAP7///8AAAAA/v///wAAAAD+////AAAAAP7///8AAAAA/v///wAAAAD+////AAAAAPz///8AAAAA/P///wAAAAD8////AA==",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Small",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_small_04/egypt_dlc_03_valley_small_04.a7m",
+  "image": "egypt/egypt_dlc_03_valley_small_04.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_small_04_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   24,
+   48,
+   448,
+   448
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAADg////AAAAAOD///8AAAAA4P///wAAAP//////AAD///////8A+P///////wD4////////APj///////8A+P///////wD4////////APj///////8A8P///////wCA////////AAD///////8AAPz//////wAA+P//////AADg//////8AAAD//////wAAAPz/////AAAA+P////8AAADA/////wAAAAD+////AAAAAP7///8AAAAA/v///wAAAAD+////AAAAAP7///8AAAAA/v///wAAAAD+////AAAAAPz///8AAAAA/P///wAAAAD8////AA==",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Small",
+  "layer_of": "egypt_dlc_03_valley_small_04",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_small_04/egypt_dlc_03_valley_small_04_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_small_04_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_trader_02": {
+  "map_size": [
+   320,
+   320
+  ],
+  "active_rect": [
+   0,
+   32,
+   320,
+   192
+  ],
+  "grid": [
+   40,
+   40
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwPH//wAAAID/////AAAAwP////8AAADA/////wAAAOD/////AAAA8P////8AAAD4/////wAAAPj/////AAAA/P////8AAAD+/////wAAAP//////AAAA//////8AAAD//////wAAAP//////AAAA/v////8AAAD+//8/AAAAAPz//z8AAAAA/P//PwAAAAD8//8/AAAAAPz//z8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Trader",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_trader_02/egypt_dlc_03_valley_trader_02.a7m",
+  "image": "egypt/egypt_dlc_03_valley_trader_02.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_trader_02_layer01": {
+  "map_size": [
+   320,
+   320
+  ],
+  "active_rect": [
+   0,
+   32,
+   320,
+   192
+  ],
+  "grid": [
+   40,
+   40
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwPH//wAAAID/////AAAAwP////8AAADA/////wAAAOD/////AAAA8P////8AAAD4/////wAAAPj/////AAAA/P////8AAAD+/////wAAAP//////AAAA//////8AAAD//////wAAAP//////AAAA/v////8AAAD+//8/AAAAAPz//z8AAAAA/P//PwAAAAD8//8/AAAAAPz//z8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Trader",
+  "layer_of": "egypt_dlc_03_valley_trader_02",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_dlc_03_valley_trader_02/egypt_dlc_03_valley_trader_02_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_trader_02_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_vilage_03": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   0,
+   0,
+   296,
+   448
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "AQAAAAAAAAAHAAAAAAAAAB8AAAAAAAAAfwAAAAAAAAD/AQAAAAAAAP8HAAAAAAAA/w8AAAAAAAD/HwAAAAAAAP9/AAAAAAAA//8AAAAAAAD//wMAAAAAAP//BwAAAAAA//8PAAAAAAD//x8AAAAAAP//BwAAAAAA//8HAAAAAAD//wcAAAAAAP//BwAAAAAA//8HAAAAAAD//wcAAAAAAP//BwAAAAAA//8/AAAAAAD///8AAAAAAP///wAAAAAA////AAAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AwAAAAD///8HAAAAAP///wcAAAAA////DwAAAAD///8fAAAAAP///z8AAAAA////PwAAAAD///9/AAAAAP////8AAAAA/////wAAAAD/////AAAAAP////8BAAAA/////wEAAAD/////AwAAAP////8HAAAA/////wcAAAD/////DwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Village",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_vilage_03/egypt_dlc_03_valley_vilage_03.a7m",
+  "image": "egypt/egypt_dlc_03_valley_vilage_03.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_vilage_03_layer01": {
+  "map_size": [
+   448,
+   448
+  ],
+  "active_rect": [
+   0,
+   0,
+   296,
+   448
+  ],
+  "grid": [
+   56,
+   56
+  ],
+  "grid_bits": "AQAAAAAAAAAHAAAAAAAAAB8AAAAAAAAAfwAAAAAAAAD/AQAAAAAAAP8HAAAAAAAA/w8AAAAAAAD/HwAAAAAAAP9/AAAAAAAA//8AAAAAAAD//wMAAAAAAP//BwAAAAAA//8PAAAAAAD//x8AAAAAAP//BwAAAAAA//8HAAAAAAD//wcAAAAAAP//BwAAAAAA//8HAAAAAAD//wcAAAAAAP//BwAAAAAA//8/AAAAAAD///8AAAAAAP///wAAAAAA////AAAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AQAAAAD///8BAAAAAP///wEAAAAA////AwAAAAD///8HAAAAAP///wcAAAAA////DwAAAAD///8fAAAAAP///z8AAAAA////PwAAAAD///9/AAAAAP////8AAAAA/////wAAAAD/////AAAAAP////8BAAAA/////wEAAAD/////AwAAAP////8HAAAA/////wcAAAD/////DwAAAP////8fAAAA/////x8AAAD/////HwAAAP////8fAAAA/////x8AAAD/////HwAAAA==",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Village",
+  "layer_of": "egypt_dlc_03_valley_vilage_03",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_dlc_03_valley_vilage_03/egypt_dlc_03_valley_vilage_03_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_vilage_03_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_village_01": {
+  "map_size": [
+   256,
+   256
+  ],
+  "active_rect": [
+   0,
+   0,
+   248,
+   232
+  ],
+  "grid": [
+   32,
+   32
+  ],
+  "grid_bits": "AADAfwAA/H////9/////f////3////9//P//f/j//3/g//9/gP//f4D//38A/P9/APz/fwDg/38AwP9/AMD/fwAA/38AAP5/AAD8fwAA+H8AAOB/AADAfwAAAH8AAAB/AAAAfgAAAHwAAAB4AAAAcAAAAGAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Village",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_village_01/egypt_dlc_03_valley_village_01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_village_01.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_village_01_layer01": {
+  "map_size": [
+   256,
+   256
+  ],
+  "active_rect": [
+   0,
+   0,
+   248,
+   232
+  ],
+  "grid": [
+   32,
+   32
+  ],
+  "grid_bits": "AADAfwAA/H////9/////f////3////9//P//f/j//3/g//9/gP//f4D//38A/P9/APz/fwDg/38AwP9/AMD/fwAA/38AAP5/AAD8fwAA+H8AAOB/AADAfwAAAH8AAAB/AAAAfgAAAHwAAAB4AAAAcAAAAGAAAAAAAAAAAAAAAAA=",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Village",
+  "layer_of": "egypt_dlc_03_valley_village_01",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_dlc_03_valley_village_01/egypt_dlc_03_valley_village_01_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_village_01_layer01.png",
+  "has_layer": false
+ },
+ "egypt_dlc_03_valley_village_02": {
+  "map_size": [
+   256,
+   256
+  ],
+  "active_rect": [
+   0,
+   24,
+   232,
+   256
+  ],
+  "grid": [
+   32,
+   32
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAA////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x8=",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Village",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_village_02/egypt_dlc_03_valley_village_02.a7m",
+  "image": "egypt/egypt_dlc_03_valley_village_02.png",
+  "has_layer": true
+ },
+ "egypt_dlc_03_valley_village_02_layer01": {
+  "map_size": [
+   256,
+   256
+  ],
+  "active_rect": [
+   0,
+   24,
+   232,
+   256
+  ],
+  "grid": [
+   32,
+   32
+  ],
+  "grid_bits": "AAAAAAAAAAAAAAAA////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x////8f////H////x8=",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Village",
+  "layer_of": "egypt_dlc_03_valley_village_02",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_dlc_03_valley_village_02/egypt_dlc_03_valley_village_02_layer01.a7m",
+  "image": "egypt/egypt_dlc_03_valley_village_02_layer01.png",
+  "has_layer": false
+ },
+ "egypt_island_quadrant_01_x0_y0": {
+  "map_size": [
+   960,
+   960
+  ],
+  "active_rect": [
+   0,
+   0,
+   960,
+   960
+  ],
+  "grid": [
+   120,
+   120
+  ],
+  "grid_bits": "////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A",
+  "quadrant": "egypt_island_quadrant_01_x0_y0",
+  "kind": "Quadrant",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y0/egypt_island_quadrant_01_x0_y0.a7m",
+  "image": "egypt/egypt_island_quadrant_01_x0_y0.png",
+  "has_layer": false
+ },
+ "egypt_island_quadrant_01_x0_y1": {
+  "map_size": [
+   960,
+   960
+  ],
+  "active_rect": [
+   0,
+   0,
+   960,
+   960
+  ],
+  "grid": [
+   120,
+   120
+  ],
+  "grid_bits": "////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A",
+  "quadrant": "egypt_island_quadrant_01_x0_y1",
+  "kind": "Quadrant",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x0_y1/egypt_island_quadrant_01_x0_y1.a7m",
+  "image": "egypt/egypt_island_quadrant_01_x0_y1.png",
+  "has_layer": false
+ },
+ "egypt_island_quadrant_01_x1_y0": {
+  "map_size": [
+   960,
+   960
+  ],
+  "active_rect": [
+   0,
+   0,
+   960,
+   960
+  ],
+  "grid": [
+   120,
+   120
+  ],
+  "grid_bits": "////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A",
+  "quadrant": "egypt_island_quadrant_01_x1_y0",
+  "kind": "Quadrant",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y0/egypt_island_quadrant_01_x1_y0.a7m",
+  "image": "egypt/egypt_island_quadrant_01_x1_y0.png",
+  "has_layer": false
+ },
+ "egypt_island_quadrant_01_x1_y1": {
+  "map_size": [
+   960,
+   960
+  ],
+  "active_rect": [
+   0,
+   0,
+   960,
+   960
+  ],
+  "grid": [
+   120,
+   120
+  ],
+  "grid_bits": "////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Quadrant",
+  "layer_of": null,
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_island_quadrant_01_x1_y1.a7m",
+  "image": "egypt/egypt_island_quadrant_01_x1_y1.png",
+  "has_layer": true
+ },
+ "egypt_island_quadrant_01_x1_y1_layer01": {
+  "map_size": [
+   960,
+   960
+  ],
+  "active_rect": [
+   0,
+   0,
+   960,
+   960
+  ],
+  "grid": [
+   120,
+   120
+  ],
+  "grid_bits": "////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A////////////////////AP///////////////////wD///////////////////8A",
+  "quadrant": "egypt_island_quadrant_01_x1_y1",
+  "kind": "Quadrant",
+  "layer_of": "egypt_island_quadrant_01_x1_y1",
+  "map_file": "data/dlc03/provinces/egypt/islands/pool/egypt_island_quadrant_01_x1_y1/egypt_island_quadrant_01_x1_y1_layer01.a7m",
+  "image": "egypt/egypt_island_quadrant_01_x1_y1_layer01.png",
+  "has_layer": false
+ }
+}

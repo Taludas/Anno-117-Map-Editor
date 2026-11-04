@@ -1,0 +1,10 @@
+<ModOps>
+    <ModOp Add="//TextExport/Texts">
+        <Text>
+            <LineId>Start_GUID</LineId>
+            <Text>$ModName</Text>
+        </Text>
+    </ModOp>
+    <ModOp Add="//TextExport/Texts/Text[LineId = '-6906721833002844760']/Text">
+$ModName - $Description</ModOp>
+</ModOps>
