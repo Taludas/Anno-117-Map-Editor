@@ -1114,7 +1114,7 @@ class FixedIslandPickerDialog(_BaseDialog):
         fbar2.pack(fill="x", padx=12, pady=(1, 4))
         tk.Label(fbar2, text="Type:", bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_SMALL).pack(side="left")
         self._type_filter_var = tk.StringVar(value="All")
-        for t in ("All", "Normal", "Continental", "ThirdParty", "Pirate", "Vulcan"):
+        for t in ("All", "Normal", "Continental", "ThirdParty", "Pirate", "Vulcan", "Custom"):
             tk.Radiobutton(fbar2, text=t, variable=self._type_filter_var, value=t, command=self._populate, bg=config.BG_SECTION, fg=config.FG_MAIN, selectcolor=config.BG_HOVER, font=config.FONT_XSMALL, activebackground=config.BG_SECTION).pack(side="left", padx=2)
 
         # Treeview
@@ -1157,7 +1157,10 @@ class FixedIslandPickerDialog(_BaseDialog):
             culture = "Roman" if isl.region == "Latium" else "Celtic"
             if cfilter != "All" and culture != cfilter:
                 continue
-            if tfilter == "Continental":
+            if tfilter == "Custom":
+                if not getattr(isl, "is_custom", False):
+                    continue
+            elif tfilter == "Continental":
                 if isl.size != "Continental":
                     continue
             elif tfilter != "All" and isl.island_type != tfilter:
@@ -1165,7 +1168,8 @@ class FixedIslandPickerDialog(_BaseDialog):
             if flt and flt not in isl.name.lower() and flt not in isl.a7m_name.lower():
                 continue
             type_label = config.ISLAND_TYPE_LABELS.get(isl.island_type, isl.island_type)
-            values = (isl.name, culture, isl.size, type_label)
+            display_name = f"{isl.name} (c)" if getattr(isl, "is_custom", False) else isl.name
+            values = (display_name, culture, isl.size, type_label)
             self._tree.insert("", "end", iid=isl.a7m_name, values=values)
 
     def _confirm(self):
@@ -1219,3 +1223,52 @@ class AboutDialog(_BaseDialog):
         tk.Label(self, text="Requires FileDBReader by anno-mods\nRequires RDAConsole by anno-mods", bg=config.BG_SECTION, fg=config.FG_DIM, font=config.FONT_XSMALL).pack(pady=2)
         _sep(self).pack(fill="x", padx=20, pady=12)
         _btn(self, "  Close  ", self.destroy).pack()
+
+class CustomMapPathsDialog(_BaseDialog):
+    """Configure Island Package folders used for custom islands."""
+    def __init__(self, parent):
+        import custom_map_paths
+        _, packages = custom_map_paths.configured_paths()
+        self._initial_packages = list(packages) if isinstance(packages, (list, tuple)) else ([packages] if packages else [])
+        super().__init__(parent, "Custom Island Paths", width=760, height=400)
+
+    def _build(self):
+        from tkinter import filedialog
+        import custom_map_paths
+        tk.Label(self, text="Custom Island Paths", bg=config.BG_SECTION, fg=config.FG_GOLD, font=config.FONT_HEADER).pack(anchor="w", padx=18, pady=(16, 8))
+        tk.Label(self, text="Island Packages", bg=config.BG_SECTION, fg=config.FG_MAIN, font=config.FONT_BODY).pack(anchor="w", padx=18, pady=(2, 4))
+        tree_frame = tk.Frame(self, bg=config.BG_SECTION)
+        tree_frame.pack(fill="both", expand=True, padx=18, pady=(0, 10))
+        self._package_tree = ttk.Treeview(tree_frame, columns=("path",), show="headings", selectmode="extended")
+        self._package_tree.heading("path", text="Folder")
+        self._package_tree.column("path", anchor="w", width=660)
+        scrollbar = ttk.Scrollbar(tree_frame, orient="vertical", command=self._package_tree.yview)
+        self._package_tree.configure(yscrollcommand=scrollbar.set)
+        self._package_tree.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+        for path in self._initial_packages:
+            self._package_tree.insert("", "end", values=(path,))
+        actions = tk.Frame(self, bg=config.BG_SECTION)
+        actions.pack(fill="x", padx=18, pady=(0, 10))
+        def add_folder():
+            selected = filedialog.askdirectory(parent=self, title="Add Island Package Folder")
+            if selected and all(self._package_tree.set(item, "path") != selected for item in self._package_tree.get_children()):
+                self._package_tree.insert("", "end", values=(selected,))
+        def remove_selected():
+            for item in self._package_tree.selection():
+                self._package_tree.delete(item)
+        tk.Button(actions, text="Add Folder…", command=add_folder, bg=config.FG_GOLD, fg="#000000", relief="flat", padx=16).pack(side="left")
+        tk.Button(actions, text="Remove Selected", command=remove_selected, bg=config.BG_HOVER, fg=config.FG_MAIN, relief="flat", padx=16).pack(side="left", padx=(8, 0))
+        buttons = tk.Frame(self, bg=config.BG_SECTION)
+        buttons.pack(fill="x", padx=18, pady=(0, 16))
+        def apply():
+            packages = [self._package_tree.set(item, "path") for item in self._package_tree.get_children()]
+            custom, _ = custom_map_paths.configured_paths()
+            custom_map_paths.save_paths(custom, packages)
+            from island_registry import IslandRegistry
+            IslandRegistry.instance().load(force=True)
+            self.result = True
+            self.destroy()
+        tk.Button(buttons, text="Cancel", command=self.destroy, bg=config.BG_HOVER, fg=config.FG_MAIN, relief="flat", padx=18).pack(side="right")
+        tk.Button(buttons, text="Apply", command=apply, bg=config.FG_GOLD, fg="#000000", relief="flat", padx=18).pack(side="right", padx=(0, 8))
+
