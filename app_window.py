@@ -678,6 +678,8 @@ class MapEditorApp(tk.Frame):
             variable=self._all_regions_islands_var,
         )
         options_menu.add_separator()
+        options_menu.add_command(label="Custom Island Paths…", command=self._set_custom_map_paths)
+        options_menu.add_separator()
         options_menu.add_command(label="Set Game Path…",         command=self._browse_game_path)
         options_menu.add_command(label="Set FileDBReader Path…", command=self._browse_fdb)
         options_menu.add_command(label="Set RdaConsole Path…",   command=self._browse_rda)
@@ -710,6 +712,10 @@ class MapEditorApp(tk.Frame):
         self.root.bind("<Control-y>",      lambda e: self.cmd_redo())
         self.root.bind("<Control-r>",      lambda e: self._rotate_selection(1))    # Ctrl+R        → rotate CW
         self.root.bind("<Control-R>",      lambda e: self._rotate_selection(-1))   # Shift+Ctrl+R  → rotate CCW
+
+    def _set_custom_map_paths(self):
+        from dialogs import CustomMapPathsDialog
+        CustomMapPathsDialog(self.root)
 
     def _build_header(self):
         hdr = tk.Frame(self, bg=config.BG_SECTION, height=52)

@@ -528,6 +528,16 @@ def build_mod_zip(
         with open(os.path.join(assets_dir, "assets.xml"), "w", encoding="utf-8") as fh:
             fh.write(assets_text)
 
+        # Copy only custom-island folders that are actually referenced by the exported maps.
+        from custom_map_paths import copy_used_custom_islands
+        used_custom_paths = [
+            island.map_file_path
+            for template in templates
+            for island in template.islands
+            if getattr(island, "map_file_path", None)
+        ]
+        copy_used_custom_islands(mod_root, used_custom_paths)
+
         # ── modinfo.json ──────────────────────────────────────────────────
         egypt_only = egypt is not None and not templates
         if egypt is not None and (is_enlarged_export or egypt_only):

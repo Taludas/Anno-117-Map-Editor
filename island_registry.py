@@ -47,6 +47,7 @@ class IslandAsset:
     island_type: str           # Normal / Starter / ThirdParty / Pirate / Vulcan
     region:      str           # Latium / Albion
     image_path:  Optional[str] = field(default=None)   # resolved UI image path
+    is_custom:   bool = False                          # configured custom island / island package
 
     @property
     def display_name(self) -> str:
@@ -176,6 +177,7 @@ class IslandRegistry:
         self._by_guid: Dict[int, IslandAsset] = {}
         self._by_name: Dict[str, IslandAsset] = {}
         self._loaded = False
+        self._custom_paths_signature = None
 
     @classmethod
     def instance(cls) -> "IslandRegistry":
@@ -190,24 +192,28 @@ class IslandRegistry:
         Parse assets.xml and build the registry.
         Returns True on success, False if assets.xml not found.
         """
-        if self._loaded and not force:
+        from custom_map_paths import configured_paths
+        signature = configured_paths()
+        if self._loaded and not force and signature == self._custom_paths_signature:
             return True
 
         assets_path = config.ASSETS_XML
-        if not os.path.isfile(assets_path):
-            print(f"[registry] assets.xml not found at {assets_path}")
-            return False
+        root = None
+        if os.path.isfile(assets_path):
+            print(f"[registry] Loading islands from {assets_path}…")
+            try:
+                tree = ET.parse(assets_path)
+                root = tree.getroot()
+            except Exception as e:
+                print(f"[registry] Failed to parse assets.xml: {e}")
+        else:
+            print(f"[registry] assets.xml not found at {assets_path}; loading configured custom maps only.")
 
-        print(f"[registry] Loading islands from {assets_path}…")
-        try:
-            tree = ET.parse(assets_path)
-            root = tree.getroot()
-        except Exception as e:
-            print(f"[registry] Failed to parse assets.xml: {e}")
-            return False
-
+        self._islands.clear()
+        self._by_guid.clear()
+        self._by_name.clear()
         count = 0
-        for asset in root.iter("Asset"):
+        for asset in root.iter("Asset") if root is not None else ():
             template_el = asset.find("Template")
             if template_el is None or template_el.text != "RandomIsland":
                 continue
@@ -312,6 +318,22 @@ class IslandRegistry:
             self._by_name[a7m_key] = isl
             count += 1
             print(f"[registry] Added continental island: {isl.name} (GUID {isl.guid})")
+
+        # Add user configured custom islands and exported island packages.
+        from custom_map_paths import all_records
+        for record in all_records():
+            if any(i.file_path.lower() == record.file_path.lower() for i in self._islands):
+                continue
+            size = record.placeholder_size or _size_from_filepath(record.file_path)
+            island = IslandAsset(
+                guid=0, name=record.name, file_path=record.file_path, size=size,
+                island_type="Normal", region=record.region,
+                image_path=record.image_path or _placeholder_for(size, "Normal"),
+                is_custom=True,
+            )
+            self._islands.append(island)
+            self._by_name[island.name.lower()] = island
+        self._custom_paths_signature = signature
 
         self._loaded = True
         print(f"[registry] Loaded {count} islands.")
